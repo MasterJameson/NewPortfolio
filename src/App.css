@@ -13,6 +13,14 @@
   }
 }
 
+.has-error > input {
+  border-color: #cc0000;
+}
+.has-error {
+  color: #cc0000;
+  background-color: #fff5cc;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;

@@ -36,7 +36,7 @@ class SignUpForm extends Component<any, MyState> {
     switch (fieldName) {
       case 'email':
         emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i) != null;
-        fieldValidationErrors.email = emailValid ? 'shit' : ' is invalid';
+        fieldValidationErrors.email = emailValid ? '' : ' is invalid';
         break;
       case 'password':
         passwordValid = value.length >= 6;
@@ -61,7 +61,6 @@ class SignUpForm extends Component<any, MyState> {
 
   validateForm() {
     this.setState({ formValid: this.state.emailValid && this.state.passwordValid && this.state.confirmPasswordValid })
-    console.log(this.state);
   }
 
   handleChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -70,27 +69,35 @@ class SignUpForm extends Component<any, MyState> {
     this.setState({ ...this.state, [name]: value }, () => { this.validateField(name, value) });
   }
 
+  errorClass(err: string) {
+    return (err.length === 0 ? '' : 'has-error')
+  }
+
   render() {
     return (
       <div style={{ width: 500, margin: "0 auto", }}>
-        <div className="panel panel-default">
-          <SignUpError formErrors={this.state.formErrors} />
-        </div>
         <form className='demoForm border p-5 mt-5'>
+
           <h2>Sign up</h2>
-          <div className="form-group mb-3">
+          <div className={`form-group mb-3
+                 ${this.errorClass(this.state.formErrors.email)}`}>
             <label htmlFor="email">Email Address</label>
             <input type="email" name='email' value={this.state.email} onChange={(event) => this.handleChange(event)} className='form-control' />
           </div>
-          <div className="form-group mb-3">
+          <div className={`form-group mb-3
+                 ${this.errorClass(this.state.formErrors.password)}`}>
             <label htmlFor="password">Password</label>
             <input type="password" name='password' value={this.state.password} onChange={event => this.handleChange(event)} className='form-control' />
           </div>
-          <div className="form-group mb-3">
+          <div className={`form-group mb-3
+                  ${this.errorClass(this.state.formErrors.confirmPassword)}`}>
             <label htmlFor="confirmPassword">Consirm Password</label>
             <input type="password" name='confirmPassword' value={this.state.confirmPassword} onChange={event => { this.handleChange(event) }} className='form-control' />
           </div>
-          <button type='submit' className='btn btn-primary' disabled={!this.state.formValid}>Sign up</button>
+          <button type='submit' className='btn btn-primary mb-3' disabled={!this.state.formValid}>Sign up</button>
+          <div className="panel panel-default">
+            <SignUpError formErrors={this.state.formErrors} />
+          </div>
         </form>
       </div>
     );
