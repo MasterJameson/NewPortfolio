@@ -75,31 +75,32 @@ class SignUpForm extends Component<any, MyState> {
 
   render() {
     return (
-      <div style={{ width: 500, margin: "0 auto", }}>
-        <form className='demoForm border p-5 mt-5'>
-
-          <h2>Sign up</h2>
-          <div className={`form-group mb-3
+      <React.Fragment>
+        <div style={{ width: 500, margin: "0 auto", }}>
+          <form className='demoForm border p-5 mt-5'>
+            <h2>Sign up</h2>
+            <div className={`form-group mb-3
                  ${this.errorClass(this.state.formErrors.email)}`}>
-            <label htmlFor="email">Email Address</label>
-            <input type="email" name='email' value={this.state.email} onChange={(event) => this.handleChange(event)} className='form-control' />
-          </div>
-          <div className={`form-group mb-3
+              <label htmlFor="email">Email Address</label>
+              <input type="email" name='email' value={this.state.email} onChange={(event) => this.handleChange(event)} className='form-control' />
+            </div>
+            <div className={`form-group mb-3
                  ${this.errorClass(this.state.formErrors.password)}`}>
-            <label htmlFor="password">Password</label>
-            <input type="password" name='password' value={this.state.password} onChange={event => this.handleChange(event)} className='form-control' />
-          </div>
-          <div className={`form-group mb-3
+              <label htmlFor="password">Password</label>
+              <input type="password" name='password' value={this.state.password} onChange={event => this.handleChange(event)} className='form-control' />
+            </div>
+            <div className={`form-group mb-3
                   ${this.errorClass(this.state.formErrors.confirmPassword)}`}>
-            <label htmlFor="confirmPassword">Consirm Password</label>
-            <input type="password" name='confirmPassword' value={this.state.confirmPassword} onChange={event => { this.handleChange(event) }} className='form-control' />
-          </div>
-          <button type='submit' className='btn btn-primary mb-3' disabled={!this.state.formValid}>Sign up</button>
-          <div className="panel panel-default">
-            <SignUpError formErrors={this.state.formErrors} />
-          </div>
-        </form>
-      </div>
+              <label htmlFor="confirmPassword">Consirm Password</label>
+              <input type="password" name='confirmPassword' value={this.state.confirmPassword} onChange={event => { this.handleChange(event) }} className='form-control' />
+            </div>
+            <button type='submit' className='btn btn-primary mb-3' disabled={!this.state.formValid}>Sign up</button>
+            <div className="panel panel-default">
+              <SignUpError formErrors={this.state.formErrors} />
+            </div>
+          </form>
+        </div>
+      </React.Fragment>
     );
   }
 }
