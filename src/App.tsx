@@ -1,11 +1,15 @@
 
 import './App.css';
+import Exam from './Forms/exam';
 import SignUpForm from './Forms/SignUp';
 
 function App() {
-  
+
   return (
-   <SignUpForm />
+    <div>
+      <SignUpForm />
+      <Exam />
+    </div>
   );
 }
 

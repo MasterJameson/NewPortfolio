@@ -12,7 +12,7 @@ interface MyState {
   formValid: boolean
 }
 
-class SignUpForm extends Component<any, any> {
+class SignUpForm extends Component<any, MyState> {
   constructor(props: any) {
     super(props);
     this.state = {
@@ -32,8 +32,6 @@ class SignUpForm extends Component<any, any> {
     let emailValid = this.state.emailValid;
     let passwordValid = this.state.passwordValid;
     let confirmPasswordValid = this.state.confirmPasswordValid;
- 
-
 
     switch (fieldName) {
       case 'email':
@@ -64,7 +62,6 @@ class SignUpForm extends Component<any, any> {
   validateForm() {
     this.setState({ formValid: this.state.emailValid && this.state.passwordValid && this.state.confirmPasswordValid })
     console.log(this.state);
-
   }
 
   handleChange(event: React.ChangeEvent<HTMLInputElement>) {
