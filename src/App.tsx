@@ -9,7 +9,7 @@ function App() {
   return (
     <div>
       <AddPerson />
-      {/* <SignUpForm /> */}
+      <SignUpForm />
     </div>
   );
 }

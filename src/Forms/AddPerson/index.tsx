@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 
 const AddPerson = () => {
   interface MyPerson {
@@ -6,45 +6,85 @@ const AddPerson = () => {
     lName: string,
     age: string | number,
     gender: string,
-    mobile: string,
+    mobile: number,
     email: string,
     jobTitle: string,
-    ageLength: number,
-    ageValid: boolean,
-    mobileValid: boolean,
-    emailValid: boolean,
+    isInputError: { email: string, age: string, mobile: string, gender: string },
+    isInputValid: {
+      ageValid: boolean,
+      mobileValid: boolean,
+      emailValid: boolean,
+      genderValid: boolean,
+    },
+    formValid: boolean,
   }
 
-  const [person, setPeson] = useState<MyPerson>({
+  const [person, setPerson] = useState<MyPerson>({
     fName: '',
     lName: '',
     age: '',
     gender: '',
-    mobile: '',
+    mobile: 0,
     email: '',
     jobTitle: '',
-    ageLength: 3,
-    ageValid: false,
-    mobileValid: false,
-    emailValid: false,
+    isInputError: { email: '', age: '', mobile: '', gender: '' },
+    isInputValid: { genderValid: false, ageValid: false, mobileValid: false, emailValid: false, },
+    formValid: false,
   })
 
+  const validateField = (fieldName: string, value: string | number) => {
+    let fieldValidationErrors = person.isInputError;
+    let itemError = person.isInputValid;
+
+    switch (fieldName) {
+      case 'age':
+        itemError.ageValid = value < 150;
+        fieldValidationErrors.age = itemError.ageValid ? '' : 'Invalid age.';
+        break;
+      case 'gender':
+        itemError.genderValid = value != '';
+        fieldValidationErrors.gender = itemError.genderValid ? '' : 'Select gender please.';
+        break;
+      case 'email':
+        itemError.emailValid = value.toString().match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i) != null;
+        fieldValidationErrors.email = itemError.emailValid ? '' : 'Email not good.';
+        break;
+      case 'mobile':
+        itemError.mobileValid = value.toString().length === 10;
+        fieldValidationErrors.mobile = itemError.mobileValid ? '' : 'Invalid network.';
+        break;
+
+      default:
+        break;
+    }
+
+  }
+
+
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    // let name = event.target.name
-    // let name = event.target.name
+    let name = event.target.name
+    let val = event.target.value
+    let value = name != 'mobile' && name != 'age' ? val : Number(val)
+
+    setPerson({ ...person, [name]: value })
+    validateField(name, value)
   }
+
+
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    // let name = event.target.name
-    // let name = event.target.name
+    let value = event.target.value
+    setPerson({ ...person, gender: value })
+    validateField('gender', value)
   }
 
-  const arr = [1, 2, 3, 4, 5];
-  const tst = arr.map(val => { return val > 3 });
-  const fltr = arr.filter(val => { return val > 3 });
-  console.log(tst);
-  console.log(fltr);
 
+  // const arr = [1, 2, 3, 4, 5];
+  // const tst = arr.map(val => { return val > 3 });
+  // const fltr = arr.filter(val => { return val > 3 });
+  // console.log(tst);
+  // console.log(fltr);
 
+  console.log(person);
 
   return (
     <React.Fragment>
@@ -63,12 +103,12 @@ const AddPerson = () => {
           </div>
           <div className="form-group">
             <label htmlFor="age">Age</label>
-            <input type="text" name='age' value={person.age} maxLength={person.ageLength}
+            <input type="number" name='age' value={person.age.toLocaleString().length <= 3 ? person.age : ''} min="0" max="150"
               onChange={event => { handleInputChange(event) }} className='form-control  mb-3' />
           </div>
           <div className="form-group">
             <label htmlFor="gender">Gender</label>
-            <select className="form-select mb-3" aria-label="Default select example" value={person.gender}
+            <select className="form-select mb-3" value={person.gender}
               onChange={event => { handleSelectChange(event) }}>
               <option value=''>Select Gender</option>
               <option value='male'>Male</option>
@@ -77,8 +117,8 @@ const AddPerson = () => {
           </div>
           <div className="form-group">
             <label htmlFor="mobile">Mobile Number</label>
-            <input type="text" name='mobile' value={person.mobile} maxLength={person.ageLength}
-              onChange={event => { handleInputChange(event) }} className='form-control  mb-3' />
+            <input type="number" name='mobile' value={person.mobile} min="0"
+              onChange={event => { handleInputChange(event) }} className='form-control mb-3' />
           </div>
           <div className="form-group">
             <label htmlFor="email">Email</label>
@@ -100,3 +140,7 @@ const AddPerson = () => {
 }
 
 export default AddPerson;
+
+function validateField(name: string, value: string | number) {
+  throw new Error('Function not implemented.')
+}
