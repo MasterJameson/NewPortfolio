@@ -1,16 +1,21 @@
 
+import React from 'react';
+import { Provider } from 'react-redux';
 import './App.css';
 import AddPerson from './Forms/AddPerson';
-import Exam from './Forms/exam';
 import SignUpForm from './Forms/SignUp';
+import { appStore } from './redux/store';
+
 
 function App() {
 
   return (
-    <div>
-      <AddPerson />
-      <SignUpForm />
-    </div>
+    <React.Fragment>
+      <Provider store={appStore}>
+        <AddPerson />
+        {/* <SignUpForm /> */}
+      </Provider>
+    </React.Fragment>
   );
 }
 
