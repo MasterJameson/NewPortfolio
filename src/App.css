@@ -16,6 +16,9 @@
 .has-error > input {
   border-color: #cc0000;
 }
+.has-error > select {
+  border-color: #cc0000;
+}
 .has-error {
   color: #cc0000;
   background-color: #fff5cc;

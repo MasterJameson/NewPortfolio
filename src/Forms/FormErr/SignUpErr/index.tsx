@@ -1,11 +1,11 @@
 import React from 'react';
 
-export default function SignUpError(props: any) {
-  const FormErrorsVal = props.formErrors
-  const FormErrorsKeys = Object.keys(props.formErrors)
+const SignUpError = (props: any): JSX.Element => {
+  const FormErrorsVal = props.formErrors;
+  const FormErrorsKeys = Object.keys(props.formErrors);
 
   return (
-    <div>
+    <React.Fragment>
       {
         FormErrorsKeys.map((fieldName, i) => {
           if (FormErrorsVal[fieldName].length > 0) {
@@ -15,6 +15,8 @@ export default function SignUpError(props: any) {
           }
         })
       }
-    </div>
+    </React.Fragment>
   );
 }
+
+export default SignUpError;

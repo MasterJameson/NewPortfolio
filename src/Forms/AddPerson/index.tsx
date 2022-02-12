@@ -1,23 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react'
+import PersonErr from '../FormErr/PersonErr';
+import { MyPerson } from './interface';
 
 const AddPerson = () => {
-  interface MyPerson {
-    fName: string,
-    lName: string,
-    age: string | number,
-    gender: string,
-    mobile: number,
-    email: string,
-    jobTitle: string,
-    isInputError: { email: string, age: string, mobile: string, gender: string },
-    isInputValid: {
-      ageValid: boolean,
-      mobileValid: boolean,
-      emailValid: boolean,
-      genderValid: boolean,
-    },
-    formValid: boolean,
-  }
+
 
   const [person, setPerson] = useState<MyPerson>({
     fName: '',
@@ -27,9 +13,9 @@ const AddPerson = () => {
     mobile: 0,
     email: '',
     jobTitle: '',
-    isInputError: { email: '', age: '', mobile: '', gender: '' },
-    isInputValid: { genderValid: false, ageValid: false, mobileValid: false, emailValid: false, },
-    formValid: false,
+    isInputError: { fName: '', lName: '', email: '', age: '', mobile: '', gender: '' },
+    isInputValid: { fNameValid: false, lNameValid: false, genderValid: false, ageValid: false, mobileValid: false, emailValid: false, formValid: false, }
+
   })
 
   const validateField = (fieldName: string, value: string | number) => {
@@ -37,6 +23,14 @@ const AddPerson = () => {
     let itemError = person.isInputValid;
 
     switch (fieldName) {
+      case 'fName':
+        itemError.fNameValid = value != '';
+        fieldValidationErrors.fName = itemError.fNameValid ? '' : 'First name is required.';
+        break;
+      case 'lName':
+        itemError.lNameValid = value != '';
+        fieldValidationErrors.lName = itemError.lNameValid ? '' : 'Last name is required.';
+        break;
       case 'age':
         itemError.ageValid = value < 150;
         fieldValidationErrors.age = itemError.ageValid ? '' : 'Invalid age.';
@@ -57,9 +51,9 @@ const AddPerson = () => {
       default:
         break;
     }
+    itemError.formValid = itemError.lNameValid && itemError.fNameValid && itemError.ageValid && itemError.emailValid && itemError.genderValid && itemError.mobileValid;
 
   }
-
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     let name = event.target.name
@@ -88,25 +82,25 @@ const AddPerson = () => {
 
   return (
     <React.Fragment>
-      <div style={{ width: 600, margin: "0 auto", }}>
-        <form >
+      <div style={{ width: 500, margin: "0 auto", }}>
+        <form className='demoForm border p-5 mt-5'>
           <h2>Add Person</h2>
-          <div className="form-group">
+          <div className={`form-group ${person.isInputError.fName.length === 0 ? '' : 'has-error'}`}>
             <label htmlFor="fName">First Name</label>
             <input type="text" name='fName' value={person.fName}
               onChange={event => { handleInputChange(event) }} className='form-control  mb-3' />
           </div>
-          <div className="form-group">
+          <div className={`form-group ${person.isInputError.lName.length === 0 ? '' : 'has-error'}`}>
             <label htmlFor="lName">Last Name</label>
             <input type="text" name='lName' value={person.lName}
               onChange={event => { handleInputChange(event) }} className='form-control  mb-3' />
           </div>
-          <div className="form-group">
+          <div className={`form-group ${person.isInputError.age.length === 0 ? '' : 'has-error'}`}>
             <label htmlFor="age">Age</label>
             <input type="number" name='age' value={person.age.toLocaleString().length <= 3 ? person.age : ''} min="0" max="150"
               onChange={event => { handleInputChange(event) }} className='form-control  mb-3' />
           </div>
-          <div className="form-group">
+          <div className={`form-group ${person.isInputError.gender.length === 0 ? '' : 'has-error'}`}>
             <label htmlFor="gender">Gender</label>
             <select className="form-select mb-3" value={person.gender}
               onChange={event => { handleSelectChange(event) }}>
@@ -115,12 +109,12 @@ const AddPerson = () => {
               <option value='female'>Female</option>
             </select>
           </div>
-          <div className="form-group">
+          <div className={`form-group ${person.isInputError.mobile.length === 0 ? '' : 'has-error'}`}>
             <label htmlFor="mobile">Mobile Number</label>
             <input type="number" name='mobile' value={person.mobile} min="0"
               onChange={event => { handleInputChange(event) }} className='form-control mb-3' />
           </div>
-          <div className="form-group">
+          <div className={`form-group ${person.isInputError.email.length === 0 ? '' : 'has-error'}`}>
             <label htmlFor="email">Email</label>
             <input type="email" name='email' value={person.email}
               onChange={event => { handleInputChange(event) }} className='form-control  mb-3' />
@@ -130,17 +124,14 @@ const AddPerson = () => {
             <input type="text" name='jobTitle' value={person.jobTitle}
               onChange={event => { handleInputChange(event) }} className='form-control  mb-3' />
           </div>
-          <button type='submit' className='btn btn-primary'>Submit</button>
+          <button type='submit' disabled={!person.isInputValid.formValid} className='btn btn-primary'>Submit</button>
+          <div className="panel panel-default">
+            <PersonErr isInputError={person.isInputError} />
+          </div>
         </form>
       </div>
     </React.Fragment>
-  )
-
-
+  );
 }
 
 export default AddPerson;
-
-function validateField(name: string, value: string | number) {
-  throw new Error('Function not implemented.')
-}
