@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { addPerson } from '../../redux/action';
 import PersonErr from '../FormErr/PersonErr';
@@ -22,6 +22,23 @@ const AddPerson = () => {
     isInputValid: { fNameValid: false, lNameValid: false, genderValid: false, ageValid: false, mobileValid: false, emailValid: false, formValid: false, }
 
   })
+  useEffect(() => {
+    const fieldValidationErrors = person.isInputError;
+    const itemError = person.isInputValid;
+    if (personList.length > 0) {
+      personList.forEach((element: MyPerson) => {
+        if (person.email === element.email) {
+          itemError.emailValid = false;
+          fieldValidationErrors.email = 'Email already exist.';
+        }
+        if (person.mobile === element.mobile) {
+          itemError.mobileValid = false;
+          fieldValidationErrors.mobile = 'Mobile already exist.';
+        }
+      });
+    }
+  }, [person])
+
 
   const validateField = (fieldName: string, value: string | number) => {
     const fieldValidationErrors = person.isInputError;
@@ -55,6 +72,8 @@ const AddPerson = () => {
       default:
         break;
     }
+    console.log(person);
+
     itemError.formValid = itemError.lNameValid && itemError.fNameValid && itemError.ageValid && itemError.emailValid && itemError.genderValid && itemError.mobileValid;
   }
   const handleId = () => {
@@ -73,7 +92,6 @@ const AddPerson = () => {
       setPerson({ ...person, id: uniqueId })
     }
   }
-
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const name = event.target.name
@@ -106,7 +124,6 @@ const AddPerson = () => {
 
   const handleDispatchPerson = (event: { preventDefault: () => void; }) => {
     const isForm = person.isInputValid.formValid;
-
     if (isForm) {
       dispatch(addPerson(person))
     }
@@ -120,12 +137,10 @@ const AddPerson = () => {
   // console.log(tst);
   // console.log(fltr);
 
-  console.log(personList);
-
   return (
     <React.Fragment>
-      <div style={{ width: 500, margin: "0 auto", }}>
-        <form className='demoForm border p-5 mt-5'>
+      <div style={{ width: 400, margin: "0 auto", }}>
+        <form className='demoForm border p-4 mt-5'>
           <h2>Add Person</h2>
           <div className={`form-group ${person.isInputError.fName.length === 0 ? '' : 'has-error'}`}>
             <label htmlFor="fName">First Name</label>

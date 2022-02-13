@@ -5,6 +5,7 @@ import './App.css';
 import AddPerson from './Forms/AddPerson';
 import SignUpForm from './Forms/SignUp';
 import { appStore } from './redux/store';
+import PersonTable from './Tables/PersonTable';
 
 
 function App() {
@@ -12,7 +13,16 @@ function App() {
   return (
     <React.Fragment>
       <Provider store={appStore}>
-        <AddPerson />
+        <div className="container">
+          <div className="row">
+            <div className="col-sm">
+              <AddPerson />
+            </div>
+            <div className="col-sm">
+              <PersonTable />
+            </div>
+          </div>
+        </div>
         {/* <SignUpForm /> */}
       </Provider>
     </React.Fragment>

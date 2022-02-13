@@ -10,7 +10,7 @@ const reducer = (state: any = storeStates, action: any) => {
       state = {
         ...state,
         personList: [...state.personList.filter((val: any) => {
-          if (val.id !== action.add.id && val.email !== action.add.email && val.mobile !== action.add.mobile) {
+          if (val.id !== action.add.id) {
             return [...state.personList, action.add]
           } return false
         }), action.add],
