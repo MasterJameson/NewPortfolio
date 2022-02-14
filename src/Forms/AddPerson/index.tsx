@@ -145,6 +145,12 @@ const AddPerson = () => {
     handleReset()
   }
 
+  const handleSearch = (event: { preventDefault: () => void; }) => {
+    const getinput = document.getElementById('findEmail')
+    getinput?.focus()
+    event.preventDefault();
+  }
+
   // const arr = [1, 2, 3, 4, 5];
   // const tst = arr.map(val => { return val > 3 });
   // const fltr = arr.filter(val => { return val > 3 });
@@ -187,7 +193,7 @@ const AddPerson = () => {
           </div>
           <div className={`form-group ${person.isInputError.email.length === 0 ? '' : 'has-error'}`}>
             <label htmlFor="email">Email</label>
-            <input type="email" name='email' value={person.email} onFocus={handleId}
+            <input type="email" name='email' id='findEmail' value={person.email} onFocus={handleId}
               onChange={event => { handleInputChange(event) }} className='form-control  mb-3' />
           </div>
           <div className="form-group">
@@ -200,8 +206,11 @@ const AddPerson = () => {
               <div className="col-md-4">
                 <button type='submit' disabled={!person.isInputValid.formValid} className='btn btn-primary' onClick={handleDispatchPerson}>Submit</button>
               </div>
-              <div className="col-md-4 offset-md-4">
-                <button type='submit' disabled={personSelected.length === 0} className='btn btn-danger' onClick={handleDeletePerson}>Delete</button>
+              <div className="col-md-4 ">
+                <button type='submit' disabled={personList.length === 0} className='btn btn-success' onClick={handleSearch}>Search</button>
+              </div>
+              <div className="col-md-4">
+                <button type='submit' disabled={personSelected.length === 0 || !person.isInputValid.formValid} className='btn btn-danger' onClick={handleDeletePerson}>Delete</button>
               </div>
             </div>
 
