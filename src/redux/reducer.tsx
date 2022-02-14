@@ -17,18 +17,30 @@ const reducer = (state: any = storeStates, action: any) => {
         }), action.add],
       }
       return state;
+
     case 'SELECTED_PERSON':
       state = {
         ...state,
         selectedPerson: [action.selected],
       }
       return state;
+
     case 'UNSELECTED_PERSON':
       state = {
         ...state,
         selectedPerson: [],
       }
       return state;
+
+    case 'REMOVED_PERSON':
+      state = {
+        ...state,
+        personList: state.personList.filter((item: any) => {
+          return item.id !== action.removed.id
+        }),
+      }
+      return state;
+
     default:
       return state;
   }

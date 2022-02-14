@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { addPerson, unselectPerson } from '../../redux/action';
+import { addPerson, removePerson, unselectPerson } from '../../redux/action';
 import PersonErr from '../FormErr/PersonErr';
 import { MyPerson } from './interface';
 
@@ -139,6 +139,12 @@ const AddPerson = () => {
     handleReset()
   }
 
+  const handleDeletePerson = (event: { preventDefault: () => void; }) => {
+    dispatch(removePerson(person))
+    event.preventDefault();
+    handleReset()
+  }
+
   // const arr = [1, 2, 3, 4, 5];
   // const tst = arr.map(val => { return val > 3 });
   // const fltr = arr.filter(val => { return val > 3 });
@@ -189,7 +195,17 @@ const AddPerson = () => {
             <input type="text" name='jobTitle' value={person.jobTitle} onFocus={handleId}
               onChange={event => { handleInputChange(event) }} className='form-control  mb-3' />
           </div>
-          <button type='submit' disabled={!person.isInputValid.formValid} className='btn btn-primary' onClick={handleDispatchPerson}>Submit</button>
+          <div className="container">
+            <div className="row">
+              <div className="col-md-4">
+                <button type='submit' disabled={!person.isInputValid.formValid} className='btn btn-primary' onClick={handleDispatchPerson}>Submit</button>
+              </div>
+              <div className="col-md-4 offset-md-4">
+                <button type='submit' disabled={personSelected.length === 0} className='btn btn-danger' onClick={handleDeletePerson}>Delete</button>
+              </div>
+            </div>
+
+          </div>
           <div className="panel panel-default mt-2" style={{ height: 30 }}>
             <PersonErr isInputError={person.isInputError} />
           </div>

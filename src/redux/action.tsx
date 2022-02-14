@@ -15,6 +15,12 @@ export const selectedPerson = (data: MyPerson) => {
 export const unselectPerson = () => {
   return {
     type: 'UNSELECTED_PERSON',
-    // selected: data
+  }
+}
+
+export const removePerson = (data: MyPerson) => {
+  return {
+    type: 'REMOVED_PERSON',
+    removed: data
   }
 }
