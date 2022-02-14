@@ -20,16 +20,25 @@ const AddPerson = () => {
     jobTitle: '',
     isInputError: { fName: '', lName: '', email: '', age: '', mobile: '', gender: '' },
     isInputValid: { fNameValid: false, lNameValid: false, genderValid: false, ageValid: false, mobileValid: false, emailValid: false, formValid: false, }
-
   })
+
+  const [searchVal, setSearchVal] = useState('');
 
   useEffect(() => {
     if (personSelected.length != 0) {
-      personSelected.map((val: MyPerson) => {
+      personSelected.filter((val: MyPerson) => {
         setPerson(val)
       })
     }
-  }, [personSelected])
+    const names = ['James', 'John', 'Paul', 'Ringo', 'George'];
+    const nameshit = personList.filter((val: any) =>val.email.split(''))
+    console.log(names);
+    console.log(nameshit);
+    
+    // personList.filter((val: any) => val.email.includes(searchVal)).map((filteredName: any) => {
+    //   console.log(filteredName.email);
+    // })
+  }, [personSelected, searchVal])
 
   const validateField = (fieldName: string, value: string | number) => {
     const fieldValidationErrors = person.isInputError;
@@ -145,11 +154,6 @@ const AddPerson = () => {
     handleReset()
   }
 
-  const handleSearch = (event: { preventDefault: () => void; }) => {
-    const getinput = document.getElementById('findEmail')
-    getinput?.focus()
-    event.preventDefault();
-  }
 
   // const arr = [1, 2, 3, 4, 5];
   // const tst = arr.map(val => { return val > 3 });
@@ -160,6 +164,12 @@ const AddPerson = () => {
   return (
     <React.Fragment>
       <div style={{ width: 400, margin: "0 auto", }}>
+        <div className="input-group mb-3 mt-3">
+          <input type="text" className="form-control" placeholder="Input Email" aria-label="Recipient's username" onChange={event => setSearchVal(event.target.value)} aria-describedby="basic-addon2" />
+          <div className="input-group-append">
+            <span className="input-group-text" id="basic-addon2">@example.com</span>
+          </div>
+        </div>
         <form className='demoForm border p-4 mt-5'>
           <h2>Add Person</h2>
           <div className={`form-group ${person.isInputError.fName.length === 0 ? '' : 'has-error'}`}>
@@ -203,13 +213,10 @@ const AddPerson = () => {
           </div>
           <div className="container">
             <div className="row">
-              <div className="col-md-4">
+              <div className="col-md-6">
                 <button type='submit' disabled={!person.isInputValid.formValid} className='btn btn-primary' onClick={handleDispatchPerson}>Submit</button>
               </div>
-              <div className="col-md-4 ">
-                <button type='submit' disabled={personList.length === 0} className='btn btn-success' onClick={handleSearch}>Search</button>
-              </div>
-              <div className="col-md-4">
+              <div className="col-md-6">
                 <button type='submit' disabled={personSelected.length === 0 || !person.isInputValid.formValid} className='btn btn-danger' onClick={handleDeletePerson}>Delete</button>
               </div>
             </div>
