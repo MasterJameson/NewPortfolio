@@ -6,3 +6,15 @@ export const addPerson = (data: MyPerson) => {
     add: data
   }
 }
+export const selectedPerson = (data: MyPerson) => {
+  return {
+    type: 'SELECTED_PERSON',
+    selected: data
+  }
+}
+export const unselectPerson = () => {
+  return {
+    type: 'UNSELECTED_PERSON',
+    // selected: data
+  }
+}

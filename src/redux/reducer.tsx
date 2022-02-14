@@ -1,7 +1,8 @@
 import { StoreStatesType } from "./type";
 
 const storeStates: StoreStatesType = {
-  personList: []
+  personList: [],
+  selectedPerson: []
 }
 
 const reducer = (state: any = storeStates, action: any) => {
@@ -14,6 +15,18 @@ const reducer = (state: any = storeStates, action: any) => {
             return [...state.personList, action.add]
           } return false
         }), action.add],
+      }
+      return state;
+    case 'SELECTED_PERSON':
+      state = {
+        ...state,
+        selectedPerson: [action.selected],
+      }
+      return state;
+    case 'UNSELECTED_PERSON':
+      state = {
+        ...state,
+        selectedPerson: [],
       }
       return state;
     default:

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { addPerson } from '../../redux/action';
+import { addPerson, unselectPerson } from '../../redux/action';
 import PersonErr from '../FormErr/PersonErr';
 import { MyPerson } from './interface';
 
@@ -8,7 +8,7 @@ const AddPerson = () => {
 
   const dispatch: any = useDispatch();
   const personList = useSelector((state: any) => state.personList)
-
+  const personSelected = useSelector((state: any) => state.selectedPerson)
   const [person, setPerson] = useState<MyPerson>({
     id: 0,
     fName: '',
@@ -22,28 +22,33 @@ const AddPerson = () => {
     isInputValid: { fNameValid: false, lNameValid: false, genderValid: false, ageValid: false, mobileValid: false, emailValid: false, formValid: false, }
 
   })
-  useEffect(() => {
-    const fieldValidationErrors = person.isInputError;
-    const itemError = person.isInputValid;
-    if (personList.length > 0) {
-      personList.forEach((element: MyPerson) => {
-        if (person.email === element.email) {
-          itemError.emailValid = false;
-          fieldValidationErrors.email = 'Email already exist.';
-        }
-        if (person.mobile === element.mobile) {
-          itemError.mobileValid = false;
-          fieldValidationErrors.mobile = 'Mobile already exist.';
-        }
-      });
-    }
-  }, [person])
 
+  useEffect(() => {
+    if (personSelected.length != 0) {
+      personSelected.map((val: MyPerson) => {
+        setPerson(val)
+      })
+    }
+  }, [personSelected])
 
   const validateField = (fieldName: string, value: string | number) => {
     const fieldValidationErrors = person.isInputError;
     const itemError = person.isInputValid;
 
+    if (personSelected.length === 0) {
+      if (personList.length > 0) {
+        personList.forEach((element: MyPerson) => {
+          if (person.email === element.email) {
+            itemError.emailValid = false;
+            fieldValidationErrors.email = 'Email already exist.';
+          }
+          if (person.mobile === element.mobile) {
+            itemError.mobileValid = false;
+            fieldValidationErrors.mobile = 'Mobile already exist.';
+          }
+        });
+      }
+    }
     switch (fieldName) {
       case 'fName':
         itemError.fNameValid = value != '';
@@ -72,8 +77,6 @@ const AddPerson = () => {
       default:
         break;
     }
-    console.log(person);
-
     itemError.formValid = itemError.lNameValid && itemError.fNameValid && itemError.ageValid && itemError.emailValid && itemError.genderValid && itemError.mobileValid;
   }
   const handleId = () => {
@@ -89,7 +92,9 @@ const AddPerson = () => {
 
     const uniqueId = Number(components.join(""))
     if (person.isInputValid.formValid) {
-      setPerson({ ...person, id: uniqueId })
+      if (personSelected.length === 0) {
+        setPerson({ ...person, id: uniqueId })
+      }
     }
   }
 
@@ -126,6 +131,9 @@ const AddPerson = () => {
     const isForm = person.isInputValid.formValid;
     if (isForm) {
       dispatch(addPerson(person))
+    }
+    if (personSelected.length != 0) {
+      dispatch(unselectPerson())
     }
     event.preventDefault();
     handleReset()
@@ -182,7 +190,7 @@ const AddPerson = () => {
               onChange={event => { handleInputChange(event) }} className='form-control  mb-3' />
           </div>
           <button type='submit' disabled={!person.isInputValid.formValid} className='btn btn-primary' onClick={handleDispatchPerson}>Submit</button>
-          <div className="panel panel-default">
+          <div className="panel panel-default mt-2" style={{ height: 30 }}>
             <PersonErr isInputError={person.isInputError} />
           </div>
         </form>
@@ -192,3 +200,5 @@ const AddPerson = () => {
 }
 
 export default AddPerson;
+
+

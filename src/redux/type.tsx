@@ -1,6 +1,6 @@
 import { MyPerson } from "../Forms/AddPerson/interface";
 
 export type StoreStatesType = {
-  personList?: MyPerson[]
-
+  personList?: MyPerson[],
+  selectedPerson?: MyPerson[]
 }

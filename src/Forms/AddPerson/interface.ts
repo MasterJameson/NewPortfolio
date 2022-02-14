@@ -1,5 +1,5 @@
 export interface MyPerson {
-  id:number,
+  id: number;
   fName: string,
   lName: string,
   age: string | number,
@@ -7,7 +7,7 @@ export interface MyPerson {
   mobile: number,
   email: string,
   jobTitle: string,
-  isInputError: { fName: string,lName: string,email: string, age: string, mobile: string, gender: string },
+  isInputError: { fName: string, lName: string, email: string, age: string, mobile: string, gender: string },
   isInputValid: {
     fNameValid: boolean,
     lNameValid: boolean,

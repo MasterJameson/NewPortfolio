@@ -1,10 +1,14 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { MyPerson } from '../../Forms/AddPerson/interface';
+import { selectedPerson } from '../../redux/action';
 
 const PersonTable = () => {
   const personList = useSelector((state: any) => state.personList)
-
+  const dispatch: any = useDispatch();
+  const handleData = (event: MyPerson) => {
+    dispatch(selectedPerson(event))
+  }
   return (
     <table className="table table-striped mt-5 " >
       <thead>
@@ -23,15 +27,15 @@ const PersonTable = () => {
         {
           personList.map((item: MyPerson, i: number) => {
             return (
-              <tr key={i}>
+              <tr key={i} onClick={() => handleData(item)}>
                 <th>{item.id}</th>
-                <td>{item.fName}</td>
-                <td>{item.lName}</td>
+                <td>{item.fName.toUpperCase()}</td>
+                <td>{item.lName.toUpperCase()}</td>
                 <td>{item.age}</td>
-                <td>{item.gender}</td>
+                <td>{item.gender.toUpperCase()}</td>
                 <td>{item.mobile}</td>
                 <td>{item.email}</td>
-                <td>{item.jobTitle}</td>
+                <td>{item.jobTitle.toUpperCase()}</td>
               </tr>
             )
           })
