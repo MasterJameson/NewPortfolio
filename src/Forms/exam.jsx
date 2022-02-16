@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default React.Exam = () => {
+const Exam = () => {
 
   //Answer for the Qustion #1
   let i, num, f;
@@ -56,10 +56,17 @@ export default React.Exam = () => {
   console.log('With duplicates', myArray);
   console.log('Without duplicates', handleFilter);
 
+  React.useEffect(() => {
+    document.getElementById('test').style.color = 'red'
+  }, [])
+  
+
   return (
     <div>
-      <p>Exam</p>
+      <p id='test'>Exam</p>
       <span>Answers are in console log</span>
     </div>
   )
 }
+
+export default Exam;

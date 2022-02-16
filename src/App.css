@@ -23,6 +23,9 @@
   color: #cc0000;
   background-color: #fff5cc;
 }
+.label-color{
+  color: red;
+}
 
 .App-header {
   background-color: #282c34;

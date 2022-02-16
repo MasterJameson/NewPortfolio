@@ -30,14 +30,6 @@ const AddPerson = () => {
         setPerson(val)
       })
     }
-    const names = ['James', 'John', 'Paul', 'Ringo', 'George'];
-    const nameshit = personList.filter((val: any) =>val.email.split(''))
-    console.log(names);
-    console.log(nameshit);
-    
-    // personList.filter((val: any) => val.email.includes(searchVal)).map((filteredName: any) => {
-    //   console.log(filteredName.email);
-    // })
   }, [personSelected, searchVal])
 
   const validateField = (fieldName: string, value: string | number) => {

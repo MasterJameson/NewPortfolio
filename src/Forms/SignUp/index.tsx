@@ -9,7 +9,8 @@ interface MyState {
   emailValid: boolean,
   passwordValid: boolean,
   confirmPasswordValid: boolean,
-  formValid: boolean
+  formValid: boolean,
+  fName: string
 }
 
 class SignUpForm extends Component<any, MyState> {
@@ -23,7 +24,8 @@ class SignUpForm extends Component<any, MyState> {
       emailValid: false,
       passwordValid: false,
       confirmPasswordValid: false,
-      formValid: false
+      formValid: false,
+      fName: 'jameson'
     }
   }
 
@@ -72,6 +74,15 @@ class SignUpForm extends Component<any, MyState> {
   errorClass(err: string) {
     return (err.length === 0 ? '' : 'has-error')
   }
+  changeColor() {
+    const output = document.getElementById('emailTest');
+    if (output) output.style.color = 'red';
+
+  }
+
+  componentDidMount() {
+    this.changeColor()
+  }
 
   render() {
     return (
@@ -81,7 +92,7 @@ class SignUpForm extends Component<any, MyState> {
             <h2>Sign up</h2>
             <div className={`form-group mb-3
                  ${this.errorClass(this.state.formErrors.email)}`}>
-              <label htmlFor="email">Email Address</label>
+              <label id='emailTest' htmlFor="email">Email Address</label>
               <input type="email" name='email' value={this.state.email} onChange={(event) => this.handleChange(event)} className='form-control' />
             </div>
             <div className={`form-group mb-3
