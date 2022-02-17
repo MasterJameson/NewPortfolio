@@ -155,7 +155,7 @@ const AddPerson = () => {
 
   return (
     <React.Fragment>
-      <div style={{ width: 400, margin: "0 auto", }}>
+      <div style={{ width: 300, margin: "0 auto", }}>
         <div className="input-group mb-3 mt-3">
           <input type="text" className="form-control" placeholder="Input Email" aria-label="Recipient's username" onChange={event => setSearchVal(event.target.value)} aria-describedby="basic-addon2" />
           <div className="input-group-append">
@@ -209,7 +209,7 @@ const AddPerson = () => {
                 <button type='submit' disabled={!person.isInputValid.formValid} className='btn btn-primary' onClick={handleDispatchPerson}>Submit</button>
               </div>
               <div className="col-md-6">
-                <button type='submit' disabled={personSelected.length === 0 || !person.isInputValid.formValid} className='btn btn-danger' onClick={handleDeletePerson}>Delete</button>
+                <button type='submit' className='btn btn-danger' disabled={personSelected.length != 1} onClick={handleDeletePerson}>Delete</button>
               </div>
             </div>
 

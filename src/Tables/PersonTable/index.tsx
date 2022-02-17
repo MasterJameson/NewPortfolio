@@ -37,7 +37,7 @@ const PersonTable = () => {
                 <td>{item.gender.toUpperCase()}</td>
                 <td>{item.mobile}</td>
                 <td>{item.email}</td>
-                <td>{item.jobTitle.toUpperCase()}</td>
+                <td>{item.jobTitle}</td>
               </tr>
             )
           })
