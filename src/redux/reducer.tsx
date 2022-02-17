@@ -12,7 +12,7 @@ const storeStates: StoreStatesType = {
       email: 'bagainjameson@gmail.com',
       jobTitle: 'SoftEng',
       isInputError: { fName: '', lName: '', email: '', age: '', mobile: '', gender: '' },
-      isInputValid: { fNameValid: false, lNameValid: false, genderValid: false, ageValid: false, mobileValid: false, emailValid: false, formValid: false, }
+      isInputValid: { fNameValid: true, lNameValid: true, genderValid: true, ageValid: true, mobileValid: true, emailValid: true, formValid: true, }
     },
     {
       id: 2022117105732,
@@ -24,7 +24,7 @@ const storeStates: StoreStatesType = {
       email: 'joerogan@gmail.com',
       jobTitle: 'Podcast',
       isInputError: { fName: '', lName: '', email: '', age: '', mobile: '', gender: '' },
-      isInputValid: { fNameValid: false, lNameValid: false, genderValid: false, ageValid: false, mobileValid: false, emailValid: false, formValid: false, }
+      isInputValid: { fNameValid: true, lNameValid: true, genderValid: true, ageValid: true, mobileValid: true, emailValid: true, formValid: true, }
     },
     {
       id: 2022117105733,
@@ -36,7 +36,7 @@ const storeStates: StoreStatesType = {
       email: 'taylorswift@gmail.com',
       jobTitle: 'Singer',
       isInputError: { fName: '', lName: '', email: '', age: '', mobile: '', gender: '' },
-      isInputValid: { fNameValid: false, lNameValid: false, genderValid: false, ageValid: false, mobileValid: false, emailValid: false, formValid: false, }
+      isInputValid: { fNameValid: true, lNameValid: true, genderValid: true, ageValid: true, mobileValid: true, emailValid: true, formValid: true, }
     },
     {
       id: 2022117105734,
@@ -48,7 +48,7 @@ const storeStates: StoreStatesType = {
       email: 'alexD@gmail.com',
       jobTitle: 'Actress',
       isInputError: { fName: '', lName: '', email: '', age: '', mobile: '', gender: '' },
-      isInputValid: { fNameValid: false, lNameValid: false, genderValid: false, ageValid: false, mobileValid: false, emailValid: false, formValid: false, }
+      isInputValid: { fNameValid: true, lNameValid: true, genderValid: true, ageValid: true, mobileValid: true, emailValid: true, formValid: true, }
     },
     {
       id: 2022117105735,
@@ -60,7 +60,7 @@ const storeStates: StoreStatesType = {
       email: 'bradley@gmail.com',
       jobTitle: 'Actor',
       isInputError: { fName: '', lName: '', email: '', age: '', mobile: '', gender: '' },
-      isInputValid: { fNameValid: false, lNameValid: false, genderValid: false, ageValid: false, mobileValid: false, emailValid: false, formValid: false, }
+      isInputValid: { fNameValid: true, lNameValid: true, genderValid: true, ageValid: true, mobileValid: true, emailValid: true, formValid: true, }
     },
     {
       id: 2022117105736,
@@ -72,7 +72,7 @@ const storeStates: StoreStatesType = {
       email: 'BarPal@gmail.com',
       jobTitle: 'Model',
       isInputError: { fName: '', lName: '', email: '', age: '', mobile: '', gender: '' },
-      isInputValid: { fNameValid: false, lNameValid: false, genderValid: false, ageValid: false, mobileValid: false, emailValid: false, formValid: false, }
+      isInputValid: { fNameValid: true, lNameValid: true, genderValid: true, ageValid: true, mobileValid: true, emailValid: true, formValid: true, }
     },
   ],
   selectedPerson: []
