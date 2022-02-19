@@ -6,23 +6,22 @@ import { selectedPerson } from '../../redux/action';
 const PersonTable = () => {
   const personList = useSelector((state: any) => state.personList)
   const dispatch: any = useDispatch();
-  
+
   const handleData = (event: MyPerson) => {
     dispatch(selectedPerson(event))
   }
-  
   return (
     <table className="table table-striped mt-5 " >
       <thead>
-        <tr>
-          <th scope="col">Id</th>
-          <th scope="col">First Name</th>
-          <th scope="col">Last Name</th>
-          <th scope="col">Age</th>
-          <th scope="col">Gender</th>
-          <th scope="col">Mobile</th>
-          <th scope="col">Email</th>
-          <th scope="col">Job Title</th>
+        <tr className="bg-dark text-white text-center">
+          <th>Id's</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Age</th>
+          <th>Gender</th>
+          <th>Mobile</th>
+          <th>Email</th>
+          <th>Job</th>
         </tr>
       </thead>
       <tbody>

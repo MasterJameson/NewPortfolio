@@ -146,7 +146,6 @@ const AddPerson = () => {
     handleReset()
   }
 
-
   // const arr = [1, 2, 3, 4, 5];
   // const tst = arr.map(val => { return val > 3 });
   // const fltr = arr.filter(val => { return val > 3 });
@@ -156,17 +155,17 @@ const AddPerson = () => {
   return (
     <React.Fragment>
       <div style={{ width: 300, margin: "0 auto", }}>
-        <div className="input-group mb-3 mt-3">
+        <div className="input-group mb-3 mt-5">
           <input type="text" className="form-control" placeholder="Input Email" aria-label="Recipient's username" onChange={event => setSearchVal(event.target.value)} aria-describedby="basic-addon2" />
           <div className="input-group-append">
             <span className="input-group-text" id="basic-addon2">@example.com</span>
           </div>
         </div>
-        <form className='demoForm border p-4 mt-5'>
+        <form className='demoForm border p-4 mt-3'>
           <h2>Add Person</h2>
           <div className={`form-group ${person.isInputError.fName.length === 0 ? '' : 'has-error'}`}>
             <label htmlFor="fName">First Name</label>
-            <input type="text" name='fName' value={person.fName} onFocus={handleId}
+            <input type="text" name='fName' value={person.fName} onFocus={handleId} autoFocus
               onChange={event => { handleInputChange(event) }} className='form-control  mb-3' />
           </div>
           <div className={`form-group ${person.isInputError.lName.length === 0 ? '' : 'has-error'}`}>
