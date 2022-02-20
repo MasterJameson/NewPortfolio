@@ -14,23 +14,25 @@ import WeartherApi from './Tables/WeatherApp';
 function App() {
 
   return (
-    <React.Fragment>
-      <Provider store={appStore}>
-        <WeartherApi />
+    <React.Fragment >
+      <Provider store={appStore} >
+        <div style={{ fontFamily: 'Candara, Calibri' }}>
+          <WeartherApi />
+          {/* <ClassComponentApp /> */}
+          <div className="container">
+            <div className="row">
+              <div className="col-sm">
+                <AddPerson />
+              </div>
+              <div className="col-sm">
+                <PersonTable />
+              </div>
 
-        {/* <ClassComponentApp /> */}
-        <div className="container">
-          <div className="row">
-            <div className="col-sm">
-              <AddPerson />
-            </div>
-            <div className="col-sm">
-              <PersonTable />
             </div>
           </div>
+          {/* <SignUpForm /> */}
+          {/* <Exam /> */}
         </div>
-        {/* <SignUpForm /> */}
-        {/* <Exam /> */}
       </Provider>
     </React.Fragment>
   );

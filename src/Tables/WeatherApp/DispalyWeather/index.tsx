@@ -15,7 +15,7 @@ const WeatherTable = (props: any) => {
 
   return (
     <>
-      <h2>Weather Forecast</h2>
+      <h2 >Current weather for your city</h2>
       <table className='table  table-striped table-hover'>
         <tbody>
           <tr>
