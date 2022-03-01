@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
+import Button from '../../Components/Buttons';
 import { addPerson, removePerson, unselectPerson } from '../../redux/action';
 import PersonErr from '../FormErr/PersonErr';
 import { MyPerson } from './interface';
@@ -128,7 +129,8 @@ const AddPerson = () => {
     })
   }
 
-  const handleDispatchPerson = (event: { preventDefault: () => void; }) => {
+  const handleDispatchPerson: React.MouseEventHandler<HTMLButtonElement> = (event: { preventDefault: () => void; }) => {
+
     const isForm = person.isInputValid.formValid;
     if (isForm) {
       dispatch(addPerson(person))
@@ -205,10 +207,20 @@ const AddPerson = () => {
           <div className="container">
             <div className="row">
               <div className="col-md-6">
-                <button type='submit' disabled={!person.isInputValid.formValid} className='btn btn-primary' onClick={handleDispatchPerson}>Submit</button>
+                <Button
+                  text='Submit'
+                  btnClass='btn-primary'
+                  disabled={!person.isInputValid.formValid}
+                  onClick={handleDispatchPerson}
+                />
               </div>
               <div className="col-md-6">
-                <button type='submit' className='btn btn-danger' disabled={personSelected.length != 1} onClick={handleDeletePerson}>Delete</button>
+                <Button
+                  text='Delete'
+                  btnClass='btn-danger'
+                  disabled={personSelected.length != 1}
+                  onClick={handleDeletePerson}
+                />
               </div>
             </div>
 
