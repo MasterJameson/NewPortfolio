@@ -6,7 +6,6 @@ import AddPerson from './Forms/AddPerson';
 import Exam from './Forms/exam';
 import SignUpForm from './Forms/SignUp';
 import { appStore } from './redux/store';
-import PersonTable from './Tables/PersonTable';
 import ClassComponentApp from './Forms/classComponent';
 import WeartherApi from './Tables/WeatherApp';
 
@@ -19,17 +18,7 @@ function App() {
         <div style={{ fontFamily: 'Candara, Calibri' }}>
           <WeartherApi />
           {/* <ClassComponentApp /> */}
-          <div className="container">
-            <div className="row">
-              <div className="col-sm">
-                <AddPerson />
-              </div>
-              <div className="col-sm">
-                <PersonTable />
-              </div>
-
-            </div>
-          </div>
+          <AddPerson />
           {/* <SignUpForm /> */}
           {/* <Exam /> */}
         </div>

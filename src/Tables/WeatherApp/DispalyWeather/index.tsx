@@ -10,9 +10,6 @@ const WeatherTable = (props: any) => {
   const celsius = (Math.floor((subTemp - 32) * 5 / 9))
   const cloudiness = value?.weather?.map((val: any) => val.main)
 
-  console.log(temp);
-  console.log(value);
-
   return (
     <>
       <h2 >Current weather for your city</h2>

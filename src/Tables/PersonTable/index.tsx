@@ -2,14 +2,16 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { MyPerson } from '../../Forms/AddPerson/interface';
 import { selectedPerson } from '../../redux/action';
+import { PersonTableType } from './interface';
 
-const PersonTable = () => {
-  const personList = useSelector((state: any) => state.personList)
+const PersonTable = ({props, thContent}: PersonTableType) => {
+  
   const dispatch: any = useDispatch();
-
+  
   const handleData = (event: MyPerson) => {
     dispatch(selectedPerson(event))
   }
+
   return (
     <table className="table table-striped mt-5 " >
       <thead>
@@ -26,7 +28,7 @@ const PersonTable = () => {
       </thead>
       <tbody>
         {
-          personList.map((item: MyPerson, i: number) => {
+         props.map((item: MyPerson, i: number) => {
             return (
               <tr key={i} onClick={() => handleData(item)}>
                 <th>{item.id}</th>

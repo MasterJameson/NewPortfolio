@@ -7,9 +7,9 @@ const SelectOption: React.FC<SelectOptionComponent> = ({ selectClass, selectValu
     <>
       <select className={selectClass} value={selectValue} onChange={onChange} onFocus={onFocus}>
         {
-          optionItems.map(items => {
+          optionItems.map((items, index) => {
             return (
-              <option value={items.optionValue}>{selectValue != '' ? selectValue : items.optionContent}</option>
+              <option key={index} value={items.optionValue} disabled={items.optionValue === ''} >{selectValue != '' ? selectValue : items.optionContent}</option>
             )
           })
         }

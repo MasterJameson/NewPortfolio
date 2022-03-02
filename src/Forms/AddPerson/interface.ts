@@ -1,5 +1,5 @@
 export interface MyPerson {
-  id: number;
+  id: number,
   fName: string,
   lName: string,
   age: string | number,
