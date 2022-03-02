@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import SignUpError from '../FormErr/SignUpErr';
+import SignUpError from '../../Components/FormErr/SignUpErr';
 
 interface MyState {
   email: string,

@@ -6,7 +6,7 @@ import Label from '../../Components/Labels';
 import SelectOption from '../../Components/SelectOption';
 import { SelectOptionComponent } from '../../Components/SelectOption/interface';
 import { addPerson, removePerson, unselectPerson } from '../../redux/action';
-import PersonErr from '../FormErr/PersonErr';
+import PersonErr from '../../Components/FormErr/PersonErr';
 import { MyPerson } from './interface';
 
 const AddPerson = () => {
@@ -224,16 +224,9 @@ const AddPerson = () => {
           </div>
           <div className={`form-group ${person.isInputError.gender.length === 0 ? '' : 'has-error'}`}>
             <Label content="Gender" htmlFor="gender" />
-            <select className="form-select mb-3" value={person.gender} onFocus={handleId}
-              onChange={event => { handleSelectChange(event) }}>
-              <option value=''>Select Gender</option>
-              <option value='male'>Male</option>
-              <option value='female'>Female</option>
-            </select>
             <SelectOption
               selectClass="form-select mb-3"
               selectValue={person.gender}
-              // optionContent={optionContent}
               optionItems={optionItems}
               onFocus={handleId}
               onChange={(event: React.ChangeEvent<HTMLSelectElement>) => { handleSelectChange(event) }}
