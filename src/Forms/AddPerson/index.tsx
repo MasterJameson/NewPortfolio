@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import Button from '../../Components/Buttons';
 import Input from '../../Components/Inputs';
 import Label from '../../Components/Labels';
+import SelectOption from '../../Components/SelectOption';
+import { SelectOptionComponent } from '../../Components/SelectOption/interface';
 import { addPerson, removePerson, unselectPerson } from '../../redux/action';
 import PersonErr from '../FormErr/PersonErr';
 import { MyPerson } from './interface';
@@ -26,6 +28,21 @@ const AddPerson = () => {
   })
 
   const [searchVal, setSearchVal] = useState('');
+  const [optionItems] = useState<SelectOptionComponent['optionItems']>(
+    [
+      {
+        optionContent: 'Select Gender',
+        optionValue: ''
+      },
+      {
+        optionContent: 'Male',
+        optionValue: 'male'
+      },
+      {
+        optionContent: 'Female',
+        optionValue: 'female'
+      }
+    ]);
 
   useEffect(() => {
     if (personSelected.length != 0) {
@@ -172,7 +189,7 @@ const AddPerson = () => {
         <form className='demoForm border p-4 mt-3'>
           <h2>Add Person</h2>
           <div className={`form-group ${person.isInputError.fName.length === 0 ? '' : 'has-error'}`}>
-            <Label content="First Name" htmlFor="fName"/>
+            <Label content="First Name" htmlFor="fName" />
             <Input
               autoFocus
               type="text"
@@ -184,7 +201,7 @@ const AddPerson = () => {
             />
           </div>
           <div className={`form-group ${person.isInputError.lName.length === 0 ? '' : 'has-error'}`}>
-            <Label content="Last Name" htmlFor="lName"/>
+            <Label content="Last Name" htmlFor="lName" />
             <Input
               type="text"
               name="lName"
@@ -195,7 +212,7 @@ const AddPerson = () => {
             />
           </div>
           <div className={`form-group ${person.isInputError.age.length === 0 ? '' : 'has-error'}`}>
-            <Label content="Age" htmlFor="age"/>
+            <Label content="Age" htmlFor="age" />
             <Input
               type="number"
               name="age"
@@ -206,16 +223,24 @@ const AddPerson = () => {
             />
           </div>
           <div className={`form-group ${person.isInputError.gender.length === 0 ? '' : 'has-error'}`}>
-            <Label content="Gender" htmlFor="gender"/>
+            <Label content="Gender" htmlFor="gender" />
             <select className="form-select mb-3" value={person.gender} onFocus={handleId}
               onChange={event => { handleSelectChange(event) }}>
               <option value=''>Select Gender</option>
               <option value='male'>Male</option>
               <option value='female'>Female</option>
             </select>
+            <SelectOption
+              selectClass="form-select mb-3"
+              selectValue={person.gender}
+              // optionContent={optionContent}
+              optionItems={optionItems}
+              onFocus={handleId}
+              onChange={(event: React.ChangeEvent<HTMLSelectElement>) => { handleSelectChange(event) }}
+            />
           </div>
           <div className={`form-group ${person.isInputError.mobile.length === 0 ? '' : 'has-error'}`}>
-            <Label content="Mobile Number" htmlFor="mobile"/>
+            <Label content="Mobile Number" htmlFor="mobile" />
             <Input
               type="number"
               name="mobile"
@@ -226,7 +251,7 @@ const AddPerson = () => {
             />
           </div>
           <div className={`form-group ${person.isInputError.email.length === 0 ? '' : 'has-error'}`}>
-            <Label content="Email" htmlFor="email"/>
+            <Label content="Email" htmlFor="email" />
             <Input
               type="email"
               name="email"
@@ -238,7 +263,7 @@ const AddPerson = () => {
             />
           </div>
           <div className="form-group">
-            <Label content="Job Title" htmlFor="jobTitle"/>
+            <Label content="Job Title" htmlFor="jobTitle" />
             <Input
               type="text"
               name="jobTitle"
