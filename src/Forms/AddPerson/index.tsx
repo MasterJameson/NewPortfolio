@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import Button from '../../Components/Buttons';
+import Input from '../../Components/Inputs';
+import Label from '../../Components/Labels';
 import { addPerson, removePerson, unselectPerson } from '../../redux/action';
 import PersonErr from '../FormErr/PersonErr';
 import { MyPerson } from './interface';
@@ -82,6 +84,7 @@ const AddPerson = () => {
     itemError.formValid = itemError.lNameValid && itemError.fNameValid && itemError.ageValid && itemError.emailValid && itemError.genderValid && itemError.mobileValid;
   }
   const handleId = () => {
+
     const date = new Date();
     const components = [
       date.getFullYear(),
@@ -93,8 +96,11 @@ const AddPerson = () => {
     ];
 
     const uniqueId = Number(components.join(""))
+
     if (person.isInputValid.formValid) {
+      console.log(uniqueId);
       if (personSelected.length === 0) {
+        console.log(uniqueId);
         setPerson({ ...person, id: uniqueId })
       }
     }
@@ -142,7 +148,7 @@ const AddPerson = () => {
     handleReset()
   }
 
-  const handleDeletePerson = (event: { preventDefault: () => void; }) => {
+  const handleDeletePerson: React.MouseEventHandler<HTMLButtonElement> | undefined = (event: { preventDefault: () => void; }) => {
     dispatch(removePerson(person))
     event.preventDefault();
     handleReset()
@@ -166,22 +172,41 @@ const AddPerson = () => {
         <form className='demoForm border p-4 mt-3'>
           <h2>Add Person</h2>
           <div className={`form-group ${person.isInputError.fName.length === 0 ? '' : 'has-error'}`}>
-            <label htmlFor="fName">First Name</label>
-            <input type="text" name='fName' value={person.fName} onFocus={handleId} autoFocus
-              onChange={event => { handleInputChange(event) }} className='form-control  mb-3' />
+            <Label content="First Name" htmlFor="fName"/>
+            <Input
+              autoFocus
+              type="text"
+              name="fName"
+              inputClass="form-control mb-3"
+              value={person.fName}
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => { handleInputChange(event) }}
+              onFocus={handleId}
+            />
           </div>
           <div className={`form-group ${person.isInputError.lName.length === 0 ? '' : 'has-error'}`}>
-            <label htmlFor="lName">Last Name</label>
-            <input type="text" name='lName' value={person.lName} onFocus={handleId}
-              onChange={event => { handleInputChange(event) }} className='form-control  mb-3' />
+            <Label content="Last Name" htmlFor="lName"/>
+            <Input
+              type="text"
+              name="lName"
+              inputClass="form-control mb-3"
+              value={person.lName}
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => { handleInputChange(event) }}
+              onFocus={handleId}
+            />
           </div>
           <div className={`form-group ${person.isInputError.age.length === 0 ? '' : 'has-error'}`}>
-            <label htmlFor="age">Age</label>
-            <input type="number" name='age' value={person.age.toLocaleString().length <= 3 ? person.age : ''} min="0" max="150"
-              onFocus={handleId} onChange={event => { handleInputChange(event) }} className='form-control  mb-3' />
+            <Label content="Age" htmlFor="age"/>
+            <Input
+              type="number"
+              name="age"
+              inputClass="form-control mb-3"
+              value={person.age.toLocaleString().length <= 3 ? person.age : ''}
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => { handleInputChange(event) }}
+              onFocus={handleId}
+            />
           </div>
           <div className={`form-group ${person.isInputError.gender.length === 0 ? '' : 'has-error'}`}>
-            <label htmlFor="gender">Gender</label>
+            <Label content="Gender" htmlFor="gender"/>
             <select className="form-select mb-3" value={person.gender} onFocus={handleId}
               onChange={event => { handleSelectChange(event) }}>
               <option value=''>Select Gender</option>
@@ -190,24 +215,44 @@ const AddPerson = () => {
             </select>
           </div>
           <div className={`form-group ${person.isInputError.mobile.length === 0 ? '' : 'has-error'}`}>
-            <label htmlFor="mobile">Mobile Number</label>
-            <input type="number" name='mobile' value={person.mobile} min="0" onFocus={handleId}
-              onChange={event => { handleInputChange(event) }} className='form-control mb-3' />
+            <Label content="Mobile Number" htmlFor="mobile"/>
+            <Input
+              type="number"
+              name="mobile"
+              inputClass="form-control mb-3"
+              value={person.mobile}
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => { handleInputChange(event) }}
+              onFocus={handleId}
+            />
           </div>
           <div className={`form-group ${person.isInputError.email.length === 0 ? '' : 'has-error'}`}>
-            <label htmlFor="email">Email</label>
-            <input type="email" name='email' id='findEmail' value={person.email} onFocus={handleId}
-              onChange={event => { handleInputChange(event) }} className='form-control  mb-3' />
+            <Label content="Email" htmlFor="email"/>
+            <Input
+              type="email"
+              name="email"
+              id='findEmail'
+              inputClass="form-control mb-3"
+              value={person.email}
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => { handleInputChange(event) }}
+              onFocus={handleId}
+            />
           </div>
           <div className="form-group">
-            <label htmlFor="jobTitle">Job Title</label>
-            <input type="text" name='jobTitle' value={person.jobTitle} onFocus={handleId}
-              onChange={event => { handleInputChange(event) }} className='form-control  mb-3' />
+            <Label content="Job Title" htmlFor="jobTitle"/>
+            <Input
+              type="text"
+              name="jobTitle"
+              inputClass="form-control mb-3"
+              value={person.jobTitle}
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => { handleInputChange(event) }}
+              onFocus={handleId}
+            />
           </div>
           <div className="container">
             <div className="row">
               <div className="col-md-6">
                 <Button
+                  type="submit"
                   text='Submit'
                   btnClass='btn-primary'
                   disabled={!person.isInputValid.formValid}
@@ -216,6 +261,7 @@ const AddPerson = () => {
               </div>
               <div className="col-md-6">
                 <Button
+                  type="submit"
                   text='Delete'
                   btnClass='btn-danger'
                   disabled={personSelected.length != 1}

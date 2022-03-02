@@ -111,6 +111,7 @@ const reducer = (state: any = storeStates, action: any) => {
         personList: state.personList.filter((item: any) => {
           return item.id !== action.removed.id
         }),
+        selectedPerson: [],
       }
       return state;
 

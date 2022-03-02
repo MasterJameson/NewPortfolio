@@ -1,10 +1,10 @@
 import React from 'react'
 import { ButtonComponent } from './interface'
 
-const Button: React.FC<ButtonComponent> = ({ text, btnClass, disabled, onClick }: ButtonComponent) => {
+const Button: React.FC<ButtonComponent> = ({ type, text, btnClass, disabled, onClick }: ButtonComponent) => {
   return (
     <>
-      <button type='button' className={`btn ${btnClass}`} disabled={disabled} onClick={onClick}>{text}</button>
+      <button type={type} className={`btn ${btnClass}`} disabled={disabled} onClick={onClick}>{text}</button>
     </>
   )
 }
