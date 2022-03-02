@@ -9,7 +9,7 @@ const SelectOption: React.FC<SelectOptionComponent> = ({ selectClass, selectValu
         {
           optionItems.map(items => {
             return (
-              <option value={items.optionValue}>{items.optionContent}</option>
+              <option value={items.optionValue}>{selectValue != '' ? selectValue : items.optionContent}</option>
             )
           })
         }

@@ -67,7 +67,7 @@ const storeStates: StoreStatesType = {
       fName: 'Barbara',
       lName: 'Palvin',
       age: 31,
-      gender: 'Femal',
+      gender: 'Female',
       mobile: 9306202586,
       email: 'BarPal@gmail.com',
       jobTitle: 'Model',
