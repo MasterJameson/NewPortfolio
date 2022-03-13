@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import Button from '../../Components/Buttons';
-import Input from '../../Components/Inputs';
-import Label from '../../Components/Labels';
-import SelectOption from '../../Components/SelectOption';
+import Button from '../../Components/Buttons/Buttons';
+import Input from '../../Components/Inputs/Inputs';
+import Label from '../../Components/Labels/Labels';
+import SelectOption from '../../Components/SelectOption/SelectOption';
 import { SelectOptionComponent } from '../../Components/SelectOption/interface';
 import { addPerson, removePerson, unselectPerson } from '../../redux/action';
-import PersonErr from '../../Components/FormErr/PersonErr';
+import PersonErr from '../../Components/FormErr/PersonErr/PersonErr';
 import { MyPerson } from './interface';
 import PersonTable from '../../Tables/PersonTable';
 

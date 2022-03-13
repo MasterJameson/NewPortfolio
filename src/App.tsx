@@ -2,7 +2,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import './App.css';
-import AddPerson from './Forms/AddPerson';
+import AddPerson from './Forms/AddPerson/AddPerson';
 import Exam from './Forms/exam';
 import SignUpForm from './Forms/SignUp';
 import { appStore } from './redux/store';

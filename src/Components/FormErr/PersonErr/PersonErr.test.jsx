@@ -1,7 +1,6 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import PersonErr, { spanConditionRender } from './index'
-
+import PersonErr from './PersonErr'
 
 describe('Behavior and Render Test', () => {
 
@@ -25,6 +24,4 @@ describe('Behavior and Render Test', () => {
     expect(wrapper.length).toEqual(1)
 
   })
-
-
 })
