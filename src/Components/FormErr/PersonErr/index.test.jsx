@@ -1,26 +1,30 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import PersonErr from './index'
-
+import PersonErr, { spanConditionRender } from './index'
 
 
 describe('Behavior and Render Test', () => {
 
   let wrapper
-  const prps = { age: "", email: "Email already exist.", fName: "", gender: "", lName: "", mobile: "Mobile already exist." }
+  const props = {
+    isInputError: {
+      age: "",
+      email: "Email already exist.",
+      fName: "",
+      gender: "",
+      lName: "",
+      mobile: "Mobile already exist."
+    }
+  }
 
   beforeEach(() => {
-    wrapper = shallow(<PersonErr {...prps} />)
+    wrapper = shallow(<PersonErr {...props} />)
   })
 
   it('Should render', () => {
     expect(wrapper.length).toEqual(1)
-    console.log(wrapper.props())
+
   })
 
-  // it("accepts products props", () => {
-  //   const prps = { age: "", email: "Email already exist.", fName: "", gender: "", lName: "", mobile: "Mobile already exist." }
-  //   expect(Object.keys(prps).sort()).toEqual(['email', 'mobile', 'gender', 'lName', 'fName', 'age'].sort())
-  // });
 
 })

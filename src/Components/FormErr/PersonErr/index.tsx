@@ -1,7 +1,9 @@
 import React from 'react'
 
 export default function PersonErr(props: any): JSX.Element {
+
   const errorValue = props.isInputError;
+  const errorkey = Object.keys(props.isInputError)
 
   const spanConditionRender = (fieldName: string, index: number) => {
     if (errorValue[fieldName].length > 0) {
@@ -13,8 +15,8 @@ export default function PersonErr(props: any): JSX.Element {
 
   return (
     <React.Fragment>
-      {props.length > 0 &&
-        Object.keys(props.isInputError).map((fieldName, index) => spanConditionRender(fieldName, index))
+      {errorkey.length > 0 &&
+        errorkey.map((fieldName, index) => spanConditionRender(fieldName, index))
       }
     </React.Fragment>
   )
