@@ -3,7 +3,9 @@ import { shallow } from 'enzyme'
 import SelectOption from "./SelectOption";
 
 describe('Behavior and Render Test', () => {
+
   let wrapper
+  
   const props = {
     selectClass: "form-select mb-3",
     selectValue: "",
@@ -21,6 +23,5 @@ describe('Behavior and Render Test', () => {
   it('Should render', () => {
     expect(wrapper.length).toEqual(1)
   })
-
 
 })

@@ -8,7 +8,7 @@ import { SelectOptionComponent } from '../../Components/SelectOption/interface';
 import { addPerson, removePerson, unselectPerson } from '../../redux/action';
 import PersonErr from '../../Components/FormErr/PersonErr/PersonErr';
 import { MyPerson } from './interface';
-import PersonTable from '../../Tables/PersonTable';
+import PersonTable from '../../Tables/PersonTable/PersonTable';
 
 const AddPerson = () => {
 

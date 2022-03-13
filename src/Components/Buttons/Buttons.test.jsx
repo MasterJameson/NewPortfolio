@@ -3,6 +3,7 @@ import { shallow } from 'enzyme'
 import Button from './Buttons'
 
 describe('Behavior and Render Test', () => {
+
   let wrapper
 
   const props = {
@@ -20,4 +21,5 @@ describe('Behavior and Render Test', () => {
   it('Should render', () => {
     expect(wrapper.length).toEqual(1)
   })
+  
 })

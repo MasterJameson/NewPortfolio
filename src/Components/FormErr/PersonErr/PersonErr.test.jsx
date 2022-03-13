@@ -5,6 +5,7 @@ import PersonErr from './PersonErr'
 describe('Behavior and Render Test', () => {
 
   let wrapper
+  
   const props = {
     isInputError: {
       age: "",
@@ -22,6 +23,6 @@ describe('Behavior and Render Test', () => {
 
   it('Should render', () => {
     expect(wrapper.length).toEqual(1)
-
   })
+
 })
