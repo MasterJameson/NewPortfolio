@@ -4,10 +4,10 @@ import { MyPerson } from '../../Forms/AddPerson/interface';
 import { selectedPerson } from '../../redux/action';
 import { PersonTableType } from './interface';
 
-const PersonTable = ({props, thContent}: PersonTableType) => {
-  
+const PersonTable = ({ props, thContent }: PersonTableType) => {
+
   const dispatch: any = useDispatch();
-  
+
   const handleData = (event: MyPerson) => {
     dispatch(selectedPerson(event))
   }
@@ -28,9 +28,9 @@ const PersonTable = ({props, thContent}: PersonTableType) => {
       </thead>
       <tbody>
         {
-         props.map((item: MyPerson, i: number) => {
+          props.map((item: MyPerson, i: number) => {
             return (
-              <tr key={i} onClick={() => handleData(item)}>
+              <tr id='TableTr' key={i} onClick={() => {handleData(item)}}>
                 <th>{item.id}</th>
                 <td>{item.fName.toUpperCase()}</td>
                 <td>{item.lName.toUpperCase()}</td>
