@@ -7,7 +7,8 @@ import Exam from './Forms/exam';
 import SignUpForm from './Forms/SignUp';
 import { appStore } from './redux/store';
 import ClassComponentApp from './Forms/classComponent';
-import WeartherApi from './Tables/WeatherApp';
+import WeartherApp from './Tables/WeatherApp/WeatherApp';
+import DisplayWeather from './Tables/WeatherApp/DispalyWeather/DisplayWeather';
 
 
 function App() {
@@ -16,7 +17,16 @@ function App() {
     <React.Fragment >
       <Provider store={appStore} >
         <div style={{ fontFamily: 'Candara, Calibri' }}>
-          <WeartherApi />
+          <div className="container">
+            <div className="row">
+              <div className="col-sm">
+                <WeartherApp />
+              </div>
+              <div className="col-sm">
+                <DisplayWeather />
+              </div>
+            </div>
+          </div>
           {/* <ClassComponentApp /> */}
           <AddPerson />
           {/* <SignUpForm /> */}
