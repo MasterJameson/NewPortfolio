@@ -3,10 +3,10 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import './App.css';
 import AddPerson from './Forms/AddPerson/AddPerson';
-import Exam from './Forms/exam';
-import SignUpForm from './Forms/SignUp';
+// import Exam from './Forms/exam';
+// import SignUpForm from './Forms/SignUp';
 import { appStore } from './redux/store';
-import ClassComponentApp from './Forms/classComponent';
+// import ClassComponentApp from './Forms/classComponent';
 import WeartherApp from './Tables/WeatherApp/WeatherApp';
 import DisplayWeather from './Tables/WeatherApp/DispalyWeather/DisplayWeather';
 

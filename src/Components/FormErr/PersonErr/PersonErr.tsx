@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function PersonErr(props: any): JSX.Element {
+ const PersonErr = (props: any): JSX.Element => {
 
   const errorValue = props.isInputError;
   const errorkey = Object.keys(props.isInputError)
@@ -21,3 +21,4 @@ export default function PersonErr(props: any): JSX.Element {
     </React.Fragment>
   )
 }
+export default PersonErr

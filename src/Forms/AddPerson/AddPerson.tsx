@@ -59,10 +59,8 @@ const AddPerson = () => {
   ])
 
   useEffect(() => {
-    if (personSelected.length != 0) {
-      personSelected.filter((val: MyPerson) => {
-        setPerson(val)
-      })
+    if (personSelected.length !== 0) {
+      personSelected.filter((val: MyPerson) => setPerson(val))
     }
   }, [personSelected, searchVal])
 
@@ -70,7 +68,7 @@ const AddPerson = () => {
     const fieldValidationErrors = person.isInputError;
     const itemError = person.isInputValid;
 
-    if (personSelected.length === 0) {
+    if (personSelected === undefined || personSelected.length == 0) {
       if (personList.length > 0) {
         personList.forEach((element: MyPerson) => {
           if (person.email === element.email) {
@@ -86,11 +84,11 @@ const AddPerson = () => {
     }
     switch (fieldName) {
       case 'fName':
-        itemError.fNameValid = value != '';
+        itemError.fNameValid = value !== '' && value.toString().trim() !== "";
         fieldValidationErrors.fName = itemError.fNameValid ? '' : 'First name is required.';
         break;
       case 'lName':
-        itemError.lNameValid = value != '';
+        itemError.lNameValid = value !== '' && value.toString().trim() !== "";
         fieldValidationErrors.lName = itemError.lNameValid ? '' : 'Last name is required.';
         break;
       case 'age':
@@ -98,11 +96,11 @@ const AddPerson = () => {
         fieldValidationErrors.age = itemError.ageValid ? '' : 'Invalid age.';
         break;
       case 'gender':
-        itemError.genderValid = value != '';
+        itemError.genderValid = value !== '';
         fieldValidationErrors.gender = itemError.genderValid ? '' : 'Select gender please.';
         break;
       case 'email':
-        itemError.emailValid = value.toString().match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i) != null;
+        itemError.emailValid = value.toString().match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i) !== null;
         fieldValidationErrors.email = itemError.emailValid ? '' : 'Email not good.';
         break;
       case 'mobile':
@@ -138,7 +136,7 @@ const AddPerson = () => {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const name = event.target.name
     const val = event.target.value
-    const value = name != 'mobile' && name != 'age' ? val : Number(val)
+    const value = name !== 'mobile' && name !== 'age' ? val : Number(val)
     setPerson({ ...person, [name]: value })
     validateField(name, value)
   }
@@ -170,7 +168,7 @@ const AddPerson = () => {
     if (isForm) {
       dispatch(addPerson(person))
     }
-    if (personSelected.length != 0) {
+    if (personSelected.length !== 0) {
       dispatch(unselectPerson())
     }
     event.preventDefault();
@@ -195,18 +193,13 @@ const AddPerson = () => {
         <div className="row">
           <div className="col-sm">
             <div style={{ width: 300, margin: "0 auto", }}>
-              <div className="input-group mb-3 mt-5">
-                <input type="text" className="form-control" placeholder="Input Email" aria-label="Recipient's username" onChange={event => setSearchVal(event.target.value)} aria-describedby="basic-addon2" />
-                <div className="input-group-append">
-                  <span className="input-group-text" id="basic-addon2">@example.com</span>
-                </div>
-              </div>
               <form className='demoForm border p-4 mt-3'>
                 <h2>Add Person</h2>
                 <div className={`form-group ${person.isInputError.fName.length === 0 ? '' : 'has-error'}`}>
                   <Label content="First Name" htmlFor="fName" />
                   <Input
                     autoFocus
+                    id='inputfName'
                     type="text"
                     name="fName"
                     inputClass="form-control mb-3"
@@ -219,6 +212,7 @@ const AddPerson = () => {
                   <Label content="Last Name" htmlFor="lName" />
                   <Input
                     type="text"
+                    id='inputlName'
                     name="lName"
                     inputClass="form-control mb-3"
                     value={person.lName}
@@ -230,6 +224,7 @@ const AddPerson = () => {
                   <Label content="Age" htmlFor="age" />
                   <Input
                     type="number"
+                    id='inputAge'
                     name="age"
                     inputClass="form-control mb-3"
                     value={person.age.toLocaleString().length <= 3 ? person.age : ''}
@@ -297,7 +292,7 @@ const AddPerson = () => {
                         type="submit"
                         text='Delete'
                         btnClass='btn-danger'
-                        disabled={personSelected.length != 1}
+                        disabled={personSelected === undefined || personSelected.length === 0 }
                         onClick={handleDeletePerson}
                       />
                     </div>
