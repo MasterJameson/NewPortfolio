@@ -47,7 +47,7 @@ const AddPerson = () => {
 
   useEffect(() => {
 
-    dispatch(getMockApi('personList'))
+    dispatch(getMockApi())
   })
 
   useEffect(() => {
