@@ -38,7 +38,7 @@ export const getWeatherApp = (data: string) => (dispatch: any) => {
 }
 
 export const getMockApi = (data:string) =>(dispatch:any)=>{
-  const url = `https://localhost:3001/${data}`
+  const url = `http://localhost:3001/${data}`
   fetch(url,{method: "GET"}).then(response => response.json().then(data =>{
     dispatch({
       type: 'GET_PERSONLIST',
