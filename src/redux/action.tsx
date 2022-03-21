@@ -39,6 +39,7 @@ export const getWeatherApp = (data: string) => (dispatch: any) => {
 export const getMockApi = (data: string) => (dispatch: any) => {
   const url = `https://data-hosting.herokuapp.com/${data}`
   fetch(url, { method: "GET" }).then(response => response.json().then(data => {
+    console.log(data)
     dispatch({
       type: 'GET_PERSONLIST',
       data: data

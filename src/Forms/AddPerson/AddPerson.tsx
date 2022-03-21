@@ -170,6 +170,7 @@ const AddPerson = () => {
   const handleDeletePerson: React.MouseEventHandler<HTMLButtonElement> | undefined = (event: { preventDefault: () => void; }) => {
     dispatch(removePerson(person))
     dispatch(deleteMockApiData(person.id))
+    dispatch(getMockApi('personList'))
     event.preventDefault();
     handleReset()
   }
