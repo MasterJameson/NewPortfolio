@@ -60,7 +60,7 @@ const AddPerson = () => {
     const fieldValidationErrors = person.isInputError;
     const itemError = person.isInputValid;
 
-    if (personSelected === undefined || personSelected.length == 0) {
+    if (personSelected === undefined || personSelected.length === 0) {
       if (personList.length > 0) {
         personList.forEach((element: MyPerson) => {
           if (person.email === element.email) {
