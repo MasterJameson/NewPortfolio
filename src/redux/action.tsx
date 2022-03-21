@@ -28,7 +28,7 @@ export const removePerson = (data: MyPerson) => {
 export const getWeatherApp = (data: string) => (dispatch: any) => {
   console.log(data)
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${data === '' ? 'manila' : data}&APPID=fde32f2b1f38982f8cf53ee3c5761528`;
-  fetch(url,{method: "GET"}).then(response => response.json().then(data => {
+  fetch(url, { method: "GET" }).then(response => response.json().then(data => {
     dispatch({
       type: 'GET_WEATHER',
       getApi: data
@@ -36,12 +36,17 @@ export const getWeatherApp = (data: string) => (dispatch: any) => {
   }))
 }
 
-export const getMockApi = () =>(dispatch:any)=>{
-  const url = `https://raw.githubusercontent.com/MasterJameson/NewPortfolio/main/db/db.json`
-  fetch(url,{method: "GET"}).then(response => response.json().then(data =>{
+export const getMockApi = (data: string) => (dispatch: any) => {
+  const url = `https://data-hosting.herokuapp.com/${data}`
+  fetch(url, { method: "GET" }).then(response => response.json().then(data => {
     dispatch({
       type: 'GET_PERSONLIST',
-      data: data.personList
+      data: data
     })
   }))
+}
+
+export const deleteMockApiData = (payload: number) => (dispatch: any) => {
+  const url = `https://data-hosting.herokuapp.com/personList/${payload}`
+  fetch(url, { method: "DELETE" }).then(response => response.json().then(data => data))
 }
