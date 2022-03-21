@@ -28,7 +28,6 @@ const AddPerson = () => {
     isInputValid: { fNameValid: false, lNameValid: false, genderValid: false, ageValid: false, mobileValid: false, emailValid: false, formValid: false, }
   })
 
-  const [searchVal, setSearchVal] = useState('');
   const [optionItems] = useState<SelectOptionComponent['optionItems']>(
     [
       {
@@ -45,29 +44,17 @@ const AddPerson = () => {
       }
     ]);
 
-  const [thContent] = useState([
-    {
-      id: `Id's`,
-      fName: 'First Name',
-      lName: 'Last Name',
-      age: 'Age',
-      gender: 'Gender',
-      mobile: 'Mobile',
-      email: 'Email',
-      jobTitle: 'Job',
-    }
-  ])
 
   useEffect(() => {
-    // if (personDataList !== []) {}
+
     dispatch(getMockApi('personList'))
-  },[])
+  })
 
   useEffect(() => {
     if (personSelected.length !== 0) {
       personSelected.filter((val: MyPerson) => setPerson(val))
     }
-  }, [personSelected, searchVal])
+  }, [personSelected])
 
   const validateField = (fieldName: string, value: string | number) => {
     const fieldValidationErrors = person.isInputError;

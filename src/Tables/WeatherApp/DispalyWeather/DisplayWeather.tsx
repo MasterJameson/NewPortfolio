@@ -1,13 +1,8 @@
-import React, { useState } from 'react'
+// import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 
 
 const DisplayWeather = () => {
-
-  const [weatherData, setWeatherData] = useState([])
-  if (weatherData === []) {
-    console.log('weatherData', weatherData)
-  }
 
   const getWeatherData = useSelector((state: any) => state.getWeatherData)
   console.log(getWeatherData)
@@ -17,11 +12,10 @@ const DisplayWeather = () => {
   const subTemp = (temp ? (temp - 212) : 0)
   const celsius = (Math.floor((subTemp - 32) * 5 / 9))
   const cloudiness = value?.weather?.map((val: any) => val.main)
-
   return (
     <>
       {
-        <><h2>Current weather for your city</h2><table className='table  table-striped table-hover'>
+        <><h2>Current weather for your city{celsius}</h2><table className='table  table-striped table-hover'>
           <tbody>
             <tr>
               <td>City name</td>

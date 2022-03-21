@@ -1,4 +1,3 @@
-import { get } from "http";
 import { MyPerson } from "../Forms/AddPerson/interface";
 
 export const addPerson = (data: MyPerson) => {
