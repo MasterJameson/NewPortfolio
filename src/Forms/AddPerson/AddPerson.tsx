@@ -5,7 +5,7 @@ import Input from '../../Components/Inputs/Inputs';
 import Label from '../../Components/Labels/Labels';
 import SelectOption from '../../Components/SelectOption/SelectOption';
 import { SelectOptionComponent } from '../../Components/SelectOption/interface';
-import { addPerson, removePerson, unselectPerson } from '../../redux/action';
+import { addPerson, getMockApi, removePerson, unselectPerson } from '../../redux/action';
 import PersonErr from '../../Components/FormErr/PersonErr/PersonErr';
 import { MyPerson } from './interface';
 import PersonTable from '../../Tables/PersonTable/PersonTable';
@@ -57,6 +57,11 @@ const AddPerson = () => {
       jobTitle: 'Job',
     }
   ])
+
+  useEffect(() => {
+    // if (personDataList !== []) {}
+    dispatch(getMockApi('personList'))
+  },[])
 
   useEffect(() => {
     if (personSelected.length !== 0) {
@@ -181,6 +186,7 @@ const AddPerson = () => {
     handleReset()
   }
 
+
   // const arr = [1, 2, 3, 4, 5];
   // const tst = arr.map(val => { return val > 3 });
   // const fltr = arr.filter(val => { return val > 3 });
@@ -292,7 +298,7 @@ const AddPerson = () => {
                         type="submit"
                         text='Delete'
                         btnClass='btn-danger'
-                        disabled={personSelected === undefined || personSelected.length === 0 }
+                        disabled={personSelected === undefined || personSelected.length === 0}
                         onClick={handleDeletePerson}
                       />
                     </div>
@@ -306,10 +312,7 @@ const AddPerson = () => {
             </div>
           </div>
           <div className="col-sm">
-            <PersonTable
-              thContent={thContent}
-              props={personList}
-            />
+            <PersonTable />
           </div>
         </div>
       </div>

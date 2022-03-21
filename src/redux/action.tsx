@@ -1,3 +1,4 @@
+import { get } from "http";
 import { MyPerson } from "../Forms/AddPerson/interface";
 
 export const addPerson = (data: MyPerson) => {
@@ -32,6 +33,16 @@ export const getWeatherApp = (data: string) => (dispatch: any) => {
     dispatch({
       type: 'GET_WEATHER',
       getApi: data
+    })
+  }))
+}
+
+export const getMockApi = (data:string) =>(dispatch:any)=>{
+  const url = `http://localhost:3001/${data}`
+  fetch(url,{method: "GET"}).then(response => response.json().then(data =>{
+    dispatch({
+      type: 'GET_PERSONLIST',
+      data: data
     })
   }))
 }

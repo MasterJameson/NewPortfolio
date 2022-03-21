@@ -97,11 +97,13 @@ const storeStates: StoreStatesType = {
     visibility: 10000,
     weather: [{ id: 800, main: 'Clear', description: 'clear sky', icon: '01d' }],
     wind: { speed: 3.6, deg: 190 },
-  }]
+  }],
+  stateList: []
 }
 
 const reducer = (state: any = storeStates, action: any) => {
   switch (action.type) {
+
     case 'ADD_PERSON':
       state = {
         ...state,
@@ -112,6 +114,15 @@ const reducer = (state: any = storeStates, action: any) => {
         }), action.add],
       }
       return state;
+
+
+    case 'GET_PERSONLIST':
+      state = {
+        ...state,
+        stateList: [action.data]
+
+      }
+      return state
 
     case 'SELECTED_PERSON':
       state = {

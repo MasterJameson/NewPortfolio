@@ -6,6 +6,8 @@ import { PersonTableType } from './interface';
 
 const PersonTable = ({ props, thContent }: PersonTableType) => {
 
+  const personDataList = useSelector((state: any) => state.stateList)
+
   const dispatch: any = useDispatch();
 
   const handleData = (event: MyPerson) => {
@@ -27,10 +29,10 @@ const PersonTable = ({ props, thContent }: PersonTableType) => {
         </tr>
       </thead>
       <tbody>
-        {
-          props.map((item: MyPerson, i: number) => {
+        {personDataList[0] !== undefined &&
+          personDataList[0].map((item: MyPerson, i: number) => {
             return (
-              <tr id='TableTr' key={i} onClick={() => {handleData(item)}}>
+              <tr id='TableTr' key={i} onClick={() => { handleData(item) }}>
                 <th>{item.id}</th>
                 <td>{item.fName.toUpperCase()}</td>
                 <td>{item.lName.toUpperCase()}</td>

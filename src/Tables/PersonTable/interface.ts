@@ -9,6 +9,6 @@ interface thContentObject {
   jobTitle: string,
 }
 export interface PersonTableType {
-  thContent: thContentObject[],
-  props: any,
+  thContent?: thContentObject[],
+  props?: any,
 }
