@@ -39,7 +39,6 @@ export const getWeatherApp = (data: string) => (dispatch: any) => {
 export const getMockApi = (data: string) => (dispatch: any) => {
   const url = `https://data-hosting.herokuapp.com/${data}`
   fetch(url, { method: "GET" }).then(response => response.json().then(data => {
-    console.log(data)
     dispatch({
       type: 'GET_PERSONLIST',
       data: data
@@ -50,4 +49,19 @@ export const getMockApi = (data: string) => (dispatch: any) => {
 export const deleteMockApiData = (payload: number) => (dispatch: any) => {
   const url = `https://data-hosting.herokuapp.com/personList/${payload}`
   fetch(url, { method: "DELETE" }).then(response => response.json().then(data => data))
+}
+
+export const postMockApiData = (payload: MyPerson) => (dispatch: any) => {
+  const data = { 
+    id: payload.id, 
+    fName: payload.fName,
+    lName: payload.lName,
+    age: payload.age,
+    gender: payload.gender,
+    mobile: payload.mobile,
+    email: payload.email,
+    jobTitle: payload.jobTitle,
+  }
+  const url = `https://data-hosting.herokuapp.com/personList`
+  fetch(url, { method: "POST", headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
 }

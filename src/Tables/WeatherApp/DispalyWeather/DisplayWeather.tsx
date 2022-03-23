@@ -5,7 +5,6 @@ import { useSelector } from 'react-redux'
 const DisplayWeather = () => {
 
   const getWeatherData = useSelector((state: any) => state.getWeatherData)
-  console.log(getWeatherData)
   const value = getWeatherData[0]
 
   const temp = value?.main?.temp

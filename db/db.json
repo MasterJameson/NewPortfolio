@@ -1,5 +1,5 @@
 {
-  "personList":  [
+  "personList": [
     {
       "id": 2022117105731,
       "fName": "Jameson",
@@ -9,8 +9,23 @@
       "mobile": 9306202580,
       "email": "bagainjameson@gmail.com",
       "jobTitle": "SoftEng",
-      "isInputError": { "fName": "", "lName": "", "email": "", "age": "", "mobile": "", "gender": "" },
-      "isInputValid": { "fNameValid": true, "lNameValid": true, "genderValid": true, "ageValid": true, "mobileValid": true, "emailValid": true, "formValid": true }
+      "isInputError": {
+        "fName": "",
+        "lName": "",
+        "email": "",
+        "age": "",
+        "mobile": "",
+        "gender": ""
+      },
+      "isInputValid": {
+        "fNameValid": true,
+        "lNameValid": true,
+        "genderValid": true,
+        "ageValid": true,
+        "mobileValid": true,
+        "emailValid": true,
+        "formValid": true
+      }
     },
     {
       "id": 2022117105732,
@@ -21,9 +36,25 @@
       "mobile": 9306202581,
       "email": "joerogan@gmail.com",
       "jobTitle": "Podcast",
-      "isInputError": { "fName": "", "lName": "", "email": "", "age": "", "mobile": "", "gender": "" },
-      "isInputValid": { "fNameValid": true, "lNameValid": true, "genderValid": true, "ageValid": true, "mobileValid": true, "emailValid": true, "formValid": true }
-    },{
+      "isInputError": {
+        "fName": "",
+        "lName": "",
+        "email": "",
+        "age": "",
+        "mobile": "",
+        "gender": ""
+      },
+      "isInputValid": {
+        "fNameValid": true,
+        "lNameValid": true,
+        "genderValid": true,
+        "ageValid": true,
+        "mobileValid": true,
+        "emailValid": true,
+        "formValid": true
+      }
+    },
+    {
       "id": 2022117105733,
       "fName": "Taylor",
       "lName": "Swift",
@@ -32,9 +63,25 @@
       "mobile": 9306202582,
       "email": "taylorswift@gmail.com",
       "jobTitle": "Singer",
-      "isInputError": { "fName": "", "lName": "", "email": "", "age": "", "mobile": "", "gender": "" },
-      "isInputValid": { "fNameValid": true, "lNameValid": true, "genderValid": true, "ageValid": true, "mobileValid": true, "emailValid": true, "formValid": true }
-    },{
+      "isInputError": {
+        "fName": "",
+        "lName": "",
+        "email": "",
+        "age": "",
+        "mobile": "",
+        "gender": ""
+      },
+      "isInputValid": {
+        "fNameValid": true,
+        "lNameValid": true,
+        "genderValid": true,
+        "ageValid": true,
+        "mobileValid": true,
+        "emailValid": true,
+        "formValid": true
+      }
+    },
+    {
       "id": 2022117105734,
       "fName": "Alexandra",
       "lName": "Daddario",
@@ -43,9 +90,25 @@
       "mobile": 9306202583,
       "email": "alexD@gmail.com",
       "jobTitle": "Actress",
-      "isInputError": { "fName": "", "lName": "", "email": "", "age": "", "mobile": "", "gender": "" },
-      "isInputValid": { "fNameValid": true, "lNameValid": true, "genderValid": true, "ageValid": true, "mobileValid": true, "emailValid": true, "formValid": true }
-    },  {
+      "isInputError": {
+        "fName": "",
+        "lName": "",
+        "email": "",
+        "age": "",
+        "mobile": "",
+        "gender": ""
+      },
+      "isInputValid": {
+        "fNameValid": true,
+        "lNameValid": true,
+        "genderValid": true,
+        "ageValid": true,
+        "mobileValid": true,
+        "emailValid": true,
+        "formValid": true
+      }
+    },
+    {
       "id": 2022117105735,
       "fName": "Bradley",
       "lName": "Cooper",
@@ -54,8 +117,23 @@
       "mobile": 9306202584,
       "email": "bradley@gmail.com",
       "jobTitle": "Actor",
-      "isInputError": { "fName": "", "lName": "", "email": "", "age": "", "mobile": "", "gender": "" },
-      "isInputValid": { "fNameValid": true, "lNameValid": true, "genderValid": true, "ageValid": true, "mobileValid": true, "emailValid": true, "formValid": true }
+      "isInputError": {
+        "fName": "",
+        "lName": "",
+        "email": "",
+        "age": "",
+        "mobile": "",
+        "gender": ""
+      },
+      "isInputValid": {
+        "fNameValid": true,
+        "lNameValid": true,
+        "genderValid": true,
+        "ageValid": true,
+        "mobileValid": true,
+        "emailValid": true,
+        "formValid": true
+      }
     },
     {
       "id": 2022117105736,
@@ -66,9 +144,24 @@
       "mobile": 9306202586,
       "email": "BarPal@gmail.com",
       "jobTitle": "Model",
-      "isInputError": { "fName": "", "lName": "", "email": "", "age": "", "mobile": "", "gender": "" },
-      "isInputValid": { "fNameValid": true, "lNameValid": true, "genderValid": true, "ageValid": true, "mobileValid": true, "emailValid": true, "formValid": true }
-    }
+      "isInputError": {
+        "fName": "",
+        "lName": "",
+        "email": "",
+        "age": "",
+        "mobile": "",
+        "gender": ""
+      },
+      "isInputValid": {
+        "fNameValid": true,
+        "lNameValid": true,
+        "genderValid": true,
+        "ageValid": true,
+        "mobileValid": true,
+        "emailValid": true,
+        "formValid": true
+      }
+    } 
   ],
   "comments": [
     {
