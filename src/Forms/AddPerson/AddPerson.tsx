@@ -5,7 +5,7 @@ import Input from '../../Components/Inputs/Inputs';
 import Label from '../../Components/Labels/Labels';
 import SelectOption from '../../Components/SelectOption/SelectOption';
 import { SelectOptionComponent } from '../../Components/SelectOption/interface';
-import { addPerson, deleteMockApiData, getMockApi, postMockApiData, removePerson, unselectPerson } from '../../redux/action';
+import { deleteMockApiData, getMockApi, postMockApiData, removePerson, unselectPerson } from '../../redux/action';
 import PersonErr from '../../Components/FormErr/PersonErr/PersonErr';
 import { MyPerson } from './interface';
 import PersonTable from '../../Tables/PersonTable/PersonTable';
@@ -13,7 +13,7 @@ import PersonTable from '../../Tables/PersonTable/PersonTable';
 const AddPerson = () => {
 
   const dispatch: any = useDispatch();
-  const personList = useSelector((state: any) => state.personList)
+  const personList = useSelector((state: any) => state.stateList[0])
   const personSelected = useSelector((state: any) => state.selectedPerson)
   const [person, setPerson] = useState<MyPerson>({
     id: 0,
@@ -43,12 +43,9 @@ const AddPerson = () => {
         optionValue: 'female'
       }
     ]);
-
-
-  useEffect(() => {
-
+  if (personSelected === undefined || personSelected.length === 0) {
     dispatch(getMockApi('personList'))
-  })
+  }
 
   useEffect(() => {
     if (personSelected.length !== 0) {
@@ -179,13 +176,6 @@ const AddPerson = () => {
     event.preventDefault();
     handleReset()
   }
-
-
-  // const arr = [1, 2, 3, 4, 5];
-  // const tst = arr.map(val => { return val > 3 });
-  // const fltr = arr.filter(val => { return val > 3 });
-  // console.log(tst);
-  // console.log(fltr);
 
   return (
     <React.Fragment>

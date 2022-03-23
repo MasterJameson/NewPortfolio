@@ -52,8 +52,8 @@ export const deleteMockApiData = (payload: number) => (dispatch: any) => {
 }
 
 export const postMockApiData = (payload: MyPerson) => (dispatch: any) => {
-  const data = { 
-    id: payload.id, 
+  const data = {  
+    id: payload.id,
     fName: payload.fName,
     lName: payload.lName,
     age: payload.age,
@@ -61,6 +61,24 @@ export const postMockApiData = (payload: MyPerson) => (dispatch: any) => {
     mobile: payload.mobile,
     email: payload.email,
     jobTitle: payload.jobTitle,
+    isInputError: {
+      fName: payload.isInputError.fName,
+      lName: payload.isInputError.lName,
+      email: payload.isInputError.email,
+      age: payload.isInputError.age,
+      mobile: payload.isInputError.mobile,
+      gender: payload.isInputError.gender,
+    },
+    isInputValid: {
+      fNameValid: payload.isInputValid.fNameValid,
+      lNameValid: payload.isInputValid.lNameValid,
+      genderValid: payload.isInputValid.genderValid,
+      ageValid: payload.isInputValid.ageValid,
+      mobileValid: payload.isInputValid.mobileValid,
+      emailValid: payload.isInputValid.emailValid,
+      formValid: payload.isInputValid.formValid,
+    }
+
   }
   const url = `https://data-hosting.herokuapp.com/personList`
   fetch(url, { method: "POST", headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
