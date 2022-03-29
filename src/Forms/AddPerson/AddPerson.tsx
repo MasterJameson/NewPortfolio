@@ -5,7 +5,7 @@ import Input from '../../Components/Inputs/Inputs';
 import Label from '../../Components/Labels/Labels';
 import SelectOption from '../../Components/SelectOption/SelectOption';
 import { SelectOptionComponent } from '../../Components/SelectOption/interface';
-import { deleteMockApiData, getMockApi, postMockApiData, removePerson, unselectPerson } from '../../redux/action';
+import { deleteMockApiData, getMockApi, postMockApiData, putMockApiData, removePerson, unselectPerson } from '../../redux/action';
 import PersonErr from '../../Components/FormErr/PersonErr/PersonErr';
 import { MyPerson } from './interface';
 import PersonTable from '../../Tables/PersonTable/PersonTable';
@@ -43,7 +43,7 @@ const AddPerson = () => {
         optionValue: 'female'
       }
     ]);
-  if (personSelected === undefined || personSelected.length === 0) {
+  if (personList === undefined || personList.length === 0) {
     dispatch(getMockApi('personList'))
   }
 
@@ -101,6 +101,7 @@ const AddPerson = () => {
     }
     itemError.formValid = itemError.lNameValid && itemError.fNameValid && itemError.ageValid && itemError.emailValid && itemError.genderValid && itemError.mobileValid;
   }
+
   const handleId = () => {
 
     const date = new Date();
@@ -154,17 +155,21 @@ const AddPerson = () => {
   const handleDispatchPerson: React.MouseEventHandler<HTMLButtonElement> = (event: { preventDefault: () => void; }) => {
 
     const isForm = person.isInputValid.formValid;
-    if (isForm) {
-      dispatch(postMockApiData(person))
-      setTimeout(() => {
-        dispatch(getMockApi('personList'))
-      }, 1000)
+    if (personSelected === undefined || personSelected.length === 0) {
+      if (isForm) {
+        dispatch(postMockApiData(person))
+      }
+    } else {
+      dispatch(putMockApiData(person))
     }
     if (personSelected.length !== 0) {
       dispatch(unselectPerson())
     }
     event.preventDefault();
-    handleReset()
+    handleReset();
+    setTimeout(() => {
+      dispatch(getMockApi('personList'))
+    }, 1000)
   }
 
   const handleDeletePerson: React.MouseEventHandler<HTMLButtonElement> | undefined = (event: { preventDefault: () => void; }) => {
@@ -296,7 +301,7 @@ const AddPerson = () => {
             </div>
           </div>
           <div className="col-sm">
-            <PersonTable />
+            <PersonTable props={personList}/>
           </div>
         </div>
       </div>
