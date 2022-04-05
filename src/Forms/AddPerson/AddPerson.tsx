@@ -137,7 +137,7 @@ const AddPerson = () => {
     validateField('gender', value)
   }
 
-  const handleReset = () => {
+  const handleReset = (event: { preventDefault: () => void; }) => {
     setPerson({
       id: 0,
       fName: '',
@@ -150,6 +150,7 @@ const AddPerson = () => {
       isInputError: { fName: '', lName: '', email: '', age: '', mobile: '', gender: '' },
       isInputValid: { fNameValid: false, lNameValid: false, genderValid: false, ageValid: false, mobileValid: false, emailValid: false, formValid: false, }
     })
+    event.preventDefault();
   }
 
   const handleDispatchPerson: React.MouseEventHandler<HTMLButtonElement> = (event: { preventDefault: () => void; }) => {
@@ -166,7 +167,7 @@ const AddPerson = () => {
       dispatch(unselectPerson())
     }
     event.preventDefault();
-    handleReset();
+    handleReset(event);
     setTimeout(() => {
       dispatch(getMockApi('personList'))
     }, 1000)
@@ -179,7 +180,7 @@ const AddPerson = () => {
       dispatch(getMockApi('personList'))
     }, 1000)
     event.preventDefault();
-    handleReset()
+    handleReset(event)
   }
 
   return (
@@ -187,7 +188,7 @@ const AddPerson = () => {
       <div className="container">
         <div className="row">
           <div className="col-sm">
-            <div style={{ width: 300, margin: "0 auto", }}>
+            <div style={{ width: 350, margin: "0 auto", }}>
               <form className='demoForm border p-4 mt-3'>
                 <h2>Add Person</h2>
                 <div className={`form-group ${person.isInputError.fName.length === 0 ? '' : 'has-error'}`}>
@@ -273,7 +274,7 @@ const AddPerson = () => {
                 </div>
                 <div className="container">
                   <div className="row">
-                    <div className="col-md-6">
+                    <div className="col-md-4">
                       <Button
                         type="submit"
                         text='Submit'
@@ -282,13 +283,22 @@ const AddPerson = () => {
                         onClick={handleDispatchPerson}
                       />
                     </div>
-                    <div className="col-md-6">
+                    <div className="col-md-4">
                       <Button
                         type="submit"
                         text='Delete'
                         btnClass='btn-danger'
                         disabled={personSelected === undefined || personSelected.length === 0}
                         onClick={handleDeletePerson}
+                      />
+                    </div>
+                    <div className="col-md-4">
+                      <Button
+                        type="submit"
+                        text='Clear'
+                        btnClass='btn-secondary'
+                        disabled={personSelected === undefined || personSelected.length === 0}
+                        onClick={handleReset}
                       />
                     </div>
                   </div>

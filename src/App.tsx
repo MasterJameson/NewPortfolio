@@ -17,6 +17,7 @@ function App() {
     <React.Fragment >
       <Provider store={appStore} >
         <div style={{ fontFamily: 'Candara, Calibri' }}>
+          <AddPerson />
           <div className="container">
             <div className="row">
               <div className="col-sm">
@@ -28,7 +29,6 @@ function App() {
             </div>
           </div>
           {/* <ClassComponentApp /> */}
-          <AddPerson />
           {/* <SignUpForm /> */}
           {/* <Exam /> */}
         </div>
