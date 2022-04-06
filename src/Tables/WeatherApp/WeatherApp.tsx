@@ -5,12 +5,7 @@ import { getWeatherApp } from '../../redux/action';
 const WeartherApp = () => {
 
   const [inputVal, setInputVal] = useState('');
-  // const [errMssg, setErrMssg] = useState()
   const dispatch: any = useDispatch();
-
-  // const handleErrMssg = (errMssg: string | undefined) => {
-  //   return <p>{errMssg?.toLocaleUpperCase()}</p>
-  // }
 
   const handleSubmit = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
@@ -35,7 +30,6 @@ const WeartherApp = () => {
                 />
               </div>
             </form>
-            {/* <span>{handleErrMssg(errMssg)}</span> */}
           </div>
         </div>
       </div>

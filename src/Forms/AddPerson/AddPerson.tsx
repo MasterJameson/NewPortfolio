@@ -5,7 +5,7 @@ import Input from '../../Components/Inputs/Inputs';
 import Label from '../../Components/Labels/Labels';
 import SelectOption from '../../Components/SelectOption/SelectOption';
 import { SelectOptionComponent } from '../../Components/SelectOption/interface';
-import { deleteMockApiData, getMockApi, postMockApiData, putMockApiData, removePerson, unselectPerson } from '../../redux/action';
+import { deleteMockApiData, getMockApi, postMockApiData, putMockApiData, unselectPerson } from '../../redux/action';
 import PersonErr from '../../Components/FormErr/PersonErr/PersonErr';
 import { MyPerson } from './interface';
 import PersonTable from '../../Tables/PersonTable/PersonTable';
@@ -174,7 +174,6 @@ const AddPerson = () => {
   }
 
   const handleDeletePerson: React.MouseEventHandler<HTMLButtonElement> | undefined = (event: { preventDefault: () => void; }) => {
-    dispatch(removePerson(person))
     dispatch(deleteMockApiData(person.id))
     setTimeout(() => {
       dispatch(getMockApi('personList'))

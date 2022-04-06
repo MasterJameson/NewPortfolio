@@ -4,7 +4,7 @@ import { MyPerson } from '../../Forms/AddPerson/interface';
 import { selectedPerson } from '../../redux/action';
 import { PersonTableType } from './interface';
 
-const PersonTable = ({ props, thContent }: PersonTableType) => {
+const PersonTable = ({ props }: PersonTableType) => {
  
   const dispatch: any = useDispatch();
 
