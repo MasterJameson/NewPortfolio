@@ -151,6 +151,7 @@ const AddPerson = () => {
       isInputError: { fName: '', lName: '', email: '', age: '', mobile: '', gender: '' },
       isInputValid: { fNameValid: false, lNameValid: false, genderValid: false, ageValid: false, mobileValid: false, emailValid: false, formValid: false, }
     })
+    dispatch(unselectPerson())
     event.preventDefault();
   }
 
