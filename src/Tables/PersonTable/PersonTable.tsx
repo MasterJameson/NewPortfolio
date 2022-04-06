@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { MyPerson } from '../../Forms/AddPerson/interface';
-import { selectedPerson } from '../../redux/action';
+import { selectedPerson } from '../../redux/actions/PersonListAction';
 import { PersonTableType } from './interface';
 
 const PersonTable = ({ props }: PersonTableType) => {

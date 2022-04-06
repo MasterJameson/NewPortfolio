@@ -4,8 +4,8 @@ import { useSelector } from 'react-redux'
 
 const DisplayWeather = () => {
 
-  const getWeatherData = useSelector((state: any) => state.getWeatherData)
-  const value = getWeatherData[0]
+  const getWeatherData = useSelector((state: any) => state.weather.getWeatherData[0])
+  const value = getWeatherData
 
   const temp = value?.main?.temp
   const subTemp = (temp ? (temp - 212) : 0)

@@ -5,7 +5,7 @@ import Input from '../../Components/Inputs/Inputs';
 import Label from '../../Components/Labels/Labels';
 import SelectOption from '../../Components/SelectOption/SelectOption';
 import { SelectOptionComponent } from '../../Components/SelectOption/interface';
-import { deleteMockApiData, getMockApi, postMockApiData, putMockApiData, unselectPerson } from '../../redux/action';
+import { deleteMockApiData, postMockApiData, putMockApiData, unselectPerson, getMockApi } from '../../redux/actions/PersonListAction';
 import PersonErr from '../../Components/FormErr/PersonErr/PersonErr';
 import { MyPerson } from './interface';
 import PersonTable from '../../Tables/PersonTable/PersonTable';
@@ -13,8 +13,8 @@ import PersonTable from '../../Tables/PersonTable/PersonTable';
 const AddPerson = () => {
 
   const dispatch: any = useDispatch();
-  const personList = useSelector((state: any) => state.stateList[0])
-  const personSelected = useSelector((state: any) => state.selectedPerson)
+  const personList = useSelector((state: any) => state.person.stateList[0])
+  const personSelected = useSelector((state: any) => state.person.selectedPerson)
   const [person, setPerson] = useState<MyPerson>({
     id: 0,
     fName: '',
@@ -101,6 +101,7 @@ const AddPerson = () => {
     }
     itemError.formValid = itemError.lNameValid && itemError.fNameValid && itemError.ageValid && itemError.emailValid && itemError.genderValid && itemError.mobileValid;
   }
+
 
   const handleId = () => {
 

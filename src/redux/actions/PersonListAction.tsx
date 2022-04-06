@@ -1,32 +1,26 @@
-import { MyPerson } from "../Forms/AddPerson/interface";
+import { MyPerson } from "../../Forms/AddPerson/interface";
+
+export const GET_PERSONLIST = 'GET_PERSONLIST'
+export const SELECTED_PERSON = 'SELECTED_PERSON'
+export const UNSELECTED_PERSON = 'UNSELECTED_PERSON'
 
 export const selectedPerson = (data: MyPerson) => {
   return {
-    type: 'SELECTED_PERSON',
+    type: SELECTED_PERSON,
     selected: data
   }
 }
 export const unselectPerson = () => {
   return {
-    type: 'UNSELECTED_PERSON',
+    type: UNSELECTED_PERSON,
   }
-}
-
-export const getWeatherApp = (data: string) => (dispatch: any) => {
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${data === '' ? 'manila' : data}&APPID=fde32f2b1f38982f8cf53ee3c5761528`;
-  fetch(url, { method: "GET" }).then(response => response.json().then(data => {
-    dispatch({
-      type: 'GET_WEATHER',
-      getApi: data
-    })
-  }))
 }
 
 export const getMockApi = (data: string) => (dispatch: any) => {
   const url = `https://data-hosting.herokuapp.com/${data}`
   fetch(url, { method: "GET" }).then(response => response.json().then(data => {
     dispatch({
-      type: 'GET_PERSONLIST',
+      type: GET_PERSONLIST,
       data: data
     })
   }))

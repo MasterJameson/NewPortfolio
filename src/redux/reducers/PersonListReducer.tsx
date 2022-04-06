@@ -1,4 +1,5 @@
-import { StoreStatesType } from "./type";
+import { StoreStatesType } from "../type";
+import {GET_PERSONLIST, SELECTED_PERSON, UNSELECTED_PERSON} from '../actions/PersonListAction'
 
 const storeStates: StoreStatesType = {
   selectedPerson: [],
@@ -27,10 +28,11 @@ const storeStates: StoreStatesType = {
   stateList: []
 }
 
-const reducer = (state: any = storeStates, action: any) => {
+
+export const personReducer = (state: any = storeStates, action: any) => {
   switch (action.type) {
 
-    case 'GET_PERSONLIST':
+    case GET_PERSONLIST:
       state = {
         ...state,
         stateList: [action.data]
@@ -38,24 +40,17 @@ const reducer = (state: any = storeStates, action: any) => {
       }
       return state
 
-    case 'SELECTED_PERSON':
+    case SELECTED_PERSON:
       state = {
         ...state,
         selectedPerson: [action.selected],
       }
       return state;
 
-    case 'UNSELECTED_PERSON':
+    case UNSELECTED_PERSON:
       state = {
         ...state,
         selectedPerson: [],
-      }
-      return state;
-
-    case 'GET_WEATHER':
-      state = {
-        ...state,
-        getWeatherData: [action.getApi]
       }
       return state;
 
@@ -64,4 +59,4 @@ const reducer = (state: any = storeStates, action: any) => {
   }
 }
 
-export default reducer;
+//  default personReducer;

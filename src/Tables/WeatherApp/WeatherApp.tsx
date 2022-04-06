@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { getWeatherApp } from '../../redux/action';
+import { getWeatherApp } from '../../redux/actions/WeatherAppAction';
 
 const WeartherApp = () => {
 
