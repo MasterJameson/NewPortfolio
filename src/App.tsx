@@ -9,6 +9,7 @@ import { appStore } from './redux/store';
 // import ClassComponentApp from './Forms/classComponent';
 import WeartherApp from './Tables/WeatherApp/WeatherApp';
 import DisplayWeather from './Tables/WeatherApp/DispalyWeather/DisplayWeather';
+import LoginPage from './Forms/Login/LoginPage';
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
   return (
     <React.Fragment >
       <Provider store={appStore} >
+        <LoginPage />
         <div style={{ fontFamily: 'Candara, Calibri' }}>
           <AddPerson />
           <div className="container">
