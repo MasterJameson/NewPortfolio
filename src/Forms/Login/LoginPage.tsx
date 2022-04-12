@@ -5,15 +5,13 @@ import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
 import { makeStyles } from '@mui/styles';
 import IconButton from '@mui/material/IconButton';
-import Input from '@mui/material/Input';
-import FilledInput from '@mui/material/FilledInput';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import InputAdornment from '@mui/material/InputAdornment';
-import FormHelperText from '@mui/material/FormHelperText';
-import FormControl from '@mui/material/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import FormControl from '@mui/material/FormControl';
+import FormGroup from '@mui/material/FormGroup';
 
 const useStyles = makeStyles({
   boxModalStyle: {
@@ -60,6 +58,11 @@ const LoginPage = () => {
   const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
   };
+  
+  const handleSubmit = (e: React.FormEvent<HTMLDivElement>) => {
+    
+    e.preventDefault()
+  }
 
   console.log('inputValue', inputValue.password)
 
@@ -72,46 +75,54 @@ const LoginPage = () => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box className={classes.boxModalStyle}>
-          <Box className={classes.textFieldStyle}>
-            <TextField
-              error={false}
-              fullWidth
-              label="Username"
-              type="text"
-              name="userName"
-              value={inputValue.userName}
-              onChange={(e: any) => handleChange(e)}
-            // helperText="Incorrect entry."
-            />
+        <FormGroup onSubmit={(e) => handleSubmit(e)}>
+          <Box className={classes.boxModalStyle}>
+            <Box className={classes.textFieldStyle}>
+              <FormControl fullWidth >
+                <TextField
+                  error={false}
+                  label="Username"
+                  id="outlined-adornment-userName"
+                  type="text"
+                  autoFocus
+                  name="userName"
+                  value={inputValue.userName}
+                  onChange={(e: any) => handleChange(e)}
+                // helperText="Incorrect entry."
+                />
+              </FormControl>
+            </Box>
+            <Box className={classes.textFieldStyle}>
+              <FormControl fullWidth>
+                <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+                <OutlinedInput
+                  type={inputValue.showPassword ? 'text' : 'password'}
+                  id="outlined-adornment-password"
+                  name="password"
+                  label="Password"
+                  value={inputValue.password}
+                  onChange={(e: any) => handleChange(e)}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                        edge="end"
+                      >
+                        {inputValue.showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                />
+              </FormControl >
+            </Box>
+            <Button variant="contained">Submit</Button>
           </Box>
-          <Box className={classes.textFieldStyle}>
-            <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-            <OutlinedInput
-              type={inputValue.showPassword ? 'text' : 'password'}
-              name="password"
-              fullWidth
-              value={inputValue.password}
-              onChange={(e: any) => handleChange(e)}
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
-                    onMouseDown={handleMouseDownPassword}
-                    edge="end"
-                  >
-                    {inputValue.showPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-              }
-              label="Password"
-            />
-          </Box>
-          <Button variant="contained">Submit</Button>
-        </Box>
+        </FormGroup>
+
       </Modal>
-    </div>
+    </div >
   )
 }
 

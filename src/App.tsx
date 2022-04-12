@@ -8,33 +8,30 @@ import AddPerson from './Forms/AddPerson/AddPerson';
 import { appStore } from './redux/store';
 // import ClassComponentApp from './Forms/classComponent';
 import WeartherApp from './Tables/WeatherApp/WeatherApp';
-import DisplayWeather from './Tables/WeatherApp/DispalyWeather/DisplayWeather';
 import LoginPage from './Forms/Login/LoginPage';
+import { BrowserRouter, Link } from 'react-router-dom';
 
 
 function App() {
 
   return (
     <React.Fragment >
-      <Provider store={appStore} >
-        <LoginPage />
-        <div style={{ fontFamily: 'Candara, Calibri' }}>
-          <AddPerson />
-          <div className="container">
-            <div className="row">
-              <div className="col-sm">
-                <WeartherApp />
-              </div>
-              <div className="col-sm">
-                <DisplayWeather />
-              </div>
-            </div>
-          </div>
+      {/* <Provider store={appStore} > */}
+        <nav>
+          <Link to={'AddPerson'} >
+            {/* <AddPerson /> */}AddPerson | 
+          </Link>
+          <Link to={'LoginPage'} >
+            {/* <LoginPage /> */} LoginPage | 
+          </Link>
+          <Link to={'WeatherApp'} >
+            {/* <WeartherApp /> */}  WeartherApp
+          </Link>
           {/* <ClassComponentApp /> */}
           {/* <SignUpForm /> */}
           {/* <Exam /> */}
-        </div>
-      </Provider>
+        </nav>
+      {/* </Provider> */}
     </React.Fragment>
   );
 }
