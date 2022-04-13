@@ -4,7 +4,6 @@ import { Provider } from 'react-redux';
 import './App.css';
 import AddPerson from './Forms/AddPerson/AddPerson';
 // import Exam from './Forms/exam';
-import SignUpForm from './Forms/SignUp/SingUp';
 import { appStore } from './redux/store';
 // import ClassComponentApp from './Forms/classComponent';
 import WeartherApp from './Tables/WeatherApp/WeatherApp';
@@ -12,6 +11,7 @@ import LoginPage from './Forms/Login/LoginPage';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Nav } from './Nav/Navigation';
 import LandingPage from './Home/LandingPage';
+import SingUp from './Forms/SignUp/SingUp';
 
 
 function App() {
@@ -26,7 +26,7 @@ function App() {
             <Route path="/add-person" element={<AddPerson />} />
             <Route path="/waether-app" element={<WeartherApp />} />
             <Route path="/login" element={<LoginPage />} />
-            <Route path="/sign-up" element={<SignUpForm />} />
+            <Route path="/sign-up" element={<SingUp />} />
           </Routes>
         </BrowserRouter>
         {/* <ClassComponentApp /> */}

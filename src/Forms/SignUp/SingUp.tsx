@@ -1,109 +1,262 @@
-import React, { Component } from 'react';
-import SignUpError from '../../Components/FormErr/SignUpErr';
+import React, { useState } from 'react'
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import { makeStyles } from '@mui/styles';
+import IconButton from '@mui/material/IconButton';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputLabel from '@mui/material/InputLabel';
+import InputAdornment from '@mui/material/InputAdornment';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import FormControl from '@mui/material/FormControl';
+import { FormHelperText } from '@mui/material';
+import { useDispatch } from 'react-redux';
+import { postAccount } from '../../redux/actions/SignUpAction';
 
-interface MyState {
-  email: string,
-  password: string,
-  confirmPassword: string,
-  formErrors: { email: string, password: string, confirmPassword: string },
-  emailValid: boolean,
-  passwordValid: boolean,
-  confirmPasswordValid: boolean,
-  formValid: boolean,
-  fName: string
-}
 
-class SignUpForm extends Component<any, MyState> {
-  constructor(props: any) {
-    super(props);
-    this.state = {
-      email: '',
-      password: '',
-      confirmPassword: '',
-      formErrors: { email: '', password: '', confirmPassword: '' },
-      emailValid: false,
-      passwordValid: false,
-      confirmPasswordValid: false,
-      formValid: false,
-      fName: 'jameson'
-    }
+const useStyles = makeStyles({
+  boxModalStyle: {
+    position: 'absolute' as 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 500,
+    backgroundColor: '#fff',
+    border: '2px solid #808080',
+    borderRadius: '5px',
+    boxShadow: '0 3px 5px 2px rgb(98 98 98 / 30%);',
+    padding: 45,
+  },
+  textFieldStyle: {
+    marginBottom: 25
   }
+})
 
-  validateField(fieldName: string, value: string) {
-    let fieldValidationErrors = this.state.formErrors;
-    let emailValid = this.state.emailValid;
-    let passwordValid = this.state.passwordValid;
-    let confirmPasswordValid = this.state.confirmPasswordValid;
 
-    switch (fieldName) {
+const SingUp = () => {
+
+  const [inputValue, setInputValue] = useState({
+    id: 0,
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+    showPassword: false,
+    formError: {
+      firstNameErr: '',
+      lastNameErr: '',
+      emailErr: '',
+      passwordErr: '',
+      confirmPassErr: ''
+    },
+    isFormValid: {
+      isFirstName: false,
+      isLastName: false,
+      isEmailerr: false,
+      isPasswordErr: false,
+      isConfirmPassErr: false,
+      isFormValidErr: false
+    }
+  })
+  const classes = useStyles()
+  const dispatch: any = useDispatch();
+
+
+  const validateField = (name: string, value: string | number) => {
+    const isFormValid = inputValue.isFormValid
+    const formError = inputValue.formError
+
+    switch (name) {
+      case 'firstName':
+        isFormValid.isFirstName = value.toString().length > 1;
+        formError.firstNameErr = isFormValid.isFirstName ? '' : 'Invalid Name'
+        break;
+      case 'lastName':
+        isFormValid.isLastName = value.toString().length > 1;
+        formError.lastNameErr = isFormValid.isLastName ? '' : 'Invalid Name'
+        break;
       case 'email':
-        emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i) !== null;
-        fieldValidationErrors.email = emailValid ? '' : ' is invalid';
+        isFormValid.isEmailerr = value.toString().match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i) !== null;
+        formError.emailErr = isFormValid.isEmailerr ? '' : 'Invalid Email'
         break;
       case 'password':
-        passwordValid = value.length >= 6;
-        fieldValidationErrors.password = passwordValid ? '' : ' is invalid';
+        isFormValid.isPasswordErr = value.toString().length >= 8;
+        formError.passwordErr = isFormValid.isPasswordErr ? '' : 'Password too weak'
         break;
       case 'confirmPassword':
-        confirmPasswordValid = value === this.state.password;
-        fieldValidationErrors.confirmPassword = confirmPasswordValid ? '' : `password don't match`;
+        isFormValid.isConfirmPassErr = value === inputValue.password;
+        formError.confirmPassErr = isFormValid.isConfirmPassErr ? '' : 'Password is not match'
         break;
 
       default:
         break;
     }
 
-    this.setState({
-      formErrors: fieldValidationErrors,
-      emailValid: emailValid,
-      passwordValid: passwordValid,
-      confirmPasswordValid: confirmPasswordValid
-    }, this.validateForm)
+    isFormValid.isFormValidErr = isFormValid.isEmailerr && isFormValid.isPasswordErr && isFormValid.isConfirmPassErr
+
+    if (isFormValid.isFormValidErr) handleId()
   }
 
-  validateForm() {
-    this.setState({ formValid: this.state.emailValid && this.state.passwordValid && this.state.confirmPasswordValid })
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+    const name = e.target.name
+    const value = e.target.value
+    setInputValue({ ...inputValue, [name]: value })
+    validateField(name, value)
   }
 
-  handleChange(event: React.ChangeEvent<HTMLInputElement>) {
-    let name = event.target.name;
-    let value = event.target.value
-    this.setState({ ...this.state, [name]: value }, () => { this.validateField(name, value) });
+  const handleClickShowPassword = () => {
+    setInputValue({
+      ...inputValue,
+      showPassword: !inputValue.showPassword,
+    });
+  };
+
+  const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+  };
+
+  const handleId = () => {
+    const date = new Date();
+    const components = [
+      date.getFullYear(),
+      date.getMonth(),
+      date.getDate(),
+      date.getHours(),
+      date.getMinutes(),
+      date.getSeconds(),
+    ];
+
+    const uniqueId = Number(components.join(""))
+
+    if (inputValue.isFormValid.isFormValidErr) setInputValue({ ...inputValue, id: uniqueId })
+
+  }
+  const handleReset = (event: { preventDefault: () => void; }) => {
+    console.log('test')
+    setInputValue({
+      id: 0,
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
+      showPassword: false,
+      formError: {
+        firstNameErr: '',
+        lastNameErr: '',
+        emailErr: '',
+        passwordErr: '',
+        confirmPassErr: ''
+      },
+      isFormValid: {
+        isFirstName: false,
+        isLastName: false,
+        isEmailerr: false,
+        isPasswordErr: false,
+        isConfirmPassErr: false,
+        isFormValidErr: false
+      }
+    })
+    event.preventDefault();
   }
 
-  errorClass(err: string) {
-    return (err.length === 0 ? '' : 'has-error')
+  const handleSubmit = (e: { preventDefault: () => void; }) => {
+    dispatch(postAccount(inputValue))
+    handleReset(e)
+    e.preventDefault()
   }
-  render() {
-    return (
-      <React.Fragment>
-        <div style={{ width: 500, margin: "0 auto", }}>
-          <form className='demoForm border p-5 mt-5'>
-            <h2>Sign up</h2>
-            <div className={`form-group mb-3
-                 ${this.errorClass(this.state.formErrors.email)}`}>
-              <label id='emailTest' htmlFor="email">Email Address</label>
-              <input type="email" name='email' value={this.state.email} onChange={(event) => this.handleChange(event)} className='form-control' />
-            </div>
-            <div className={`form-group mb-3
-                 ${this.errorClass(this.state.formErrors.password)}`}>
-              <label htmlFor="password">Password</label>
-              <input type="password" name='password' value={this.state.password} onChange={event => this.handleChange(event)} className='form-control' />
-            </div>
-            <div className={`form-group mb-3
-                  ${this.errorClass(this.state.formErrors.confirmPassword)}`}>
-              <label htmlFor="confirmPassword">Consirm Password</label>
-              <input type="password" name='confirmPassword' value={this.state.confirmPassword} onChange={event => { this.handleChange(event) }} className='form-control' />
-            </div>
-            <button type='submit' className='btn btn-primary mb-3' disabled={!this.state.formValid}>Sign up</button>
-            <div className="panel panel-default">
-              <SignUpError formErrors={this.state.formErrors} />
-            </div>
-          </form>
-        </div>
-      </React.Fragment>
-    );
-  }
+
+  return (
+    <>
+      <form >
+        <Box className={classes.boxModalStyle}>
+          <Box className={classes.textFieldStyle}>
+            <FormControl fullWidth >
+              <TextField
+                error={inputValue.formError.firstNameErr.length > 0}
+                label="First Name"
+                type="text"
+                autoFocus
+                name="firstName"
+                value={inputValue.firstName}
+                helperText={inputValue.formError.firstNameErr}
+                onChange={(e: any) => handleChange(e)}
+              />
+            </FormControl>
+          </Box>
+          <Box className={classes.textFieldStyle}>
+            <FormControl fullWidth >
+              <TextField
+                error={inputValue.formError.lastNameErr.length > 0}
+                label="Last Name"
+                type="text"
+                name="lastName"
+                value={inputValue.lastName}
+                helperText={inputValue.formError.lastNameErr}
+                onChange={(e: any) => handleChange(e)}
+              />
+            </FormControl>
+          </Box>
+          <Box className={classes.textFieldStyle}>
+            <FormControl fullWidth >
+              <TextField
+                error={inputValue.formError.emailErr.length > 0}
+                label="Email"
+                type="text"
+                name="email"
+                value={inputValue.email}
+                helperText={inputValue.formError.emailErr}
+                onChange={(e: any) => handleChange(e)}
+              />
+            </FormControl>
+          </Box>
+          <Box className={classes.textFieldStyle}>
+            <FormControl fullWidth>
+              <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+              <OutlinedInput
+                error={inputValue.formError.passwordErr.length > 0}
+                type={inputValue.showPassword ? 'text' : 'password'}
+                id="outlined-adornment-password"
+                name="password"
+                label="Password"
+                autoComplete="new-password"
+                value={inputValue.password}
+                onChange={(e: any) => handleChange(e)}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      edge="end"
+                    >
+                      {inputValue.showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+              />{<FormHelperText error>{inputValue.formError.passwordErr}</FormHelperText>}
+            </FormControl >
+          </Box>
+          <Box className={classes.textFieldStyle}>
+            <FormControl fullWidth >
+              <TextField
+                error={inputValue.formError.confirmPassErr.length > 0}
+                label="Confirm Password"
+                type="password"
+                name="confirmPassword"
+                helperText={inputValue.formError.confirmPassErr}
+                value={inputValue.confirmPassword}
+                onChange={(e: any) => handleChange(e)}
+              />
+            </FormControl>
+          </Box>
+          <Button variant="contained" type="submit" disabled={!inputValue.isFormValid.isFormValidErr} onClick={handleSubmit}>Submit</Button>
+        </Box>
+      </form>
+    </ >
+  )
 }
 
-export default SignUpForm;
+export default SingUp

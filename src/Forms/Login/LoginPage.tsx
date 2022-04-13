@@ -33,9 +33,18 @@ const useStyles = makeStyles({
 const LoginPage = () => {
   const [inputValue, setInputValue] = useState({
     id: 0,
-    userName: '',
+    email: '',
     password: '',
     showPassword: false,
+    formError: {
+      emailErr: '',
+      passwordErr: '',
+    },
+    isFormValid:{
+      emailErr: false,
+      passwordErr: false,
+    }
+
   })
 
   const classes = useStyles()
@@ -63,19 +72,18 @@ const LoginPage = () => {
   console.log('inputValue', inputValue.password)
 
   return (
-    <div>
+    <>
       <FormGroup onSubmit={(e) => handleSubmit(e)}>
         <Box className={classes.boxModalStyle}>
           <Box className={classes.textFieldStyle}>
             <FormControl fullWidth >
               <TextField
                 error={false}
-                label="Username"
-                id="outlined-adornment-userName"
+                label="Email"
                 type="text"
                 autoFocus
-                name="userName"
-                value={inputValue.userName}
+                name="email"
+                value={inputValue.email}
                 onChange={(e: any) => handleChange(e)}
               // helperText="Incorrect entry."
               />
@@ -89,6 +97,7 @@ const LoginPage = () => {
                 id="outlined-adornment-password"
                 name="password"
                 label="Password"
+                autoComplete="new-password"
                 value={inputValue.password}
                 onChange={(e: any) => handleChange(e)}
                 endAdornment={
@@ -109,7 +118,7 @@ const LoginPage = () => {
           <Button variant="contained">Submit</Button>
         </Box>
       </FormGroup>
-    </div >
+    </ >
   )
 }
 
