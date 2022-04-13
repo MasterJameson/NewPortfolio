@@ -7,14 +7,17 @@ export const Nav = () => {
       <Link to={''} >
         Home |
       </Link>
-      <Link to={'AddPerson'} >
+      <Link to={'add-person'} >
         AddPerson |
       </Link>
-      <Link to={'LoginPage'} >
-        LoginPage |
+      <Link to={'waether-app'} >
+        WeartherApp |
       </Link>
-      <Link to={'WeatherApp'} >
-        WeartherApp
+      <Link to={'login'} >
+        Login | 
+      </Link>
+      <Link to={'sign-up'} >
+        Sign Up
       </Link>
     </>
   )

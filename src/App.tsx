@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import './App.css';
 import AddPerson from './Forms/AddPerson/AddPerson';
 // import Exam from './Forms/exam';
-// import SignUpForm from './Forms/SignUp';
+import SignUpForm from './Forms/SignUp/SingUp';
 import { appStore } from './redux/store';
 // import ClassComponentApp from './Forms/classComponent';
 import WeartherApp from './Tables/WeatherApp/WeatherApp';
@@ -23,9 +23,10 @@ function App() {
           <Nav />
           <Routes>
             <Route path="/" element={<LandingPage />} />
-            <Route path="/LoginPage" element={<LoginPage />} />
-            <Route path="/AddPerson" element={<AddPerson />} />
-            <Route path="/WeatherApp" element={<WeartherApp />} />
+            <Route path="/add-person" element={<AddPerson />} />
+            <Route path="/waether-app" element={<WeartherApp />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/sign-up" element={<SignUpForm />} />
           </Routes>
         </BrowserRouter>
         {/* <ClassComponentApp /> */}

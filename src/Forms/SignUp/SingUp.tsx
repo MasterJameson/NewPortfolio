@@ -37,7 +37,7 @@ class SignUpForm extends Component<any, MyState> {
 
     switch (fieldName) {
       case 'email':
-        emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i) != null;
+        emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i) !== null;
         fieldValidationErrors.email = emailValid ? '' : ' is invalid';
         break;
       case 'password':
@@ -74,16 +74,6 @@ class SignUpForm extends Component<any, MyState> {
   errorClass(err: string) {
     return (err.length === 0 ? '' : 'has-error')
   }
-  changeColor() {
-    const output = document.getElementById('emailTest');
-    if (output) output.style.color = 'red';
-
-  }
-
-  componentDidMount() {
-    this.changeColor()
-  }
-
   render() {
     return (
       <React.Fragment>

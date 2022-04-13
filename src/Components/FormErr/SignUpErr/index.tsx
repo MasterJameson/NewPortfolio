@@ -5,7 +5,7 @@ const SignUpError = (props: any): JSX.Element => {
 
   return (
     <React.Fragment>
-      {props.length > 0 &&
+      {
         Object.keys(props.formErrors).map((fieldName, i) => {
           if (FormErrorsVal[fieldName].length > 0) {
             return (
