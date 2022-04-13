@@ -9,29 +9,29 @@ import { appStore } from './redux/store';
 // import ClassComponentApp from './Forms/classComponent';
 import WeartherApp from './Tables/WeatherApp/WeatherApp';
 import LoginPage from './Forms/Login/LoginPage';
-import { BrowserRouter, Link } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Nav } from './Nav/Navigation';
+import LandingPage from './Home/LandingPage';
 
 
 function App() {
 
   return (
     <React.Fragment >
-      {/* <Provider store={appStore} > */}
-        <nav>
-          <Link to={'AddPerson'} >
-            {/* <AddPerson /> */}AddPerson | 
-          </Link>
-          <Link to={'LoginPage'} >
-            {/* <LoginPage /> */} LoginPage | 
-          </Link>
-          <Link to={'WeatherApp'} >
-            {/* <WeartherApp /> */}  WeartherApp
-          </Link>
-          {/* <ClassComponentApp /> */}
-          {/* <SignUpForm /> */}
-          {/* <Exam /> */}
-        </nav>
-      {/* </Provider> */}
+      <Provider store={appStore} >
+        <BrowserRouter>
+          <Nav />
+          <Routes>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/LoginPage" element={<LoginPage />} />
+            <Route path="/AddPerson" element={<AddPerson />} />
+            <Route path="/WeatherApp" element={<WeartherApp />} />
+          </Routes>
+        </BrowserRouter>
+        {/* <ClassComponentApp /> */}
+        {/* <SignUpForm /> */}
+        {/* <Exam /> */}
+      </Provider>
     </React.Fragment>
   );
 }
