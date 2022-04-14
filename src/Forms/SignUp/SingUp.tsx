@@ -11,8 +11,8 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import FormControl from '@mui/material/FormControl';
 import { FormHelperText } from '@mui/material';
-import { useDispatch } from 'react-redux';
-import { postAccount } from '../../redux/actions/SignUpAction';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAccount, postAccount } from '../../redux/actions/SignUpAction';
 
 
 const useStyles = makeStyles({
@@ -62,11 +62,22 @@ const SingUp = () => {
   })
   const classes = useStyles()
   const dispatch: any = useDispatch();
+  const signUpAcc = useSelector((state: any) => state.signup.getAcounts[0])
+
+  if (signUpAcc === undefined) dispatch(getAccount())
 
 
-  const validateField = (name: string, value: string | number) => {
+
+  const validateField = (name: string, value: string) => {
     const isFormValid = inputValue.isFormValid
     const formError = inputValue.formError
+
+    signUpAcc.forEach((item: any) => {
+      if (item.email === inputValue.email) {
+        isFormValid.isEmailerr = false;
+        formError.emailErr = "Email already exist.";
+      }
+    })
 
     switch (name) {
       case 'firstName':
@@ -134,7 +145,6 @@ const SingUp = () => {
 
   }
   const handleReset = (event: { preventDefault: () => void; }) => {
-    console.log('test')
     setInputValue({
       id: 0,
       firstName: '',
