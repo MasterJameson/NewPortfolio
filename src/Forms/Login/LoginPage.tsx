@@ -10,11 +10,9 @@ import InputAdornment from '@mui/material/InputAdornment';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import FormControl from '@mui/material/FormControl';
-import FormGroup from '@mui/material/FormGroup';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAccount } from '../../redux/actions/SignUpAction';
-import { createImportSpecifier } from 'typescript';
-import { FormHelperText } from '@mui/material';
+import { postLogAcc } from '../../redux/actions/LoginAction';
 
 const useStyles = makeStyles({
   boxModalStyle: {
@@ -39,50 +37,31 @@ const LoginPage = () => {
     email: '',
     password: '',
     showPassword: false,
-    formError: {
-      emailErr: '',
-      passwordErr: '',
-    },
-    isFormValid: {
-      emailErr: false,
-      passwordErr: false,
-      formErr: false
-    }
+    formInvalid: false
   })
 
   const classes = useStyles()
   const dispatch: any = useDispatch();
   const signUpAcc = useSelector((state: any) => state.signup.getAcounts[0])
   if (signUpAcc === undefined) dispatch(getAccount())
+  const handleReset = () => {
+    setInputValue({
+      email: '',
+      password: '',
+      showPassword: false,
+      formInvalid: false
+    })
+  }
 
-  const validateField = (name: string, value: string) => {
-    const isFormValid = inputValue.isFormValid
-    const formError = inputValue.formError
-    const getEmail = signUpAcc.filter((item: any) => item.email === value)
-
-    switch (name) {
-      case 'email':
-        isFormValid.emailErr = getEmail.length > 0;
-        formError.emailErr = isFormValid.emailErr ? '' : 'Invalid Email';
-        break;
-
-      case 'password':
-        const getPass = signUpAcc.filter((item: any) => item.email === inputValue.email)[0].password
-        isFormValid.passwordErr = getPass === value;
-        formError.passwordErr = isFormValid.passwordErr ? '' : 'Wrong Password';
-        break;
-      default:
-        break;
-    }
-    isFormValid.formErr = isFormValid.emailErr && isFormValid.passwordErr
-
+  const validateField = (e: React.FormEvent<HTMLFormElement>) => {
+    const [getEmail] = signUpAcc.filter((item: any) => item.email === inputValue.email)
+    return getEmail ? getEmail.password === inputValue.password ? true : false : false
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     const name = e.target.name
     const value = e.target.value
     setInputValue({ ...inputValue, [name]: value })
-    validateField(name, value)
 
   }
   const handleClickShowPassword = () => {
@@ -95,28 +74,29 @@ const LoginPage = () => {
     event.preventDefault();
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLDivElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    if (validateField(e)) { 
+      handleReset();
+      dispatch(postLogAcc(inputValue))
+    } else {
+      setInputValue({...inputValue, formInvalid: true})
+    }
   }
-
-  console.log('inputValue', inputValue)
-
 
   return (
     <>
-      <FormGroup onSubmit={(e) => handleSubmit(e)}>
+      <form onSubmit={(e) => handleSubmit(e)}>
         <Box className={classes.boxModalStyle}>
           <Box className={classes.textFieldStyle}>
             <FormControl fullWidth >
               <TextField
-                error={inputValue.formError.emailErr.length > 0}
                 label="Email"
                 type="text"
                 autoFocus
                 name="email"
                 value={inputValue.email}
                 onChange={(e: any) => handleChange(e)}
-                helperText={inputValue.formError.emailErr}
               />
             </FormControl>
           </Box>
@@ -125,7 +105,6 @@ const LoginPage = () => {
               <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
               <OutlinedInput
                 type={inputValue.showPassword ? 'text' : 'password'}
-                error={inputValue.formError.passwordErr.length > 0}
                 id="outlined-adornment-password"
                 name="password"
                 label="Password"
@@ -145,12 +124,12 @@ const LoginPage = () => {
                   </InputAdornment>
                 }
               />
-              {<FormHelperText error>{inputValue.formError.passwordErr}</FormHelperText>}
             </FormControl >
           </Box>
-          <Button variant="contained" disabled={!inputValue.isFormValid.formErr}>Submit</Button>
+          {inputValue.formInvalid && <p style={{ fontSize: 10, color: "red" }}>Email or Password is wrong</p>}
+          <Button variant="contained" type="submit" disabled={inputValue.email === '' || inputValue.password === ''}>Submit</Button>
         </Box>
-      </FormGroup>
+      </form>
     </ >
   )
 }
