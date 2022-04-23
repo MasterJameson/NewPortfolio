@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 function LandingPage() {
+const getActiveUser = localStorage.getItem('userAcc')
+console.log('getActiveUser', getActiveUser)
+
   return (
     <>
-      <p>LandingPage</p>
+      <p >LandingPage</p>
     </>
   )
 }

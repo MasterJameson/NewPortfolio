@@ -12,13 +12,19 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Nav } from './Nav/Navigation';
 import LandingPage from './Home/LandingPage';
 import SingUp from './Forms/SignUp/SingUp';
+import { createTheme ,ThemeProvider} from '@mui/material';
+// import { createTheme, ThemeProvider } from '@mui/styles';
 
+const theme = createTheme()
 
 function App() {
+
 
   return (
     <React.Fragment >
       <Provider store={appStore} >
+        <ThemeProvider theme={theme}>
+
         <BrowserRouter>
           <Nav />
           <Routes>
@@ -29,6 +35,7 @@ function App() {
             <Route path="/sign-up" element={<SingUp />} />
           </Routes>
         </BrowserRouter>
+        </ThemeProvider>
         {/* <ClassComponentApp /> */}
         {/* <SignUpForm /> */}
         {/* <Exam /> */}

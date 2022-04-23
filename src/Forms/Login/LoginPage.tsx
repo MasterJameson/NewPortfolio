@@ -55,7 +55,7 @@ const LoginPage = () => {
 
   const validateField = (e: React.FormEvent<HTMLFormElement>) => {
     const [getEmail] = signUpAcc.filter((item: any) => item.email === inputValue.email)
-    return getEmail ? getEmail.password === inputValue.password ? true : false : false
+    return getEmail ? getEmail.password === inputValue.password ? getEmail : false : false
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
@@ -78,7 +78,7 @@ const LoginPage = () => {
     e.preventDefault()
     if (validateField(e)) { 
       handleReset();
-      dispatch(postLogAcc(inputValue))
+      dispatch(postLogAcc(validateField(e)))
     } else {
       setInputValue({...inputValue, formInvalid: true})
     }
