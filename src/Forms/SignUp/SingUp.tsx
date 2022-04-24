@@ -17,16 +17,13 @@ import { getAccount, postAccount } from '../../redux/actions/SignUpAction';
 
 const useStyles = makeStyles({
   boxModalStyle: {
-    position: 'absolute' as 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 500,
-    backgroundColor: '#fff',
-    border: '2px solid #808080',
+    width: '100%',
+    maxWidth: '420px',
+    margin: '0 auto',
+    padding: '30px',
+    boxShadow: '0 3px 5px 2px rgb(98 98 98 / 30%)',
     borderRadius: '5px',
-    boxShadow: '0 3px 5px 2px rgb(98 98 98 / 30%);',
-    padding: 45,
+    backgroundColor: '#fff',
   },
   textFieldStyle: {
     marginBottom: 25
@@ -180,7 +177,7 @@ const SingUp = () => {
 
   return (
     <>
-      <form >
+      <form style={{margin: 30}}>
         <Box className={classes.boxModalStyle}>
           <Box className={classes.textFieldStyle}>
             <FormControl fullWidth >
