@@ -13,7 +13,6 @@ import { Nav } from './Nav/Navigation';
 import LandingPage from './Home/LandingPage';
 import SingUp from './Forms/SignUp/SingUp';
 import { createTheme ,ThemeProvider} from '@mui/material';
-// import { createTheme, ThemeProvider } from '@mui/styles';
 
 const theme = createTheme()
 

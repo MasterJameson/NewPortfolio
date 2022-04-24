@@ -3,9 +3,16 @@ import { useDispatch } from 'react-redux'
 import { MyPerson } from '../../Forms/AddPerson/interface';
 import { selectedPerson } from '../../redux/actions/PersonListAction';
 import { PersonTableType } from './interface';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 
 const PersonTable = ({ props }: PersonTableType) => {
- 
+
   const dispatch: any = useDispatch();
 
   const handleData = (event: MyPerson) => {
@@ -13,38 +20,35 @@ const PersonTable = ({ props }: PersonTableType) => {
   }
 
   return (
-    <table className="table table-striped mt-5 " >
-      <thead>
-        <tr className="bg-dark text-white text-center">
-          <th>Id's</th>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Age</th>
-          <th>Gender</th>
-          <th>Mobile</th>
-          <th>Email</th>
-          <th>Job</th>
-        </tr>
-      </thead>
-      <tbody>
-        {props !== undefined &&
-          props.map((item: MyPerson, i: number) => {
-            return (
-              <tr id='TableTr' key={i} onClick={() => { handleData(item) }}>
-                <th>{item.id}</th>
-                <td>{item.fName.toUpperCase()}</td>
-                <td>{item.lName.toUpperCase()}</td>
-                <td>{item.age}</td>
-                <td>{item.gender.toUpperCase()}</td>
-                <td>{item.mobile}</td>
-                <td>{item.email}</td>
-                <td>{item.jobTitle}</td>
-              </tr>
-            )
-          })
-        }
-      </tbody>
-    </table >
+      <TableContainer component={Paper} style={{margin: '20px 0'}}>
+        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell align="right">First Name</TableCell>
+              <TableCell align="right">Last Name</TableCell>
+              <TableCell align="right">Age</TableCell>
+              <TableCell align="right">Gender</TableCell>
+              <TableCell align="right">Mobile</TableCell>
+              <TableCell align="right">Email</TableCell>
+              <TableCell align="right">Job</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {props !== undefined &&
+              props.map((row: MyPerson, i: number) => (
+                <TableRow key={i} onClick={() => { handleData(row) }}>
+                  <TableCell component="th" scope="row">{row.fName.toUpperCase()}</TableCell>
+                  <TableCell align="right">{row.lName.toUpperCase()}</TableCell>
+                  <TableCell align="right">{row.age}</TableCell>
+                  <TableCell align="right">{row.gender.toUpperCase()}</TableCell>
+                  <TableCell align="right">{row.mobile}</TableCell>
+                  <TableCell align="right">{row.email}</TableCell>
+                  <TableCell align="right">{row.jobTitle}</TableCell>
+                </TableRow>
+              ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
   )
 }
 
