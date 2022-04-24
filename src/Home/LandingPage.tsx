@@ -1,13 +1,15 @@
-import React, { useState } from 'react'
+import React from 'react'
+import getActiveUser from "./getActiveUse"
 
-function LandingPage() {
-const getActiveUser: string | null = localStorage.getItem('userAcc')
-const parseActiveUser = getActiveUser !== null && JSON.parse(getActiveUser)
-console.log('getActiveUser', parseActiveUser)
+
+const LandingPage = () => {
+
+  const user = getActiveUser()
+
 
   return (
     <>
-      <p>Hello {parseActiveUser.firstName + " " + parseActiveUser.lastName}</p>
+      <p>Hello {user && user.firstName + " " + user.lastName} </p>
     </>
   )
 }

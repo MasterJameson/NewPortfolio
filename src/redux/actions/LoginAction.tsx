@@ -11,7 +11,6 @@ export const postLogAcc = (payload: any) => (dispatch: any) => {
     return (date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear() + " " + strTime;
   }
   const date = new Date();
-  console.log('payload', payload)
 
   const data = {
     email: payload.email,

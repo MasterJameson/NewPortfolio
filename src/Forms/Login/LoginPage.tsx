@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -13,6 +13,8 @@ import FormControl from '@mui/material/FormControl';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAccount } from '../../redux/actions/SignUpAction';
 import { postLogAcc } from '../../redux/actions/LoginAction';
+import { useNavigate } from 'react-router-dom';
+import getActiveUser from '../../Home/getActiveUse';
 
 const useStyles = makeStyles({
   boxModalStyle: {
@@ -36,6 +38,9 @@ const LoginPage = () => {
     showPassword: false,
     formInvalid: false
   })
+
+  const navigate = useNavigate()
+  const userActive = getActiveUser()
 
   const classes = useStyles()
   const dispatch: any = useDispatch();
@@ -76,14 +81,15 @@ const LoginPage = () => {
     if (validateField(e)) { 
       handleReset();
       dispatch(postLogAcc(validateField(e)))
+      navigate('/add-person')
     } else {
-      setInputValue({...inputValue, formInvalid: true})
+      setInputValue({ ...inputValue, formInvalid: true })
     }
   }
 
   return (
     <>
-      <form onSubmit={(e) => handleSubmit(e)} style={{margin: 30}}>
+      <form onSubmit={(e) => handleSubmit(e)} style={{ margin: 30 }}>
         <Box className={classes.boxModalStyle}>
           <Box className={classes.textFieldStyle}>
             <FormControl fullWidth >
