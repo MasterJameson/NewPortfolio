@@ -8,7 +8,7 @@ export const postAccount = (payload: any) => (dispatch: any) => {
     email: payload.email,
     password: payload.password,
   }
-  const url = `http://localhost:3001/accounts`
+  const url = `https://data-hosting.herokuapp.com/accounts`
   fetch(url, {
     method: "POST",
     headers: { 'Content-Type': 'application/json' },
@@ -18,7 +18,7 @@ export const postAccount = (payload: any) => (dispatch: any) => {
 
 
 export const getAccount = () => (dispatch: any) => {
-  const url = `http://localhost:3001/accounts`
+  const url = `https://data-hosting.herokuapp.com/accounts`
   fetch(url, {
     method: "GET",
   }).then(res => res.json().then(data => {

@@ -19,7 +19,7 @@ export const postLogAcc = (payload: any) => (dispatch: any) => {
     time: formatDate(date)
   }
 
-  const url = 'http://localhost:3001/loginSesh'
+  const url = 'https://data-hosting.herokuapp.com/loginSesh'
   fetch(url, {
     method: "POST",
     headers: { 'Content-Type': 'application/json' },
