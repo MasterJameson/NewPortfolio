@@ -16,7 +16,6 @@ export const postAccount = (payload: any) => (dispatch: any) => {
   })
 }
 
-
 export const getAccount = () => (dispatch: any) => {
   const url = `https://data-hosting.herokuapp.com/accounts`
   fetch(url, {
