@@ -16,4 +16,4 @@ jobs:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_JBAG_4D2FC }}'
           channelId: live
-          projectId: jbag-4d2fc
+          projectId: jbag-project
