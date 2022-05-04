@@ -1,20 +1,21 @@
-// import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
+import _ from 'lodash'
 
 
-const DisplayWeather = () => {
+const DisplayWeather = (props: any) => {
 
-  const getWeatherData = useSelector((state: any) => state.weather.getWeatherData[0])
-  const value = getWeatherData
-
+  const value = props.items
   const temp = value?.main?.temp
   const subTemp = (temp ? (temp - 212) : 0)
   const celsius = (Math.floor((subTemp - 32) * 5 / 9))
   const cloudiness = value?.weather?.map((val: any) => val.main)
+
+
   return (
     <>
       {
-        <><h2>Current weather for your city{celsius}</h2><table className='table  table-striped table-hover'>
+        <><h2>Current weather for your city {value?.name}</h2><table className='table  table-striped table-hover'>
           <tbody>
             <tr>
               <td>City name</td>

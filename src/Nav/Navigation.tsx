@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { makeStyles } from '@mui/styles';
 import { Link } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import dropDownIcon from '../Assets/icons/dropDownIcon.png'
 import getActiveUser from '../Home/getActiveUse'
 import _ from 'lodash'
+import { useSelector } from 'react-redux';
+
 
 const useStyles = makeStyles((theme: any) => ({
   openNavSection: {
@@ -56,7 +58,13 @@ const useStyles = makeStyles((theme: any) => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    cursor: 'pointer',
+    paddingRight: 10,
+  },
+  dropDownDisabledDiv: {
+    position: 'relative',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
     padding: '10px 20px',
   },
   dropDownSpan: {
@@ -69,9 +77,16 @@ const useStyles = makeStyles((theme: any) => ({
     color: '#fff',
     fontSize: 16,
     margin: 0,
+    cursor: 'pointer',
+    padding: '10px 20px',
     '&:hover': {
       color: '#0a58ca',
     },
+  },
+  dropDownDisabled: {
+    color: 'rgb(197 197 197)',
+    fontSize: 16,
+    margin: 0,
   },
   dropDownContent: {
     position: 'absolute',
@@ -79,7 +94,7 @@ const useStyles = makeStyles((theme: any) => ({
     zIndex: 1,
     textAlign: 'center',
     backgroundColor: '#fff',
-    border: '1px solid rgba(0,0,0,.15);',
+    border: '1px solid rgba(0,0,0,.15)',
     borderRadius: '0.25rem',
   },
   dropDownAnchor: {
@@ -102,13 +117,28 @@ export const Nav = () => {
 
   const [showNav, setShowNav] = React.useState(false)
   const [showComponents, setShowComponents] = React.useState(false);
+  const activeUser = useSelector((state: any) => state.user.activeUser)
 
   const classes = useStyles()
   const user = getActiveUser()
 
-  console.log('user', user)
   const openNav = () => {
     setShowNav(showNav ? false : true)
+  }
+
+  useEffect(() => {
+    !_.isEmpty(activeUser) && getActiveUser()
+  }, [activeUser])
+
+  const handleComponents = () => {
+    return (_.isEmpty(user)
+      ? <div className={classes.dropDownDisabledDiv} >
+        <p className={classes.dropDownDisabled}>Components</p>
+      </div>
+      : <div className={classes.dropDownDiv} onClick={() => setShowComponents(showComponents ? false : true)}>
+        <p className={classes.dropDownStlye}>Components</p>
+        <span className={classes.dropDownSpan}><img src={dropDownIcon} alt="" /></span>
+      </div>)
   }
 
 
@@ -121,12 +151,7 @@ export const Nav = () => {
             <Link to={''} className={classes.anchor} onClick={openNav}>Home</Link>
           </li>
           <li>
-            {
-            }
-            <div className={classes.dropDownDiv} onClick={() => setShowComponents(showComponents ? false : true)}>
-              <p className={classes.dropDownStlye}>Components</p>
-              <span className={classes.dropDownSpan}><img src={dropDownIcon} alt="" /></span>
-            </div>
+            {handleComponents()}
             {showComponents &&
               <div className={classes.dropDownContent} onMouseLeave={() => setShowComponents(false)}>
                 <Link to={'add-person'} className={classes.dropDownAnchor}>AddPerson</Link>

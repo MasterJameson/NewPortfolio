@@ -1,3 +1,5 @@
+export const ACTIVE_USER = 'ACTIVE_USER'
+
 export const postLogAcc = (payload: any) => (dispatch: any) => {
 
   const formatDate = (date: any) => {
@@ -5,7 +7,7 @@ export const postLogAcc = (payload: any) => (dispatch: any) => {
     let minutes = date.getMinutes();
     let ampm = hours >= 12 ? 'pm' : 'am';
     hours = hours % 12;
-    hours = hours ? hours : 12; 
+    hours = hours ? hours : 12;
     minutes = minutes < 10 ? '0' + minutes : minutes;
     let strTime = hours + ':' + minutes + ' ' + ampm;
     return (date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear() + " " + strTime;
@@ -24,8 +26,12 @@ export const postLogAcc = (payload: any) => (dispatch: any) => {
     method: "POST",
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data)
-  }).then(res => res.json().then(item => {
-    localStorage.setItem("userAcc", JSON.stringify(item))
+  }).then(response => response.json().then(data => {
+    localStorage.setItem("userAcc", JSON.stringify(data))
+    dispatch({
+      type: ACTIVE_USER,
+      data: data
+    })
   }))
 
 }

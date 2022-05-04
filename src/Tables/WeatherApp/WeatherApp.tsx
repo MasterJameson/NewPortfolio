@@ -1,12 +1,21 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { getWeatherApp } from '../../redux/actions/WeatherAppAction';
 import DisplayWeather from './DispalyWeather/DisplayWeather';
+import { useSelector } from 'react-redux'
+import _ from 'lodash'
 
 const WeartherApp = () => {
 
   const [inputVal, setInputVal] = useState('');
   const dispatch: any = useDispatch();
+  const getWeatherData = useSelector((state: any) => state.weather.getWeatherData[0])
+
+  useEffect(() => {
+    if (_.isEmpty(getWeatherData)) {
+      dispatch(getWeatherApp(''))
+    }
+  }, [])
 
   const handleSubmit = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
@@ -35,7 +44,7 @@ const WeartherApp = () => {
             </div>
           </div>
           <div className="col-sm">
-            <DisplayWeather />
+            <DisplayWeather items={getWeatherData} />
           </div>
         </div>
       </div>

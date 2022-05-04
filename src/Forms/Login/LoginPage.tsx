@@ -15,6 +15,7 @@ import { getAccount } from '../../redux/actions/SignUpAction';
 import { postLogAcc } from '../../redux/actions/LoginAction';
 import { useNavigate } from 'react-router-dom';
 import getActiveUser from '../../Home/getActiveUse';
+import _ from 'lodash';
 
 const useStyles = makeStyles({
   boxModalStyle: {
@@ -45,6 +46,7 @@ const LoginPage = () => {
   const classes = useStyles()
   const dispatch: any = useDispatch();
   const signUpAcc = useSelector((state: any) => state.signup.getAcounts[0])
+  const activeUser = useSelector((state: any) => state.user.activeUser)
   if (signUpAcc === undefined) dispatch(getAccount())
   const handleReset = () => {
     setInputValue({
@@ -78,14 +80,17 @@ const LoginPage = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if (validateField(e)) { 
-      handleReset();
+    if (validateField(e)) {
       dispatch(postLogAcc(validateField(e)))
-      navigate('/add-person')
+      handleReset();
     } else {
       setInputValue({ ...inputValue, formInvalid: true })
     }
   }
+
+  useEffect(() => {
+    !_.isEmpty(activeUser) && navigate('/')
+  }, [activeUser])
 
   return (
     <>
