@@ -89,8 +89,8 @@ const LoginPage = () => {
   }
 
   useEffect(() => {
-    !_.isEmpty(activeUser) && navigate('/')
-  }, [activeUser])
+    !_.isEmpty(userActive) && navigate('/')
+  }, [userActive])
 
   return (
     <>

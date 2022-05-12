@@ -5,7 +5,9 @@ import Box from '@mui/material/Box';
 import dropDownIcon from '../Assets/icons/dropDownIcon.png'
 import getActiveUser from '../Home/getActiveUse'
 import _ from 'lodash'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+// import { postLogAcc } from '../redux/actions/LoginAction';
+import { useNavigate } from 'react-router-dom';
 
 
 const useStyles = makeStyles((theme: any) => ({
@@ -49,6 +51,10 @@ const useStyles = makeStyles((theme: any) => ({
     color: '#fff',
     textDecoration: 'none',
     transition: '0.5s',
+    cursor: 'pointer',
+    '&:hover': {
+      color: '#b9b9b9',
+    },
     [theme.breakpoints.down('sm')]: {
       textAlign: 'center',
     }
@@ -59,6 +65,7 @@ const useStyles = makeStyles((theme: any) => ({
     justifyContent: 'center',
     alignItems: 'center',
     paddingRight: 10,
+
   },
   dropDownDisabledDiv: {
     position: 'relative',
@@ -80,13 +87,14 @@ const useStyles = makeStyles((theme: any) => ({
     cursor: 'pointer',
     padding: '10px 20px',
     '&:hover': {
-      color: '#0a58ca',
+      color: '#b9b9b9',
     },
   },
   dropDownDisabled: {
     color: 'rgb(197 197 197)',
     fontSize: 16,
     margin: 0,
+    cursor: 'not-allowed'
   },
   dropDownContent: {
     position: 'absolute',
@@ -117,7 +125,9 @@ export const Nav = () => {
 
   const [showNav, setShowNav] = React.useState(false)
   const [showComponents, setShowComponents] = React.useState(false);
+  // const dispatch: any = useDispatch();
   const activeUser = useSelector((state: any) => state.user.activeUser)
+  const navigate = useNavigate()
 
   const classes = useStyles()
   const user = getActiveUser()
@@ -126,21 +136,26 @@ export const Nav = () => {
     setShowNav(showNav ? false : true)
   }
 
+
   useEffect(() => {
-    !_.isEmpty(activeUser) && getActiveUser()
-  }, [activeUser])
+    !_.isEmpty(user) && getActiveUser()
+  }, [user])
 
   const handleComponents = () => {
     return (_.isEmpty(user)
       ? <div className={classes.dropDownDisabledDiv} >
-        <p className={classes.dropDownDisabled}>Components</p>
+        <p className={classes.dropDownDisabled}>Projects</p>
       </div>
       : <div className={classes.dropDownDiv} onClick={() => setShowComponents(showComponents ? false : true)}>
-        <p className={classes.dropDownStlye}>Components</p>
+        <p className={classes.dropDownStlye}>Projects</p>
         <span className={classes.dropDownSpan}><img src={dropDownIcon} alt="" /></span>
       </div>)
   }
 
+  const handleLogout = () => {
+    navigate('/login')
+    localStorage.removeItem('userAcc')
+  }
 
   return (
     <>
@@ -160,7 +175,13 @@ export const Nav = () => {
             }
           </li>
           <li>
-            <Link to={'login'} className={classes.anchor} onClick={openNav}>Login</Link>
+            {
+              _.isEmpty(getActiveUser())
+                ?
+                < Link to={'login'} className={classes.anchor} onClick={openNav}>Login</Link>
+                :
+                <a className={classes.anchor} onClick={handleLogout}>Logout</a>
+            }
           </li>
           <li>
             <Link to={'sign-up'} className={classes.anchor} onClick={openNav}>Signup</Link>
