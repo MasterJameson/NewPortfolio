@@ -6272,17 +6272,20 @@ find-up@^5.0.0:
     locate-path "^6.0.0"
     path-exists "^4.0.0"
 
-firebase-frameworks@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.npmjs.org/firebase-frameworks/-/firebase-frameworks-0.3.0.tgz"
-  integrity sha512-Zxtx5WsD8ZZdItIeDjjpM+JgaIWDdwBujmLYLKf2Ou6onyRsd8bNRrnVsqrnq4S3FN9TcNYliXdwMu7AwYdW7Q==
+firebase-frameworks@^0.4.2:
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/firebase-frameworks/-/firebase-frameworks-0.4.2.tgz#f112f8afeec35b5532d8b9bbb2886f9cff68f61b"
+  integrity sha512-a3xNE3wPh8JWq2WOgWlSypVS9O/y/3/3Im9EV7bNBF44wFV2oOAyFdVgDk6it81+lBRv7ci8PttgQZohtsFeVA==
   dependencies:
+    fs-extra "^10.1.0"
+    jsonc-parser "^3.0.0"
+    semver "^7.3.7"
     tslib "^2.3.1"
 
-firebase-tools@^10.7.2:
-  version "10.7.2"
-  resolved "https://registry.yarnpkg.com/firebase-tools/-/firebase-tools-10.7.2.tgz#75073f64fa3015b020f292330b54a1d3519a8fbd"
-  integrity sha512-KU6cQ9XPBn2++gMBkR393LYbl4YEbKbHG/KsUR/JnfB2p5rhSPL/X4TntIl59QFs5527+VcLpeeeRRIB4Z9wUw==
+firebase-tools@^10.9.2:
+  version "10.9.2"
+  resolved "https://registry.yarnpkg.com/firebase-tools/-/firebase-tools-10.9.2.tgz#44d5228e9b4c367e9a9da18aa21bfa6f857215fc"
+  integrity sha512-oH5AV7mnoIhVsgFT5QI/HeMh7bfpbr60Siw0tbD5FB4xtaqYyyPC42W6/unbLMxlM6qNH3rHe1+PZmU2z7NeWA==
   dependencies:
     "@google-cloud/pubsub" "^2.18.4"
     abort-controller "^3.0.0"
@@ -6305,7 +6308,7 @@ firebase-tools@^10.7.2:
     exit-code "^1.0.2"
     express "^4.16.4"
     filesize "^6.1.0"
-    firebase-frameworks "^0.3.0"
+    firebase-frameworks "^0.4.2"
     fs-extra "^5.0.0"
     glob "^7.1.2"
     google-auth-library "^7.11.0"
@@ -6453,6 +6456,15 @@ fs-extra@^10.0.0:
   version "10.0.1"
   resolved "https://registry.npmjs.org/fs-extra/-/fs-extra-10.0.1.tgz"
   integrity sha512-NbdoVMZso2Lsrn/QwLXOy6rm0ufY2zEOKCDzJR/0kBsb0E6qed0P3iYK+Ath3BfvXEeu4JhEtXLgILx5psUfag==
+  dependencies:
+    graceful-fs "^4.2.0"
+    jsonfile "^6.0.1"
+    universalify "^2.0.0"
+
+fs-extra@^10.1.0:
+  version "10.1.0"
+  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-10.1.0.tgz#02873cfbc4084dde127eaa5f9905eef2325d1abf"
+  integrity sha512-oRXApq54ETRj4eMiFzGnHWGy+zo5raudjuxN0b8H7s/RU2oW0Wvsx9O0ACRN/kRq9E8Vu/ReskGB5o3ji+FzHQ==
   dependencies:
     graceful-fs "^4.2.0"
     jsonfile "^6.0.1"
@@ -8578,6 +8590,11 @@ json5@^2.1.2, json5@^2.2.0:
   version "2.2.1"
   resolved "https://registry.npmjs.org/json5/-/json5-2.2.1.tgz"
   integrity sha512-1hqLFMSrGHRHxav9q9gNjJ5EXznIxGVO09xQRrwplcS8qs28pZ8s8hupZAmqDwZUmVZ2Qb2jnyPOWcDH8m8dlA==
+
+jsonc-parser@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/jsonc-parser/-/jsonc-parser-3.0.0.tgz#abdd785701c7e7eaca8a9ec8cf070ca51a745a22"
+  integrity sha512-fQzRfAbIBnR0IQvftw9FJveWiHp72Fg20giDrHz6TdfB12UH/uue0D3hm57UB5KgAVuniLMCaS8P1IMj9NR7cA==
 
 jsonfile@^4.0.0:
   version "4.0.0"
@@ -11946,7 +11963,7 @@ semver@^6.0.0, semver@^6.1.1, semver@^6.1.2, semver@^6.2.0, semver@^6.3.0:
   resolved "https://registry.npmjs.org/semver/-/semver-6.3.0.tgz"
   integrity sha512-b39TBaTSfV6yBrapU89p5fKekE2m/NwnDocOVruQFS1/veMgdzuPcnOM34M6CwxW8jH/lxEa5rBoDeUwu5HHTw==
 
-semver@^7.0.0:
+semver@^7.0.0, semver@^7.3.7:
   version "7.3.7"
   resolved "https://registry.npmjs.org/semver/-/semver-7.3.7.tgz"
   integrity sha512-QlYTucUYOews+WeEujDoEGziz4K6c47V/Bd+LjSSYcA94p+DmINdf7ncaUinThfvZyu13lN9OY1XDxt8C0Tw0g==
