@@ -5,8 +5,7 @@ import Box from '@mui/material/Box';
 import dropDownIcon from '../Assets/icons/dropDownIcon.png'
 import getActiveUser from '../Home/getActiveUse'
 import _ from 'lodash'
-import { useDispatch, useSelector } from 'react-redux';
-// import { postLogAcc } from '../redux/actions/LoginAction';
+import {  useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -125,17 +124,14 @@ export const Nav = () => {
 
   const [showNav, setShowNav] = React.useState(false)
   const [showComponents, setShowComponents] = React.useState(false);
-  // const dispatch: any = useDispatch();
-  const activeUser = useSelector((state: any) => state.user.activeUser)
-  const navigate = useNavigate()
 
+  const navigate = useNavigate()
   const classes = useStyles()
   const user = getActiveUser()
 
   const openNav = () => {
     setShowNav(showNav ? false : true)
   }
-
 
   useEffect(() => {
     !_.isEmpty(user) && getActiveUser()

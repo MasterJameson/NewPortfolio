@@ -46,7 +46,7 @@ const LoginPage = () => {
   const classes = useStyles()
   const dispatch: any = useDispatch();
   const signUpAcc = useSelector((state: any) => state.signup.getAcounts[0])
-  const activeUser = useSelector((state: any) => state.user.activeUser)
+
   if (signUpAcc === undefined) dispatch(getAccount())
   const handleReset = () => {
     setInputValue({

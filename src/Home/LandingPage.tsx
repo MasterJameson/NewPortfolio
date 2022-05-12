@@ -1,6 +1,3 @@
-import { rejects } from 'assert'
-import { resolve } from 'path'
-import React from 'react'
 import getActiveUser from "./getActiveUse"
 
 
