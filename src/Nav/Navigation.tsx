@@ -5,8 +5,9 @@ import Box from '@mui/material/Box';
 import dropDownIcon from '../Assets/icons/dropDownIcon.png'
 import getActiveUser from '../Home/getActiveUse'
 import _ from 'lodash'
-import {  useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { removeLog } from '../redux/actions/LoginAction';
 
 
 const useStyles = makeStyles((theme: any) => ({
@@ -124,7 +125,9 @@ export const Nav = () => {
 
   const [showNav, setShowNav] = React.useState(false)
   const [showComponents, setShowComponents] = React.useState(false);
+  const activeUser = useSelector((state: any) => state.user.activeUser)
 
+  const dispatch: any = useDispatch();
   const navigate = useNavigate()
   const classes = useStyles()
   const user = getActiveUser()
@@ -151,7 +154,10 @@ export const Nav = () => {
   const handleLogout = () => {
     navigate('/login')
     localStorage.removeItem('userAcc')
+    dispatch(removeLog())
+
   }
+  console.log('test', activeUser)
 
   return (
     <>
@@ -167,6 +173,7 @@ export const Nav = () => {
               <div className={classes.dropDownContent} onMouseLeave={() => setShowComponents(false)}>
                 <Link to={'add-person'} className={classes.dropDownAnchor}>AddPerson</Link>
                 <Link to={'waether-app'} className={classes.dropDownAnchor}>WeartherApp</Link>
+                <Link to={'tictactoe'} className={classes.dropDownAnchor}>Tic-tac-toe</Link>
               </div>
             }
           </li>

@@ -46,7 +46,7 @@ const LoginPage = () => {
   const classes = useStyles()
   const dispatch: any = useDispatch();
   const signUpAcc = useSelector((state: any) => state.signup.getAcounts[0])
-
+  const activeUser = useSelector((state: any) => state.user.activeUser)
   if (signUpAcc === undefined) dispatch(getAccount())
   const handleReset = () => {
     setInputValue({
@@ -81,7 +81,25 @@ const LoginPage = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (validateField(e)) {
-      dispatch(postLogAcc(validateField(e)))
+      const formatDate = (date: any) => {
+        let hours = date.getHours();
+        let minutes = date.getMinutes();
+        let ampm = hours >= 12 ? 'pm' : 'am';
+        hours = hours % 12;
+        hours = hours ? hours : 12;
+        minutes = minutes < 10 ? '0' + minutes : minutes;
+        let strTime = hours + ':' + minutes + ' ' + ampm;
+        return (date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear() + " " + strTime;
+      }
+      const date = new Date();
+    
+      const data = {
+        email: validateField(e).email,
+        firstName: validateField(e).firstName,
+        lastName: validateField(e).lastName,
+        time: formatDate(date)
+      }
+      dispatch(postLogAcc(data))
       handleReset();
     } else {
       setInputValue({ ...inputValue, formInvalid: true })
@@ -89,8 +107,8 @@ const LoginPage = () => {
   }
 
   useEffect(() => {
-    !_.isEmpty(userActive) && navigate('/')
-  }, [userActive])
+    !_.isEmpty(activeUser) && navigate('/')
+  }, [activeUser])
 
   return (
     <>

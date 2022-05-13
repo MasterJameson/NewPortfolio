@@ -13,6 +13,7 @@ import { Nav } from './Nav/Navigation';
 import LandingPage from './Home/LandingPage';
 import SingUp from './Forms/SignUp/SingUp';
 import { createTheme ,ThemeProvider} from '@mui/material';
+import Tictactoe from './Tables/Tictactoe/Tictactoe';
 
 const theme = createTheme()
 
@@ -32,6 +33,7 @@ function App() {
             <Route path="/waether-app" element={<WeartherApp />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/sign-up" element={<SingUp />} />
+            <Route path="/tictactoe" element={<Tictactoe />} />
           </Routes>
         </BrowserRouter>
         </ThemeProvider>
