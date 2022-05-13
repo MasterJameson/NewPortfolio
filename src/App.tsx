@@ -33,7 +33,7 @@ function App() {
             <Route path="/waether-app" element={<WeartherApp />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/sign-up" element={<SingUp />} />
-            <Route path="/tictactoe" element={<Tictactoe />} />
+            <Route path="/tictactoe" element={<Tictactoe/>} />
           </Routes>
         </BrowserRouter>
         </ThemeProvider>

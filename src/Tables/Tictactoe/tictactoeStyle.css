@@ -1,0 +1,135 @@
+:root {
+  --cell: 100px;
+  --mark: calc(var(--cell) * .9)
+}
+
+.gameBoard {
+  width: 100vw;
+  height: 30vw;
+  display: grid;
+  align-content: center;
+  justify-content: center;
+  grid-template-columns: repeat(3, auto);
+}
+
+.cell {
+  width: 100px;
+  border: 1px solid #000;
+  cursor: pointer;
+  height: 100px;
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+}
+
+.cell:first-child,
+.cell:nth-child(2),
+.cell:nth-child(3) {
+  border-top: none;
+}
+
+.cell:nth-child(3n + 1) {
+  border-left: none
+}
+
+.cell:nth-child(3n + 3) {
+  border-right: none
+}
+
+.cell:last-child,
+.cell:nth-child(8),
+.cell:nth-child(7) {
+  border-bottom: none
+}
+
+.cell.x,
+.cell.circle {
+  cursor: not-allowed;
+}
+
+.x::before,
+.x::after,
+.circle::before {
+  background-color: #000
+}
+
+.xTurn .cell:not(.x):not(.circle):hover::after,
+.xTurn .cell:not(.x):not(.circle):hover::before,
+.circleTurn .cell:not(.x):not(.circle):hover:before {
+  background-color: rgb(187, 187, 187);
+}
+
+.x::before,
+.x::after,
+.xTurn .cell:not(.x):not(.circle):hover::after,
+.xTurn .cell:not(.x):not(.circle):hover::before {
+  content: '';
+  position: absolute;
+  width: calc(var(--mark)*.15);
+  height: var(--mark);
+}
+
+.x::before,
+.xTurn .cell:not(.x):not(.circle):hover::before {
+  transform: rotate(45deg)
+}
+
+.x::after,
+.xTurn .cell:not(.x):not(.circle):hover::after {
+  transform: rotate(-45deg)
+}
+
+.circle::before,
+.circle::after,
+.circleTurn .cell:not(.x):not(.circle):hover::before,
+.circleTurn .cell:not(.x):not(.circle):hover::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+}
+
+.circle::before,
+.circleTurn .cell:not(.x):not(.circle):hover:before {
+  width: calc(var(--cell) * .8);
+  height: calc(var(--cell) * .8);
+}
+
+.circle::after,
+.circleTurn .cell:not(.x):not(.circle):hover:after {
+  background-color: #fff;
+  width: calc(var(--cell) * .55);
+  height: calc(var(--cell) * .55);
+}
+
+.containerMessage {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgb(0, 0, 0, .8);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-size: 4rem;
+  flex-direction: column;
+}
+
+.containerMessage .restartButton {
+  background-color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 3rem;
+}
+
+.containerMessage .restartButton:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+.containerMessage.show {
+  display: flex;
+}

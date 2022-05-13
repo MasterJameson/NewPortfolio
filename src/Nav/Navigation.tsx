@@ -157,7 +157,6 @@ export const Nav = () => {
     dispatch(removeLog())
 
   }
-  console.log('test', activeUser)
 
   return (
     <>
