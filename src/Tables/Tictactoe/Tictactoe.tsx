@@ -18,7 +18,7 @@ function Tictactoe() {
 
   return (
     <>
-      <div className="gameBoard xTurn" id="board">
+      <div className="gameBoard x" id="board">
         <div className="cell" data-cell></div>
         <div className="cell" data-cell></div>
         <div className="cell" data-cell></div>
@@ -30,8 +30,8 @@ function Tictactoe() {
         <div className="cell" data-cell></div>
       </div>
       <div className='containerMessage' id="message">
-        <div data-message>X Won!</div>
-        <button className='restartButton' >Restart</button>
+        <div data-message>X's Won!</div>
+        <button className='stlyButton' id='restartButton' >Restart</button>
       </div>
     </>
   )

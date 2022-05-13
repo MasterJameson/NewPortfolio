@@ -49,55 +49,55 @@
   cursor: not-allowed;
 }
 
-.x::before,
-.x::after,
-.circle::before {
+.cell.x::before,
+.cell.x::after,
+.cell.circle::before {
   background-color: #000
 }
 
-.xTurn .cell:not(.x):not(.circle):hover::after,
-.xTurn .cell:not(.x):not(.circle):hover::before,
-.circleTurn .cell:not(.x):not(.circle):hover:before {
+.gameBoard.x .cell:not(.x):not(.circle):hover::after,
+.gameBoard.x .cell:not(.x):not(.circle):hover::before,
+.gameBoard.circle .cell:not(.x):not(.circle):hover:before {
   background-color: rgb(187, 187, 187);
 }
 
-.x::before,
-.x::after,
-.xTurn .cell:not(.x):not(.circle):hover::after,
-.xTurn .cell:not(.x):not(.circle):hover::before {
+.cell.x::before,
+.cell.x::after,
+.gameBoard.x .cell:not(.x):not(.circle):hover::after,
+.gameBoard.x .cell:not(.x):not(.circle):hover::before {
   content: '';
   position: absolute;
   width: calc(var(--mark)*.15);
   height: var(--mark);
 }
 
-.x::before,
-.xTurn .cell:not(.x):not(.circle):hover::before {
+.cell.x::before,
+.gameBoard.x .cell:not(.x):not(.circle):hover::before {
   transform: rotate(45deg)
 }
 
-.x::after,
-.xTurn .cell:not(.x):not(.circle):hover::after {
+.cell.x::after,
+.gameBoard.x .cell:not(.x):not(.circle):hover::after {
   transform: rotate(-45deg)
 }
 
-.circle::before,
-.circle::after,
-.circleTurn .cell:not(.x):not(.circle):hover::before,
-.circleTurn .cell:not(.x):not(.circle):hover::after {
+.cell.circle::before,
+.cell.circle::after,
+.gameBoard.circle .cell:not(.x):not(.circle):hover::before,
+.gameBoard.circle .cell:not(.x):not(.circle):hover::after {
   content: '';
   position: absolute;
   border-radius: 50%;
 }
 
-.circle::before,
-.circleTurn .cell:not(.x):not(.circle):hover:before {
+.cell.circle::before,
+.gameBoard.circle .cell:not(.x):not(.circle):hover:before {
   width: calc(var(--cell) * .8);
   height: calc(var(--cell) * .8);
 }
 
-.circle::after,
-.circleTurn .cell:not(.x):not(.circle):hover:after {
+.cell.circle::after,
+.gameBoard.circle .cell:not(.x):not(.circle):hover:after {
   background-color: #fff;
   width: calc(var(--cell) * .55);
   height: calc(var(--cell) * .55);
@@ -118,14 +118,14 @@
   flex-direction: column;
 }
 
-.containerMessage .restartButton {
+.containerMessage .stlyButton {
   background-color: #fff;
   border: none;
   border-radius: 10px;
   font-size: 3rem;
 }
 
-.containerMessage .restartButton:hover {
+.containerMessage .stlyButton:hover {
   background-color: #000;
   color: #fff;
 }
