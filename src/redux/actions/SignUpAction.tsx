@@ -1,4 +1,5 @@
 export const GET_ACCOUNT = 'GET_ACCOUNT'
+export const POST_ACCOUNT = 'POST_ACCOUNT'
 
 export const postAccount = (payload: any) => (dispatch: any) => {
   const data = {
@@ -13,6 +14,11 @@ export const postAccount = (payload: any) => (dispatch: any) => {
     method: "POST",
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data)
+  }).then(response => response.json()).then(data =>{ 
+    dispatch({
+      type: POST_ACCOUNT,
+      data: data
+    })
   })
 }
 

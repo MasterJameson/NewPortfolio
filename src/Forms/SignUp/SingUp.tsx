@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -13,6 +13,8 @@ import FormControl from '@mui/material/FormControl';
 import { FormHelperText } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAccount, postAccount } from '../../redux/actions/SignUpAction';
+import { useNavigate } from 'react-router-dom';
+import _ from 'lodash';
 
 
 const useStyles = makeStyles({
@@ -59,10 +61,16 @@ const SingUp = () => {
   })
   const classes = useStyles()
   const dispatch: any = useDispatch();
+  const navigate = useNavigate()
+
   const signUpAcc = useSelector((state: any) => state.signup.getAcounts[0])
+  const postAcc = useSelector((state: any) => state.signup.postAccount)
 
   if (signUpAcc === undefined) dispatch(getAccount())
 
+  useEffect(() => {
+    if (!_.isEmpty(postAcc)) navigate('/login')
+  }, [postAcc])
 
 
   const validateField = (name: string, value: string) => {
@@ -177,7 +185,7 @@ const SingUp = () => {
 
   return (
     <>
-      <form style={{margin: 30}}>
+      <form style={{ margin: 30 }}>
         <Box className={classes.boxModalStyle}>
           <Box className={classes.textFieldStyle}>
             <FormControl fullWidth >
