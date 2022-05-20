@@ -1,0 +1,15 @@
+ul.paginationContainer {
+  display: flex;
+}
+
+a.pagination {
+  display: inline;
+  padding: 0 7px;
+  text-decoration: none;
+  border: 1px solid gray;
+}
+
+
+ul.paginationContainer :not(li:last-child) a.pagination:first-child {
+  border-right: none;
+}

@@ -92,7 +92,7 @@ const LoginPage = () => {
         return (date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear() + " " + strTime;
       }
       const date = new Date();
-    
+
       const data = {
         email: validateField(e).email,
         firstName: validateField(e).firstName,
@@ -154,6 +154,7 @@ const LoginPage = () => {
           </Box>
           {inputValue.formInvalid && <p style={{ fontSize: 10, color: "red" }}>Email or Password is wrong</p>}
           <Button variant="contained" type="submit" disabled={inputValue.email === '' || inputValue.password === ''}>Submit</Button>
+          <Button onClick={() => navigate('/sign-up')}>Create Account</Button>
         </Box>
       </form>
     </ >
