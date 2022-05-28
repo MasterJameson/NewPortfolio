@@ -13,10 +13,8 @@ import { removeLog } from '../redux/actions/LoginAction';
 const useStyles = makeStyles((theme: any) => ({
   openNavSection: {
     display: 'flex',
-    background: 'linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)',
+    background: '#f5f5f5',
     border: 0,
-    borderRadius: 3,
-    boxShadow: '0 3px 5px 2px rgba(33, 203, 243, .3)',
     padding: '0 30px',
     listStyleType: 'none',
     alignItems: 'center',
@@ -27,10 +25,8 @@ const useStyles = makeStyles((theme: any) => ({
   },
   closeNavSection: {
     display: 'flex',
-    background: 'linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)',
+    background: '#f5f5f5',
     border: 0,
-    borderRadius: 3,
-    boxShadow: '0 3px 5px 2px rgba(33, 203, 243, .3)',
     padding: '0 30px',
     listStyleType: 'none',
     alignItems: 'center',
@@ -48,7 +44,7 @@ const useStyles = makeStyles((theme: any) => ({
   anchor: {
     display: 'block',
     padding: '10px 20px',
-    color: '#fff',
+    color: '#000',
     textDecoration: 'none',
     transition: '0.5s',
     cursor: 'pointer',
@@ -74,14 +70,21 @@ const useStyles = makeStyles((theme: any) => ({
     alignItems: 'center',
     padding: '10px 20px',
   },
-  dropDownSpan: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
+  arrow: {
+    border: 'solid black',
+    borderWidth: '0 1px 1px 0',
+    display: ' inline-block',
+    padding: '3px',
+  },
+  up: {
+    transform: ' rotate(-135deg)',
+  },
+  down: {
+    transform: 'rotate(45deg)'
   },
   dropDownStlye: {
     paddingRight: 10,
-    color: '#fff',
+    color: '#000',
     fontSize: 16,
     margin: 0,
     cursor: 'pointer',
@@ -114,6 +117,7 @@ const useStyles = makeStyles((theme: any) => ({
     fontSize: 12,
     '&:hover': {
       backgroundColor: '#f8f9fa',
+      color: '#b9b9b9',
     },
     [theme.breakpoints.down('sm')]: {
       textAlign: 'center',
@@ -141,13 +145,10 @@ export const Nav = () => {
   }, [user])
 
   const handleComponents = () => {
-    return (_.isEmpty(user)
-      ? <div className={classes.dropDownDisabledDiv} >
-        <p className={classes.dropDownDisabled}>Projects</p>
-      </div>
-      : <div className={classes.dropDownDiv} onClick={() => setShowComponents(showComponents ? false : true)}>
+    return (
+      <div className={classes.dropDownDiv} onClick={() => setShowComponents(showComponents ? false : true)}>
         <p className={classes.dropDownStlye}>Projects</p>
-        <span className={classes.dropDownSpan}><img src={dropDownIcon} alt="" /></span>
+        <span className={`${classes.arrow} ${classes.down}`}></span>
       </div>)
   }
 
