@@ -61,7 +61,6 @@ const useStyles = makeStyles((theme: any) => ({
     justifyContent: 'center',
     alignItems: 'center',
     paddingRight: 10,
-
   },
   dropDownDisabledDiv: {
     position: 'relative',
@@ -104,13 +103,14 @@ const useStyles = makeStyles((theme: any) => ({
     minWidth: 128,
     zIndex: 1,
     textAlign: 'center',
-    backgroundColor: '#fff',
-    border: '1px solid rgba(0,0,0,.15)',
-    borderRadius: '0.25rem',
+    backgroundColor: '#f5f5f5',
+    top: '44px',
+    left: 0,
+    textAlignLast: 'left'
   },
   dropDownAnchor: {
     display: 'block',
-    padding: 5,
+    padding: "5px 18px",
     textDecoration: 'none',
     transition: '0.5s',
     color: '#16181b',
@@ -118,7 +118,9 @@ const useStyles = makeStyles((theme: any) => ({
     '&:hover': {
       backgroundColor: '#f8f9fa',
       color: '#b9b9b9',
+
     },
+
     [theme.breakpoints.down('sm')]: {
       textAlign: 'center',
     }
@@ -144,13 +146,6 @@ export const Nav = () => {
     !_.isEmpty(user) && getActiveUser()
   }, [user])
 
-  const handleComponents = () => {
-    return (
-      <div className={classes.dropDownDiv} onClick={() => setShowComponents(showComponents ? false : true)}>
-        <p className={classes.dropDownStlye}>Projects</p>
-        <span className={`${classes.arrow} ${classes.down}`}></span>
-      </div>)
-  }
 
   const handleLogout = () => {
     navigate('/login')
@@ -168,12 +163,19 @@ export const Nav = () => {
             <Link to={''} className={classes.anchor} onClick={openNav}>Home</Link>
           </li>
           <li>
-            {handleComponents()}
-            {showComponents &&
-              <div className={classes.dropDownContent} onMouseLeave={() => setShowComponents(false)}>
-                <Link to={'add-person'} className={classes.dropDownAnchor}>AddPerson</Link>
-                <Link to={'waether-app'} className={classes.dropDownAnchor}>WeartherApp</Link>
-                <Link to={'tictactoe'} className={classes.dropDownAnchor}>Tic-tac-toe</Link>
+            {
+              <div className={classes.dropDownDiv} onMouseEnter={() => setShowComponents(true)} onMouseLeave={() => setShowComponents(false)}>
+                <p className={classes.dropDownStlye}>Projects</p>
+                <span className={`${classes.arrow} ${classes.down}`}></span>
+                {
+                  showComponents &&
+                  <div className={classes.dropDownContent} >
+                    <Link to={'add-person'} className={classes.dropDownAnchor}>AddPerson</Link>
+                    <Link to={'waether-app'} className={classes.dropDownAnchor}>WeartherApp</Link>
+                    <Link to={'tictactoe'} className={classes.dropDownAnchor}>Tic-tac-toe</Link>
+                    <Link to={'ecommerce'} className={classes.dropDownAnchor}>E-commerce</Link>
+                  </div>
+                }
               </div>
             }
           </li>

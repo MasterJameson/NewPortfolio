@@ -12,8 +12,9 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Nav } from './Nav/Navigation';
 import LandingPage from './Home/LandingPage';
 import SingUp from './Forms/SignUp/SingUp';
-import { createTheme ,ThemeProvider} from '@mui/material';
+import { createTheme, ThemeProvider } from '@mui/material';
 import Tictactoe from './Tables/Tictactoe/Tictactoe';
+import ProductView from './Ecom/ProductView';
 
 const theme = createTheme()
 
@@ -25,17 +26,18 @@ function App() {
       <Provider store={appStore} >
         <ThemeProvider theme={theme}>
 
-        <BrowserRouter>
-          <Nav />
-          <Routes>
-            <Route path="/" element={<LandingPage />} />
-            <Route path="/add-person" element={<AddPerson />} />
-            <Route path="/waether-app" element={<WeartherApp />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/sign-up" element={<SingUp />} />
-            <Route path="/tictactoe" element={<Tictactoe/>} />
-          </Routes>
-        </BrowserRouter>
+          <BrowserRouter>
+            <Nav />
+            <Routes>
+              <Route path="/" element={<LandingPage />} />
+              <Route path="/add-person" element={<AddPerson />} />
+              <Route path="/waether-app" element={<WeartherApp />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/sign-up" element={<SingUp />} />
+              <Route path="/tictactoe" element={<Tictactoe />} />
+              <Route path="/ecommerce" element={<ProductView />} />
+            </Routes>
+          </BrowserRouter>
         </ThemeProvider>
         {/* <ClassComponentApp /> */}
         {/* <SignUpForm /> */}

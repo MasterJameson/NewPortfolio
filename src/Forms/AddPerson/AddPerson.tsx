@@ -24,6 +24,7 @@ const AddPerson = () => {
     mobile: 0,
     email: '',
     jobTitle: '',
+    createdAt: 0,
     isInputError: { fName: '', lName: '', email: '', age: '', mobile: '', gender: '' },
     isInputValid: { fNameValid: false, lNameValid: false, genderValid: false, ageValid: false, mobileValid: false, emailValid: false, formValid: false, }
   })
@@ -148,6 +149,7 @@ const AddPerson = () => {
       mobile: 0,
       email: '',
       jobTitle: '',
+      createdAt: 0,
       isInputError: { fName: '', lName: '', email: '', age: '', mobile: '', gender: '' },
       isInputValid: { fNameValid: false, lNameValid: false, genderValid: false, ageValid: false, mobileValid: false, emailValid: false, formValid: false, }
     })
@@ -183,7 +185,16 @@ const AddPerson = () => {
     event.preventDefault();
     handleReset(event)
   }
+  const date = new Date();
+  const formatDate = (date: any) => {
+    const hours = date.getHours();
+    let minutes = date.getMinutes();
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    let strTime = hours + '' + minutes;
+    return Number(`${(date.getMonth() + 1)}${date.getDate()}${date.getFullYear()}${strTime}`)
+  }
 
+  formatDate(date)
   return (
     <React.Fragment>
       <div className="container">
@@ -312,7 +323,7 @@ const AddPerson = () => {
             </div>
           </div>
           <div className="col-sm">
-            <PersonTable props={personList}/>
+            <PersonTable props={personList} />
           </div>
         </div>
       </div>

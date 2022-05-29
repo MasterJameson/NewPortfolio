@@ -7,6 +7,7 @@ export interface MyPerson {
   mobile: number,
   email: string,
   jobTitle: string,
+  createdAt: number
   isInputError: { fName: string, lName: string, email: string, age: string, mobile: string, gender: string },
   isInputValid: {
     fNameValid: boolean,

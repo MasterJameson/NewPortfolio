@@ -29,7 +29,9 @@ const PersonTable = ({ props }: PersonTableType) => {
   //to get current page
   const getIndexLastPerson = currentPage * postPerPage
   const getIndextFirstPerson = getIndexLastPerson - postPerPage
-  const getPersonInfo = !_.isEmpty(data) && data.slice(getIndextFirstPerson, getIndexLastPerson)
+  const getPersonInfo = !_.isEmpty(data) && data.sort((a: MyPerson, b: MyPerson) => {
+    if (a !== undefined && b !== undefined) return b.createdAt - a.createdAt
+  }).slice(getIndextFirstPerson, getIndexLastPerson)
 
   const Paginate = (number: number) => setCurrentPage(number)
 

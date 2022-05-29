@@ -12,7 +12,6 @@ const Pagination = ({ postPerPage, totalPosts, paginate }: Props): JSX.Element =
   const pageNumber = [];
 
   for (let i = 1; i <= Math.ceil(totalPosts / postPerPage); i++) {
-    console.log(i)
     pageNumber.push(i)
   }
 

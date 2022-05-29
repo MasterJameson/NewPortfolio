@@ -32,6 +32,14 @@ export const deleteMockApiData = (payload: number) => (dispatch: any) => {
 }
 
 export const postMockApiData = (payload: MyPerson) => (dispatch: any) => {
+  const date = new Date();
+  const formatDate = (date: any) => {
+    const hours = date.getHours();
+    let minutes = date.getMinutes();
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    let strTime = hours + '' + minutes;
+    return Number(`${(date.getMonth() + 1)}${date.getDate()}${date.getFullYear()}${strTime}`)
+  }
   const data = {
     id: payload.id,
     fName: payload.fName,
@@ -41,6 +49,7 @@ export const postMockApiData = (payload: MyPerson) => (dispatch: any) => {
     mobile: payload.mobile,
     email: payload.email,
     jobTitle: payload.jobTitle,
+    createdAt: formatDate(date),
     isInputError: {
       fName: payload.isInputError.fName,
       lName: payload.isInputError.lName,
@@ -58,7 +67,6 @@ export const postMockApiData = (payload: MyPerson) => (dispatch: any) => {
       emailValid: payload.isInputValid.emailValid,
       formValid: payload.isInputValid.formValid,
     }
-
   }
   const url = `https://data-hosting.herokuapp.com/personList`
   fetch(url, { method: "POST", headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
