@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react'
 import _ from "lodash"
-import { ClassNames } from '@emotion/react'
 import { makeStyles } from '@mui/styles';
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
+
 
 const useStyles = makeStyles((theme: any) => ({
 
@@ -29,11 +31,18 @@ const ProductView = () => {
       )
     })
   }
+  console.log(value)
   return (
     <>
       <div>ProductView</div>
       <div className='productImgContainer'>
-        {!_.isUndefined(value) && renderProduct(value)}
+        {
+          _.isUndefined(value)
+            ? <Box sx={{ display: 'flex' }}>
+              <CircularProgress />
+            </Box>
+            : renderProduct(value)
+        }
       </div>
     </>
   )

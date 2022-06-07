@@ -9,6 +9,9 @@ import { deleteMockApiData, postMockApiData, putMockApiData, unselectPerson, get
 import PersonErr from '../../Components/FormErr/PersonErr/PersonErr';
 import { MyPerson } from './interface';
 import PersonTable from '../../Tables/PersonTable/PersonTable';
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
+import _ from 'lodash';
 
 const AddPerson = () => {
 
@@ -195,137 +198,147 @@ const AddPerson = () => {
   }
 
   formatDate(date)
+
+  console.log(personList)
+
   return (
     <React.Fragment>
       <div className="container">
-        <div className="row">
-          <div className="col-sm">
-            <div style={{ width: 350, margin: "0 auto", }}>
-              <form className='demoForm border p-4 mt-3'>
-                <h2>Add Person</h2>
-                <div className={`form-group ${person.isInputError.fName.length === 0 ? '' : 'has-error'}`}>
-                  <Label content="First Name" htmlFor="fName" />
-                  <Input
-                    autoFocus
-                    id='inputfName'
-                    type="text"
-                    name="fName"
-                    inputClass="form-control mb-3"
-                    value={person.fName}
-                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => { handleInputChange(event) }}
-                    onFocus={handleId}
-                  />
-                </div>
-                <div className={`form-group ${person.isInputError.lName.length === 0 ? '' : 'has-error'}`}>
-                  <Label content="Last Name" htmlFor="lName" />
-                  <Input
-                    type="text"
-                    id='inputlName'
-                    name="lName"
-                    inputClass="form-control mb-3"
-                    value={person.lName}
-                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => { handleInputChange(event) }}
-                    onFocus={handleId}
-                  />
-                </div>
-                <div className={`form-group ${person.isInputError.age.length === 0 ? '' : 'has-error'}`}>
-                  <Label content="Age" htmlFor="age" />
-                  <Input
-                    type="number"
-                    id='inputAge'
-                    name="age"
-                    inputClass="form-control mb-3"
-                    value={person.age.toLocaleString().length <= 3 ? person.age : ''}
-                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => { handleInputChange(event) }}
-                    onFocus={handleId}
-                  />
-                </div>
-                <div className={`form-group ${person.isInputError.gender.length === 0 ? '' : 'has-error'}`}>
-                  <Label content="Gender" htmlFor="gender" />
-                  <SelectOption
-                    selectClass="form-select mb-3"
-                    selectValue={person.gender}
-                    optionItems={optionItems}
-                    onFocus={handleId}
-                    onChange={(event: React.ChangeEvent<HTMLSelectElement>) => { handleSelectChange(event) }}
-                  />
-                </div>
-                <div className={`form-group ${person.isInputError.mobile.length === 0 ? '' : 'has-error'}`}>
-                  <Label content="Mobile Number" htmlFor="mobile" />
-                  <Input
-                    type="number"
-                    name="mobile"
-                    inputClass="form-control mb-3"
-                    value={person.mobile}
-                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => { handleInputChange(event) }}
-                    onFocus={handleId}
-                  />
-                </div>
-                <div className={`form-group ${person.isInputError.email.length === 0 ? '' : 'has-error'}`}>
-                  <Label content="Email" htmlFor="email" />
-                  <Input
-                    type="email"
-                    name="email"
-                    id='findEmail'
-                    inputClass="form-control mb-3"
-                    value={person.email}
-                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => { handleInputChange(event) }}
-                    onFocus={handleId}
-                  />
-                </div>
-                <div className="form-group">
-                  <Label content="Job Title" htmlFor="jobTitle" />
-                  <Input
-                    type="text"
-                    name="jobTitle"
-                    inputClass="form-control mb-3"
-                    value={person.jobTitle}
-                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => { handleInputChange(event) }}
-                    onFocus={handleId}
-                  />
-                </div>
-                <div className="container">
-                  <div className="row">
-                    <div className="col-md-4">
-                      <Button
-                        type="submit"
-                        text='Submit'
-                        btnClass='btn-primary'
-                        disabled={!person.isInputValid.formValid}
-                        onClick={handleDispatchPerson}
-                      />
-                    </div>
-                    <div className="col-md-4">
-                      <Button
-                        type="submit"
-                        text='Delete'
-                        btnClass='btn-danger'
-                        disabled={personSelected === undefined || personSelected.length === 0}
-                        onClick={handleDeletePerson}
-                      />
-                    </div>
-                    <div className="col-md-4">
-                      <Button
-                        type="submit"
-                        text='Clear'
-                        btnClass='btn-secondary'
-                        disabled={personSelected === undefined || personSelected.length === 0}
-                        onClick={handleReset}
-                      />
-                    </div>
+        {_.isUndefined(personList)
+          ?
+          < Box sx={{ display: 'flex' }}>
+            <CircularProgress />
+          </Box>
+          :
+          <div className="row">
+            <div className="col-sm">
+              <div style={{ width: 350, margin: "0 auto", }}>
+                <form className='demoForm border p-4 mt-3'>
+                  <h2>Add Person</h2>
+                  <div className={`form-group ${person.isInputError.fName.length === 0 ? '' : 'has-error'}`}>
+                    <Label content="First Name" htmlFor="fName" />
+                    <Input
+                      autoFocus
+                      id='inputfName'
+                      type="text"
+                      name="fName"
+                      inputClass="form-control mb-3"
+                      value={person.fName}
+                      onChange={(event: React.ChangeEvent<HTMLInputElement>) => { handleInputChange(event) }}
+                      onFocus={handleId}
+                    />
                   </div>
+                  <div className={`form-group ${person.isInputError.lName.length === 0 ? '' : 'has-error'}`}>
+                    <Label content="Last Name" htmlFor="lName" />
+                    <Input
+                      type="text"
+                      id='inputlName'
+                      name="lName"
+                      inputClass="form-control mb-3"
+                      value={person.lName}
+                      onChange={(event: React.ChangeEvent<HTMLInputElement>) => { handleInputChange(event) }}
+                      onFocus={handleId}
+                    />
+                  </div>
+                  <div className={`form-group ${person.isInputError.age.length === 0 ? '' : 'has-error'}`}>
+                    <Label content="Age" htmlFor="age" />
+                    <Input
+                      type="number"
+                      id='inputAge'
+                      name="age"
+                      inputClass="form-control mb-3"
+                      value={person.age.toLocaleString().length <= 3 ? person.age : ''}
+                      onChange={(event: React.ChangeEvent<HTMLInputElement>) => { handleInputChange(event) }}
+                      onFocus={handleId}
+                    />
+                  </div>
+                  <div className={`form-group ${person.isInputError.gender.length === 0 ? '' : 'has-error'}`}>
+                    <Label content="Gender" htmlFor="gender" />
+                    <SelectOption
+                      selectClass="form-select mb-3"
+                      selectValue={person.gender}
+                      optionItems={optionItems}
+                      onFocus={handleId}
+                      onChange={(event: React.ChangeEvent<HTMLSelectElement>) => { handleSelectChange(event) }}
+                    />
+                  </div>
+                  <div className={`form-group ${person.isInputError.mobile.length === 0 ? '' : 'has-error'}`}>
+                    <Label content="Mobile Number" htmlFor="mobile" />
+                    <Input
+                      type="number"
+                      name="mobile"
+                      inputClass="form-control mb-3"
+                      value={person.mobile}
+                      onChange={(event: React.ChangeEvent<HTMLInputElement>) => { handleInputChange(event) }}
+                      onFocus={handleId}
+                    />
+                  </div>
+                  <div className={`form-group ${person.isInputError.email.length === 0 ? '' : 'has-error'}`}>
+                    <Label content="Email" htmlFor="email" />
+                    <Input
+                      type="email"
+                      name="email"
+                      id='findEmail'
+                      inputClass="form-control mb-3"
+                      value={person.email}
+                      onChange={(event: React.ChangeEvent<HTMLInputElement>) => { handleInputChange(event) }}
+                      onFocus={handleId}
+                    />
+                  </div>
+                  <div className="form-group">
+                    <Label content="Job Title" htmlFor="jobTitle" />
+                    <Input
+                      type="text"
+                      name="jobTitle"
+                      inputClass="form-control mb-3"
+                      value={person.jobTitle}
+                      onChange={(event: React.ChangeEvent<HTMLInputElement>) => { handleInputChange(event) }}
+                      onFocus={handleId}
+                    />
+                  </div>
+                  <div className="container">
+                    <div className="row">
+                      <div className="col-md-4">
+                        <Button
+                          type="submit"
+                          text='Submit'
+                          btnClass='btn-primary'
+                          disabled={!person.isInputValid.formValid}
+                          onClick={handleDispatchPerson}
+                        />
+                      </div>
+                      <div className="col-md-4">
+                        <Button
+                          type="submit"
+                          text='Delete'
+                          btnClass='btn-danger'
+                          disabled={personSelected === undefined || personSelected.length === 0}
+                          onClick={handleDeletePerson}
+                        />
+                      </div>
+                      <div className="col-md-4">
+                        <Button
+                          type="submit"
+                          text='Clear'
+                          btnClass='btn-secondary'
+                          disabled={personSelected === undefined || personSelected.length === 0}
+                          onClick={handleReset}
+                        />
+                      </div>
+                    </div>
 
-                </div>
-                <div className="panel panel-default mt-2" style={{ height: 30 }}>
-                  <PersonErr isInputError={person.isInputError} />
-                </div>
-              </form>
+                  </div>
+                  <div className="panel panel-default mt-2" style={{ height: 30 }}>
+                    <PersonErr isInputError={person.isInputError} />
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div className="col-sm">
+              <PersonTable props={personList} />
             </div>
           </div>
-          <div className="col-sm">
-            <PersonTable props={personList} />
-          </div>
-        </div>
+        }
       </div>
 
     </React.Fragment >
