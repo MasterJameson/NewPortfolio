@@ -14,7 +14,7 @@ import LandingPage from './Home/LandingPage';
 import SingUp from './Forms/SignUp/SingUp';
 import { createTheme, ThemeProvider } from '@mui/material';
 import Tictactoe from './Tables/Tictactoe/Tictactoe';
-import ProductView from './Ecom/ProductView';
+import ProductView from './Ecom/ProductList';
 
 const theme = createTheme()
 
