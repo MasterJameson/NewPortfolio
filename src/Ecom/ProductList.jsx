@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getProductList } from '../redux/actions/ProductList';
 
 
-const useStyles = makeStyles((theme: any) => ({
+const useStyles = makeStyles((theme) => ({
   imageContainer: {
     marginBottom: 10
   },
@@ -26,56 +26,56 @@ const useStyles = makeStyles((theme: any) => ({
 }))
 
 const ProductList = () => {
-  const dispatch: any = useDispatch();
+  const dispatch = useDispatch();
   const classes = useStyles()
 
-  const personList = useSelector((state: any) => state.product.productlist[0])
+  const personList = useSelector((state) => state.product.productlist[0])
 
-  const [selected, setSelected] = useState(null)
+  const [selectedProduct, setSelectedProduct] = useState(null)
+  const [currentView, setCurrentView] = useState(0)
 
   useEffect(() => {
     _.isEmpty(personList) && dispatch(getProductList())
   })
 
-  const renderProduct = (value: any) => {
-    return value.map((item: any) => {
-      // console.log(item)
-      const variant = item.subCategory.length
+  const renderProduct = (value) => {
+    // !_.isNull(selectedProduct)
+    return value.map((item, index) => {
+      const variant = item.subCategory
 
       return (
-        <div key={item.id} className={classes.productContainer} onMouseEnter={() => setSelected(item.id)} onMouseLeave={() => setSelected(null)}>
+        <div key={item.id} className={classes.productContainer} onMouseEnter={() => setSelectedProduct(index)} onMouseLeave={() => setSelectedProduct(null)}>
           <div className={classes.imageContainer}>
-            <img style={{ width: '100%', }} src={item.subCategory[0].productView} alt={item.productName} />
+            {
+              selectedProduct === index
+                ? (<img style={{ width: '100%', }} src={value[index].subCategory[currentView].productView} alt={item.productName} />)
+                : <img style={{ width: '100%', }} src={value[index].subCategory[0].productView} alt={item.productName} />}
           </div>
           {
-            selected === item.id
+            selectedProduct === index
               ? <div>
                 {
-                  item.subCategory.map((val: any) => {
+                  item.subCategory.map((val, index) => {
                     return (
-                      <span key={val.id} style={{ marginRight: 5}}>
+                      <span key={val.id} style={{ marginRight: 5 }} onMouseEnter={() => setCurrentView(index)} onMouseLeave={()=>setCurrentView(0)}>
                         <img style={{ width: 36, height: 36 }} src={val.icon} alt={item.productName} />
                       </span>
                     )
                   })
                 }
-                <p style={{marginTop: 16}}>{item.price}</p>
+                <p style={{ marginTop: 16 }}>{item.price}</p>
               </div>
               : <div>
                 <p className={`${classes.mb0}`}>{item.productName}</p>
                 <p className={`${classes.mb0} ${classes.gray}`}>{item.category} shoe</p>
-                <p className={`${classes.gray}`}>{variant} {variant > 1 ? "Colours" : "Colour"}</p>
+                <p className={`${classes.gray}`}>{variant.length} {variant.length > 1 ? "Colours" : "Colour"}</p>
                 <p>{item.price}</p>
               </div>
           }
-
-
         </div>
       )
     })
   }
-  console.log('selected', selected)
-
 
   return (
     <>
@@ -83,10 +83,17 @@ const ProductList = () => {
       <div className='productImgContainer'>
         {
           _.isEmpty(personList)
-            ? <Box sx={{ display: 'flex' }}>
+            ?
+            <Box sx={{ display: 'flex' }}>
               <CircularProgress />
             </Box>
-            : renderProduct(personList)
+            :
+            <>
+              {
+                renderProduct(personList)
+              }
+            </>
+
         }
       </div>
     </>
