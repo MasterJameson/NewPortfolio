@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import _ from "lodash"
+import _, { isEmpty } from "lodash"
 import { makeStyles } from '@mui/styles';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
@@ -29,27 +29,29 @@ const ProductList = () => {
   const dispatch = useDispatch();
   const classes = useStyles()
 
-  const personList = useSelector((state) => state.product.productlist[0])
+  const productList = useSelector((state) => state.product.productlist[0])
 
   const [selectedProduct, setSelectedProduct] = useState(null)
   const [currentView, setCurrentView] = useState(0)
 
+
   useEffect(() => {
-    _.isEmpty(personList) && dispatch(getProductList())
+    _.isUndefined(productList) && dispatch(getProductList())
   })
 
   const renderProduct = (value) => {
     // !_.isNull(selectedProduct)
     return value.map((item, index) => {
       const variant = item.subCategory
+      const subCat = value[index].subCategory
 
       return (
         <div key={item.id} className={classes.productContainer} onMouseEnter={() => setSelectedProduct(index)} onMouseLeave={() => setSelectedProduct(null)}>
           <div className={classes.imageContainer}>
             {
               selectedProduct === index
-                ? (<img style={{ width: '100%', }} src={value[index].subCategory[currentView].productView} alt={item.productName} />)
-                : <img style={{ width: '100%', }} src={value[index].subCategory[0].productView} alt={item.productName} />}
+                ? (<img style={{ width: '100%', }} src={subCat[currentView].productView} alt={item.productName} />)
+                : <img style={{ width: '100%', }} src={subCat[0].productView} alt={item.productName} />}
           </div>
           {
             selectedProduct === index
@@ -57,7 +59,7 @@ const ProductList = () => {
                 {
                   item.subCategory.map((val, index) => {
                     return (
-                      <span key={val.id} style={{ marginRight: 5 }} onMouseEnter={() => setCurrentView(index)} onMouseLeave={()=>setCurrentView(0)}>
+                      <span key={val.id} style={{ marginRight: 5 }} onMouseEnter={() => setCurrentView(index)} onMouseLeave={() => setCurrentView(0)}>
                         <img style={{ width: 36, height: 36 }} src={val.icon} alt={item.productName} />
                       </span>
                     )
@@ -82,7 +84,7 @@ const ProductList = () => {
       <div>Product List</div>
       <div className='productImgContainer'>
         {
-          _.isEmpty(personList)
+          _.isUndefined(productList)
             ?
             <Box sx={{ display: 'flex' }}>
               <CircularProgress />
@@ -90,7 +92,7 @@ const ProductList = () => {
             :
             <>
               {
-                renderProduct(personList)
+                renderProduct(productList)
               }
             </>
 
