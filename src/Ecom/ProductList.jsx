@@ -33,14 +33,23 @@ const ProductList = () => {
 
   const [selectedProduct, setSelectedProduct] = useState(null)
   const [currentView, setCurrentView] = useState(0)
-
+  const [items, setItems] = useState([])
+  const [test] = useState([])
 
   useEffect(() => {
-    _.isUndefined(productList) && dispatch(getProductList())
+    _.isUndefined(productList) ? dispatch(getProductList()) : productList.forEach(element => {
+      test.length !== productList.length && test.push(element.currentView)
+      setItems(productList)
+    });
   })
 
+  const handleSubMouseEnter = (index) => {
+    setCurrentView(index)
+    if (test.length > 0) test[selectedProduct] = index
+  }
+
   const renderProduct = (value) => {
-    // !_.isNull(selectedProduct)
+
     return value.map((item, index) => {
       const variant = item.subCategory
       const subCat = value[index].subCategory
@@ -50,8 +59,8 @@ const ProductList = () => {
           <div className={classes.imageContainer}>
             {
               selectedProduct === index
-                ? (<img style={{ width: '100%', }} src={subCat[currentView].productView} alt={item.productName} />)
-                : <img style={{ width: '100%', }} src={subCat[0].productView} alt={item.productName} />}
+                ? (<img style={{ width: '100%', }} src={subCat[test[index]].productView} alt={item.productName} />)
+                : <img style={{ width: '100%', }} src={subCat[!_.isEmpty(test) ? test[index] : 0].productView} alt={item.productName} />}
           </div>
           {
             selectedProduct === index
@@ -59,7 +68,7 @@ const ProductList = () => {
                 {
                   item.subCategory.map((val, index) => {
                     return (
-                      <span key={val.id} style={{ marginRight: 5 }} onMouseEnter={() => setCurrentView(index)} onMouseLeave={() => setCurrentView(0)}>
+                      <span key={val.id} style={{ marginRight: 5 }} onMouseEnter={() => handleSubMouseEnter(index)} >
                         <img style={{ width: 36, height: 36 }} src={val.icon} alt={item.productName} />
                       </span>
                     )
@@ -79,12 +88,14 @@ const ProductList = () => {
     })
   }
 
+
+
   return (
     <>
       <div>Product List</div>
       <div className='productImgContainer'>
         {
-          _.isUndefined(productList)
+          _.isUndefined(items)
             ?
             <Box sx={{ display: 'flex' }}>
               <CircularProgress />
@@ -92,7 +103,7 @@ const ProductList = () => {
             :
             <>
               {
-                renderProduct(productList)
+                renderProduct(items)
               }
             </>
 
