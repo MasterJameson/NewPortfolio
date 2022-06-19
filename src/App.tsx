@@ -15,6 +15,7 @@ import SingUp from './Forms/SignUp/SingUp';
 import { createTheme, ThemeProvider } from '@mui/material';
 import Tictactoe from './Tables/Tictactoe/Tictactoe';
 import ProductView from './Ecom/ProductList';
+import ProductItem from './Ecom/ProductItem';
 
 const theme = createTheme()
 
@@ -36,6 +37,7 @@ function App() {
               <Route path="/sign-up" element={<SingUp />} />
               <Route path="/tictactoe" element={<Tictactoe />} />
               <Route path="/ecommerce" element={<ProductView />} />
+              <Route path="/product-item" element={<ProductItem />} />
             </Routes>
           </BrowserRouter>
         </ThemeProvider>

@@ -18,6 +18,21 @@
   height: auto;
 }
 
+.iconSpan {
+  margin-right: 5px;
+  margin-bottom: 5px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.iconSpan:hover img {
+  border: 1px solid #000;
+}
+
+.iconSpan img.iconFocus {
+  border: 1px solid #000;
+}
+
 .App {
   text-align: center;
 }
