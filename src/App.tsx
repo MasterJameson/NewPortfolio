@@ -16,6 +16,7 @@ import { createTheme, ThemeProvider } from '@mui/material';
 import Tictactoe from './Tables/Tictactoe/Tictactoe';
 import ProductView from './Ecom/ProductList';
 import ProductItem from './Ecom/ProductItem';
+import CornSite from './CornSite';
 
 const theme = createTheme()
 
@@ -38,6 +39,7 @@ function App() {
               <Route path="/tictactoe" element={<Tictactoe />} />
               <Route path="/ecommerce" element={<ProductView />} />
               <Route path="/product-item" element={<ProductItem />} />
+              <Route path="/cornsite" element={<CornSite />} />
             </Routes>
           </BrowserRouter>
         </ThemeProvider>

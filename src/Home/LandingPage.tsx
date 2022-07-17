@@ -2,12 +2,14 @@ import _ from "lodash"
 import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { getProductList } from "../redux/actions/ProductList"
+// import getData from "../firebase/firestore"
 import getActiveUser from "./getActiveUse"
+
 
 
 const LandingPage = () => {
   const dispatch: any = useDispatch();
-
+  
   const personList = useSelector((state: any) => state.product.productlist[0])
 
   useEffect(() => {
@@ -16,6 +18,7 @@ const LandingPage = () => {
 
 
   const user = getActiveUser()
+
 
   // let promiseFunc = () => {
   //   let a = 4 + 2
@@ -34,6 +37,7 @@ const LandingPage = () => {
   //   console.log(error)
   // })
 
+  
   console.log(personList)
 
   return (
